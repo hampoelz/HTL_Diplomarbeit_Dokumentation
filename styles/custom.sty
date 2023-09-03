@@ -1,3 +1,200 @@
 % ========================================
 %      Add custom packages and styles     
 % ========================================
+
+\usepackage{xspace}
+\usepackage{fontawesome}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% ---------------- colors ----------------
+\definecolor{inlinecode}{HTML}{eff1f3}
+\definecolor{codeblock}{HTML}{f6f8fa}
+\definecolor{blockquote}{HTML}{d0d7de}
+\definecolor{muted}{HTML}{656d76}
+\definecolor{note}{HTML}{0969da}
+\definecolor{important}{HTML}{8250df}
+\definecolor{warning}{HTML}{9a6700}
+
+% -------------- code block --------------
+\usemintedstyle{emacs}
+\setminted{%
+    fontsize=\footnotesize,%
+    baselinestretch=1,%
+    bgcolor=codeblock%
+}
+
+% https://github.com/gpoore/minted/issues/220
+\AfterEndEnvironment{minted}{\vspace{-3em}}
+
+% -------------- inline code -------------
+\NewDocumentCommand{\code}{ s O{text} m }{\IfBooleanTF{#1}{\codeplain{#3}}{\codeminted{#2}{#3}}}
+%\newcommand{\code}[2][text]{\@ifstar{\codeplain{#2}}{\codeminted{#1}{#2}}}
+
+\newcommand{\codeminted}[2]{%
+    \highLight[inlinecode]{%
+        \phantom{\hspace*{3px}}%
+        \mintinline[%
+            bgcolor={},%
+            breaklines,%
+            breakafter={,=-/},%
+            breakaftersymbolpost=\hspace*{3px},%
+            breakbefore={ABCDEFGHIJKLMNOPQRSTUVWXYZ},%
+            breakbeforesymbolpost=\hspace*{3px},%
+        ]{#1}{#2}%
+        \phantom{\hspace*{3px}}%
+    }%
+}
+
+\newcommand{\codeplain}[1]{%
+    \highLight[inlinecode]{%
+        \phantom{\hspace*{3px}}%
+        {\footnotesize\texttt{#1}}%
+        \phantom{\hspace*{3px}}%
+    }%
+}
+
+\newcommand{\codebreak}[3][text]{%
+    \code[#1]{#2}%
+    \hspace*{-3px}%
+    \highLight[inlinecode]{\,\footnotesize\ensuremath{_\rfloor}}%
+    \newline%
+    \code[#1]{#3}%
+}
+
+
+
+% --------------- footnotes --------------
+
+\def\FootnotesText{}
+\newcommand{\setFootnoteNumber}[2]{\expandafter\edef\csname FootnoteNumber_#1 \endcsname{#2}}
+\newcommand{\getFootnoteNumber}[1]{\csname FootnoteNumber_#1 \endcsname}
+\newcommand{\setFootnoteMark}[2]{\expandafter\def\csname FootnoteMark_#1 \endcsname{#2\footnotemark[\getFootnoteNumber{#1}]}}
+\newcommand{\getFootnoteMark}[1]{\csname FootnoteMark_#1 \endcsname}
+\newcommand{\addFootnoteText}[2]{\apptocmd{\FootnotesText}{\footnotetext[\getFootnoteNumber{#1}]{#2}}{}{}}
+\newcommand{\getFootnotesText}{\FootnotesText}
+\newcommand{\resetFootnotesText}{\def\FootnotesText{}}
+
+\newcounter{FNCount}
+
+\newcommand{\fn}[1]{%
+    \getFootnoteMark{#1}%
+}
+
+\newcommand{\addfn}[3]{%
+    \stepcounter{FNCount}%
+    \setFootnoteNumber{#1}{\theFNCount}%
+    \setFootnoteMark{#1}{#2}%
+    \addFootnoteText{#1}{#3}%
+}
+
+\newcommand{\printfn}{%
+    \setcounter{FNCount}{0}%
+    \getFootnotesText%
+    \resetFootnotesText%
+}
+
+\newcommand{\addurlfn}[3]{\addfn{#1}{\href{#3}{#2}}{\url{#3}}}
+
+% --------- alert and quote boxes --------
+\newenvironment{baseAlertBox}[1]{
+    \begin{tcolorbox}[%
+        enhanced,%
+        frame hidden,%
+        colback=white,%
+        borderline west={3px}{0pt}{#1}%
+    ]
+}{
+    \end{tcolorbox}
+}
+
+\renewenvironment{quote}{
+    \begin{baseAlertBox}{blockquote}
+        \color{muted}
+}{
+    \end{baseAlertBox}
+}
+
+\newenvironment{titleAlertBox}[2]{
+    \begin{baseAlertBox}{#1}
+        {\large\color{#1}#2}
+        \\[0.5em]
+}{
+    \end{baseAlertBox}
+}
+
+\newenvironment{iconAlertbox}[3]{
+    \begin{titleAlertBox}{#1}{#2\hspace{1ex}\textbf{#3}}
+}{
+    \end{titleAlertBox}
+}
+
+\newenvironment{alertbox}[2]{
+    \begin{titleAlertBox}{#1}{\textbf{#2}}
+}{
+    \end{titleAlertBox}
+}
+
+\newenvironment{note}[1][Anmerkung]{
+    \begin{iconAlertbox}{note}{\faInfoCircle}{#1}
+}{
+    \end{iconAlertbox}
+}
+
+\newenvironment{important}[1][Wichtig]{
+    \begin{iconAlertbox}{important}{\faExclamation}{#1}
+}{
+    \end{iconAlertbox}
+}
+
+\newenvironment{warning}[1][Warnung]{
+    \begin{iconAlertbox}{warning}{\faExclamationTriangle}{#1}
+}{
+    \end{iconAlertbox}
+}
+
+% ---- style paragraphs like sections ----
+\setcounter{secnumdepth}{5}
+
+\titlespacing*{\paragraph}{-2em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subparagraph}{-2em}{3.25ex plus 1ex minus .2ex}{1em}
+
+\let\saveparagraph\paragraph
+\renewcommand{\paragraph}[1]{\saveparagraph{#1}\mbox{}}
+
+\let\savesubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\savesubparagraph{#1}\mbox{}}
+
+% ---- style paragraphs like sections ----
+\def\bfstart#1\bfstop{\textbf{#1}}
+
+\NewDocumentEnvironment{interfacedesc}{ o O{10em} O{6em} }{
+    \begin{table}[H]
+        \begin{tabular}{ | >{\bfstart} L{#2} <{\bfstop} | L{#3} | p{\textwidth - #2 - #3 - 2em} | }
+            \hline
+            \textbf{Prop} & \textbf{Type} & \textbf{Description} \\
+            \hline
+}{
+        \end{tabular}
+        \IfNoValueTF{#1}{}{\captionlistentry[table]{#1}}
+    \end{table}
+}
+
+\NewDocumentEnvironment{interface}{o}{
+    \begin{table}[H]
+        \begin{tabular}{ | >{\bfstart} L{10em} <{\bfstop} | l | }
+            \hline
+            \textbf{Prop} & \textbf{Type} \\
+            \hline
+}{
+        \end{tabular}
+        \IfNoValueTF{#1}{}{\captionlistentry[table]{#1}}
+    \end{table}
+}
+
+\newenvironment{config}[1][]{
+    \renewcommand{\arraystretch}{1.5}
+    \begin{interfacedesc}[#1]
+}{
+    \end{interfacedesc}
+}
