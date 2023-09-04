@@ -69,8 +69,9 @@
 \newcommand{\tocbreak}{\addtocontents{toc}{\protect\pagebreak}}
 
 % ------------ highlight text ------------
-\usepackage{xcolor}
-\newcommand{\hl}[1]{\colorbox[HTML]{FBF719}{#1}}
+\usepackage{luacolor}
+\usepackage{lua-ul}
+\newcommand{\hl}[1]{\highLight{#1}}
 
 % --- align columns with custom width ----
 \usepackage{array}
