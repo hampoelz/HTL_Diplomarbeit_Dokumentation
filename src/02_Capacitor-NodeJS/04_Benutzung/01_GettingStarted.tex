@@ -1,0 +1,147 @@
+\addurlfn{vite}{Vite}{https://vitejs.dev}
+
+\subsubsection{Getting Started}
+\label{sec:Capacitor-NodeJS:GettingStarted}
+
+This guide shows how to add a minimal Node.js project to a Capacitor application and communicate between these processes.
+
+\paragraph{Basics}
+\label{sec:Capacitor-NodeJS:Basics}
+
+In the example below the \fn{vite} build system is used. However, any build system can be used as long as the following criteria are met:
+
+\begin{enumerate}
+  \item The Node.js project (to be executed by the engine) must be located in a subdirectory named \code{nodejs} \textit{(or the path set via \code{nodeDir})} of the Capacitor \code{webDir}.
+  \item The Node.js project must have a starting point, this can either be a script named \code{index.js} or a package.json with a \code{main} field.
+\end{enumerate}
+
+\begin{quote}
+  For example if the Node.js project needs to be compiled or bundled then this output should be located in the subdirectory of the Capacitor \code{webDir}.
+\end{quote}
+
+\newpage
+
+\paragraph{Minimal example}
+\label{sec:Capacitor-NodeJS:MinimalExample}
+
+In this example the directory for the app's source files is named \code{src}, the directory for static assets is named \code{static},
+the directory for the compiled files is named \code{dist}, and the directory for the Node.js project is named \code{nodejs}.
+
+So the configurations should contain at least the following values. \cite{vite, capacitor:docs}
+
+\textbf{Vite Configurations:}
+
+\begin{minted}{typescript}
+// in vite.config.js or vite.config.ts
+{
+  root: './src',
+  publicDir: '../static',
+  build: {
+    outDir: '../dist'
+  }
+}
+\end{minted}
+
+\textbf{Capacitor Configurations:}
+
+\begin{minted}{typescript}
+// in capacitor.config.json or capacitor.config.ts
+{
+  "webDir": 'dist',
+  "plugins": {
+    "CapacitorNodeJS": {
+      "nodeDir": "nodejs"
+    }
+  }
+}
+\end{minted}
+
+\vspace{1em}
+
+To meet the criteria from above using \fn{vite}, just create a new directory called \code{nodejs} inside the \code{static} directory.
+And create a new file called \code{index.js} in it as the starting point.
+
+\begin{quote}
+  \fn{vite} will copy assets from the \code{static} directory to the root of the \code{dist} directory as-is.~\cite{vite}
+  So the created \code{nodejs} project directory will be placed in the Capacitor \code{webdir} after build.
+\end{quote}
+
+\vspace{1em}
+
+The project structure should now look something like this:
+
+\begin{minted}{diff}
+  capacitor-app/
+  ├── ...
+  ├── dist/                   # Capacitor webdir
+  ├── src/                    # app source directory
++ ├── static/                 # static assets
++ │   ├── nodejs/             # Node.js project directory
++ │   │   ├── index.js        # Node.js main script
+  ├── capacitor.config.json
+  ├── vite.config.ts
+  ├── ...
+\end{minted}
+
+\vspace{1em}
+
+After building and syncing the project, the main script will be executed by the Node.js runtime when the app is launched.
+
+A guide for a more complex Node.js project can be found in the \hyperref[sec:Capacitor-NodeJS:ComplexProjects]{Complex Projects} section.
+
+\paragraph{Inter-Process Communication}
+\label{sec:Capacitor-NodeJS:InterprocessCommunication}
+
+A bridge module to communicate between the Capacitor layer and the Node.js process is built-in.
+
+Use the following code in a Node.js script to wait for messages from the Capacitor layer and send messages back:
+
+\begin{minted}{javascript}
+const { channel } = require('bridge');
+
+// Listens to "msg-from-capacitor" from the Capacitor layer.
+channel.addListener('msg-from-capacitor', message => {
+  console.log('[Node.js] Message from Capacitor: ' + message);
+  
+  // Sends a message back to the Capacitor layer.
+  channel.send("msg-from-nodejs",
+    `Replying to the message '${message}'.`,
+    "And optionally add more arguments."
+  );
+});
+\end{minted}
+
+\vspace{1em}
+
+Now it is possible to communicate with the Node.js process in the Capacitor app:
+
+\begin{minted}{typescript}
+import { NodeJS } from 'capacitor-nodejs';
+
+// Listens to "msg-from-nodejs" from the Node.js process.
+NodeJS.addListener('msg-from-nodejs', event => {
+  document.body.innerHTML = `
+    <p>
+      <b>Message from Capacitor</b><br>
+      First argument: ${event.args[0]}<br>
+      Second argument: ${event.args[1]}
+    </p>
+  `;
+  console.log(event);
+});
+
+// Waits for the Node.js process to initialize.
+NodeJS.whenReady().then(() => {
+
+  // Sends a message to the Node.js process.
+  NodeJS.send({
+    eventName: "msg-from-capacitor",
+    args: [ "Hello from Capacitor!" ]
+  });
+
+});
+\end{minted}
+
+A full \ac{api} documentation can be found in the \hyperref[sec:Capacitor-NodeJS:API_BridgeModule]{API - Bridge module} section.
+
+\printfn

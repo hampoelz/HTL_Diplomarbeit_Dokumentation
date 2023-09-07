@@ -1,0 +1,33 @@
+\addurlfn{nodejs-mobile}{Node.js for Mobile Apps}{https://github.com/nodejs-mobile/nodejs-mobile}
+\addurlfn{android-ndk}{Android \ac{ndk}}{https://developer.android.com/ndk}
+
+\subsection{Verwendete Bibliotheken}
+
+Die Node.js Runtime wird zum Zeitpunkt dieser Arbeit offiziell nur auf gängigen Desktop"=Plattformen (Linux, Windows und macOS) unterstützt.~\cite{nodejs}
+Daher musste für die Implementierung des Plugins zusätzlich zu den Plattform-\acsp{api} auf weitere Bibliotheken und Toolsets zurückgegriffen werden.
+
+In diesem Abschnitt werden die Bibliotheken und Toolsets vorgestellt, die bei der Entwicklung des Capacitor-NodeJS Plugins verwendet wurden.
+
+\subsubsection{Node.js for Mobile Apps}
+
+\fn{nodejs-mobile} ist ein Toolset für die Integration der Node.js Runtime in mobilen Anwendungen.
+Das Hauptziel des Projekts ist es, Korrekturen bereitzustellen, damit Node.js auch auf mobilen Plattformen problemlos ausgeführt werden kann.
+Eine Hauptkomponente des Projekts besteht aus einer Bibliothek, die es ermöglicht, Node.js auf einem separaten Thread in mobilen Anwendung auszuführen.
+\cite{nodejs-mobile, nodejs-mobile:docs}
+
+Im Capacitor-NodeJS Plugin werden vom Projekt bereitgestellte Header-Dateien der mobilen Node.js Runtime sowie vorgefertigte native Binärdateien für Android und iOS verwendet.
+
+\subsubsection{Android NDK}
+
+Das \fn{android-ndk} ist ein Toolset, mit dem Teile einer Android Anwendung in nativem Code mit Sprachen wie C und C++ implementiert werden können.
+Es bietet eine Reihe von Bibliotheken und Tools, die zur Erstellung von nativem Code für Android verwendet werden können.
+\cite{android:ndk}
+
+Damit Android Anwendungen nativen C oder C++ Code aufrufen können und umgekehrt, verwendet das \fn{android-ndk} das \ac{jni} Framework.
+Dies bedeutet, dass Java-Code geschrieben werden kann, der auf Low"=Level"=Hardwarefunktionen zugreifen oder Funktionen in einer nativen Bibliothek aufrufen kann.
+\cite{android:ndk}
+
+Im Capacitor-NodeJS Plugin wird das \fn{android-ndk} benötigt, um auf die native JavaScript Runtime des \fn{nodejs-mobile} Toolkits zuzugreifen.
+\cite{nodejs-mobile:docs}
+
+\printfn

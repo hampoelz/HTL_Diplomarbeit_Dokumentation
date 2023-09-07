@@ -1,0 +1,72 @@
+\addurlfn{child_process}{child\_process}{https://nodejs.org/api/child_process.html}
+\addurlfn{fs}{fs}{https://nodejs.org/api/fs.html}
+\addurlfn{intl}{intl}{https://nodejs.org/api/intl.html}
+\addurlfn{os}{os}{https://nodejs.org/api/os.html}
+\addurlfn{process}{process}{https://nodejs.org/api/process.html}
+
+\subsubsection{Mobile Node.js APIs differences}
+\label{sec:Capacitor-NodeJS:MobileAPIDifferences}
+
+\begin{note}[Note]
+  This section is based on the documentation of the Node.js for Mobile Apps toolkits. \cite{nodejs-mobile:docs}
+\end{note}
+
+Not every \ac{api} is supported on mobile devices. Mobile operating systems do not allow applications to call certain \acsp{api} that are expected to be available on other operating systems.
+
+\paragraph{\protect\fn{child_process} module}
+
+Mobile applications are expected to be a single process.
+\acsp{api} that create new processes, such as \code{child_process.spawn()} or \code{child_process.fork()} will therefore run into permission issues.
+
+\paragraph{file system (\protect\fn{fs}) module}
+
+On mobile platforms, the current working directory is the root directory of the file system.
+This can lead to unexpected behavior in code that assumes that the current working directory is set to the directory of the Node.js project.
+
+On Android creating hard links (\code{fs.link()} and \code{fs.linkSync()}) is not supported.
+
+\paragraph{internationalization (\protect\fn{intl}) module}
+
+The internationalization (\code{intl}) module is not available on current nodejs-mobile builds.
+
+\paragraph{\protect\fn{os} module}
+
+\begin{itemize}
+  \setlength\itemsep{-0.5em}
+  \item \code{os.cpus()} may return inconsistent/unreliable results, since different OS versions will have different permissions for accessing CPU information.
+  \item \code{os.homedir()} on mobile platforms there is no concept of user home directories.
+  \item \code{os.platform()} can also return \enquote{android} or \enquote{ios}, depending on the platform.
+\end{itemize}
+
+On Android, the files in the cache (\code{os.tmpdir()}) are kept until the system needs space, so it increases the application's disk space unless the developer manually deletes them.
+
+\newpage
+
+\paragraph{\protect\fn{process} module}
+
+\begin{itemize}
+  \setlength\itemsep{-0.5em}
+  \item \code{process.cwd()} is the root directory of the file system, instead of the start directory of the project.
+  \item \code{process.exit()} is not allowed by the Apple App Store guildelines.
+  \item \code{process.stdin} is not available.
+  \item \code{process.platform} can also be \enquote{android} or \enquote{ios}, depending on the platform.
+  \item \code{process.versions} includes the \enquote{mobile} key, containing the nodejs-mobile core library version.
+\end{itemize}
+
+The following functions are only available on POSIX platforms, so they are unavailable on Android:
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{process.getegid()}
+  \item \code{process.geteuid()}
+  \item \code{process.getgid()}
+  \item \code{process.getgroups()}
+  \item \code{process.getuid()}
+  \item \code{process.setegid()}
+  \item \code{process.seteuid()}
+  \item \code{process.setgid()}
+  \item \code{process.setgroups()}
+  \item \code{process.setuid()}
+\end{itemize}
+
+\printfn

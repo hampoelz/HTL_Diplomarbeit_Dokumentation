@@ -1,0 +1,166 @@
+\subsubsection{API - Capacitor layer}
+\label{sec:Capacitor-NodeJS:API_CapacitorLayer}
+
+The \code{NodeJS} module is the \ac{api} used in the Capacitor app.
+It provides a few methods to send messages from the Node.js layer and wait for them.
+
+It has the following methods:
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{start(...)}
+  \item \code{send(...)}
+  \item \code{whenReady()}
+  \item \code{addListener(string, ...)}
+  \item \code{removeListener(...)}
+  \item \code{removeAllListeners(...)}
+  \item Interfaces
+  \item Type Aliases
+\end{itemize}
+
+% -------------------- %
+
+\paragraph{start(...)}
+
+\begin{minted}{typescript}
+  start(
+    options?: StartOptions
+  ) => Promise<void>
+\end{minted}
+
+Starts the Node.js engine with properties as set by the \code{options}.
+
+\textbf{Note:} This method is only available if the Node.js engine startup mode was set to \code[typescript]{'manual'} via the plugin configuration.
+
+% -------------------- %
+
+\paragraph{send(...)}
+
+\begin{minted}{typescript}
+  send(
+    args: ChannelPayloadData
+  ) => Promise<void>
+\end{minted}
+
+Sends a message to the Node.js process.
+
+% -------------------- %
+
+\paragraph{whenReady()}
+
+\begin{minted}{typescript}
+  whenReady() => Promise<void>
+\end{minted}
+
+Resolves when the Node.js process is initialized.
+
+% -------------------- %
+
+\newpage
+
+\paragraph{addListener(string, ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: string,
+    listenerFunc: ChannelListenerCallback
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Listens to \code{eventName} and calls \code{listenerFunc(data)} when a new message arrives from the Node.js process.
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+\paragraph{removeListener(...)}
+
+\begin{minted}{typescript}
+  removeListener(
+    listenerHandle: PluginListenerHandle
+  ) => Promise<void>
+\end{minted}
+
+Removes the specified \code{listenerHandle} from the listener array for the event it refers to.
+
+% -------------------- %
+
+\paragraph{removeAllListeners(...)}
+
+\begin{minted}{typescript}
+  removeAllListeners(
+    eventName?: string
+  ) => Promise<void>
+\end{minted}
+
+Removes all listeners, or those of the specified \code{eventName}, for this plugin.
+
+% -------------------- %
+
+\newpage
+
+\paragraph{Interfaces}
+
+
+\subparagraph{StartOptions}
+
+An interface containing the options used when starting the Node.js engine manually.
+
+\begin{interfacedesc}[Capacitor-NodeJS / StartOptions][5em]
+  \code{nodeDir} & \code[typescript]{string}   & Relative path of the integrated Node.js project based on the Capacitor webdir. Defaults to the \code{nodeDir} field of the global plugin configuration. If the \code{nodeDir} config is not set, \code{nodejs} in the Capacitor webdir is used as Node.js project directory. \\ \hline
+  \code{script}  & \code[typescript]{string}   & The primary entry point to the Node.js program. This should be a module relative to the root of the Node.js project folder. Defaults to the \code{main} field in the project's package.json. If the \code{main} field is not set, \code{index.js} in the project's root folder is used. \\ \hline
+  \code{args}    & \code[typescript]{string[]} & A list of string arguments. \\ \hline
+  \code{env}     & \code[typescript]{NodeEnv}  & Environment key-value pairs. \\ \hline
+\end{interfacedesc}
+
+% -------------------- %
+
+\subparagraph{NodeEnv}
+
+An interface that holds environment variables as string key-value pairs.
+
+% -------------------- %
+
+\subparagraph{ChannelPayloadData}
+
+The payload data to send a message to the web page via \code{eventName},
+along with arguments. Arguments will be serialized with \ac{json}.
+
+\begin{interfacedesc}[Capacitor-NodeJS / ChannelPayloadData]
+  \code{eventName} & \code[typescript]{string} & The name of the event being send to. \\ \hline
+  \code{args}      & \code[typescript]{any[]}  & The array of arguments to send. \\ \hline
+\end{interfacedesc}   
+
+% -------------------- %
+
+\subparagraph{PluginListenerHandle}
+
+\begin{interface}[Capacitor-NodeJS / PluginListenerHandle]
+  \code{remove} & \code[typescript]{() => Promise<void>} \\ \hline
+\end{interface}
+
+% -------------------- %
+
+\subparagraph{ChannelCallbackData}
+
+The callback data object when a message from the Node.js process arrives.
+
+\begin{interfacedesc}[Capacitor-NodeJS / ChannelCallbackData]
+  \code{args} & \code[typescript]{any[]} & The received array of arguments. \\ \hline
+\end{interfacedesc}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{Type Aliases}
+
+
+\subparagraph{ChannelListenerCallback}
+
+The callback function to be called when listen to messages from the Node.js process.
+
+\code[typescript]{(data: ChannelCallbackData): void}

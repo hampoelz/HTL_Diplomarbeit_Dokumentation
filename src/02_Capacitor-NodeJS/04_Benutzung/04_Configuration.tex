@@ -1,0 +1,45 @@
+\subsubsection{Configuration}
+\label{sec:Capacitor-NodeJS:Configuration}
+
+These config values are available:
+
+\begin{config}[Capacitor-NodeJS / Configuration]
+  \code{nodeDir}   & \code[typescript]{string} & Relative path of the integrated Node.js project based on the Capacitor webdir. Defaults to \code[typescript]{"nodejs"}. \\ \hline
+  \code{startMode} & \code[typescript]{string} & Startup mode of the Node.js engine. Defaults to \code[typescript]{"auto"}. The following values are accepted: \\
+                   &                           & \textbf{\code{auto}}: The Node.js engine starts automatically when the application is launched. \\
+                   &                           & \textbf{\code{manual}}: The Node.js engine is started via the \code{NodeJS.start()} method. \\ \hline
+\end{config}
+  
+\textbf{Examples}
+
+In \code{capacitor.config.json}:
+
+\begin{minted}{json}
+{
+  "plugins": {
+    "CapacitorNodeJS": {
+      "nodeDir": "custom-nodejs",
+      "startMode": "manual"
+    }
+  }
+}
+\end{minted}
+
+In \code{capacitor.config.ts}:
+
+\begin{minted}{typescript}
+/// <reference types="capacitor-nodejs" />
+
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorNodeJS: {
+      nodeDir: "custom-nodejs",
+      startMode: "manual",
+    },
+  },
+};
+
+export default config;
+\end{minted}
