@@ -1,0 +1,110 @@
+\addurlfn{mixed-content}{Mixed content}{https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content}
+
+\subsubsection{Configuration}
+\label{sec:Capacitor-BrowserView:Configuration}
+
+The following configurations are applied globally to all BrowserViews.
+However, most of them can be overridden individually when a BrowserView is created or changed later via methods.
+
+These config values are available:
+
+\begin{config}[Capacitor-BrowserView / Configuration]
+  \code{url}                  & \code[typescript]{string}   & Default external \ac{url} loaded in BrowserViews. \\ \hline
+  \code{allowMultipleWindows} & \code[typescript]{boolean}  & Open links that request a new tab or window in the external browser instead of the BrowserViews. \\
+                              &                             & Defaults to \code[typescript]{true} \\ \hline
+  \code{allowNavigation}      & \code[typescript]{string[]} & Set regular expressions to which the BrowserViews can navigate additional. By default, all external \acp{url} are opened in the external browser (not the BrowserView). \\
+                              &                             & Defaults to \code[typescript]{[]} \\ \hline
+  \code{enableBridge}         & \code[typescript]{boolean}  & Enable a bridge between the Capacitor layer and the loaded web page. \\
+                              &                             & Defaults to \code[typescript]{false} \\ \hline
+  \code{overrideUserAgent}    & \code[typescript]{string}   & Default user-agent for BrowserViews. \\ \hline
+  \code{appendUserAgent}      & \code[typescript]{string}   & String to append to the original user-agent for BrowserViews. This is disregarded if \code{overrideUserAgent} is used. \\ \hline
+  \code{backgroundColor}      & \code[typescript]{Color}    & Default background color for BrowserViews. \\ \hline
+\end{config}
+
+\begin{config}[Capacitor-BrowserView / Configuration (Android)]
+  \codebreak{android}{OverrideUserAgent} & \code[typescript]{string}   & Overrides global \code{overrideUserAgent} option on Android. \\ \hline
+  \codebreak{android}{AppendUserAgent}   & \code[typescript]{string}   & Overrides global \code{appendUserAgent} option on Android. \\ \hline
+  \codebreak{android}{BackgroundColor}   & \code[typescript]{Color}    & Overrides global \code{backgroundColor} option on Android. \\ \hline
+  \codebreak{android}{AllowMixedContent} & \code[typescript]{boolean}  & Enable mixed content in the BrowserViews for Android. \fn{mixed-content} is disabled by default for security. During development, this option may need to be enabled to allow the BrowserViews to load files from different schemes. \\
+                                         &                             & \textbf{This is not intended for use in production.} \\ 
+                                         &                             & Defaults to \code[typescript]{false} \\ \hline
+\end{config}
+
+\begin{config}[Capacitor-BrowserView / Configuration (Electron)]
+  \codebreak{electron}{OverrideUserAgent} & \code[typescript]{string}   & Overrides global \code{overrideUserAgent} option on Electron. \\ \hline
+  \codebreak{electron}{AppendUserAgent}   & \code[typescript]{string}   & Overrides global \code{appendUserAgent} option on Electron. \\ \hline
+  \codebreak{electron}{BackgroundColor}   & \code[typescript]{Color}    & Overrides global \code{backgroundColor} option  on Electron. \\ \hline
+  \codebreak{electron}{AllowMixedContent} & \code[typescript]{boolean}  & Enable mixed content in the BrowserViews for Electron. \fn{mixed-content} is disabled by default for security. During development, this option may need to be enabled to allow the BrowserViews to load files from different schemes. \\
+                                          &                             & \textbf{This is not intended for use in production.} \\ 
+                                          &                             & Defaults to \code[typescript]{false} \\ \hline
+\end{config}
+
+\newpage
+
+\textbf{Examples}
+
+In \code{capacitor.config.json}:
+
+\begin{minted}{json}
+{
+  "plugins": {
+    "CapacitorBrowserView": {
+      "url": "https://capacitorjs.com/",
+      "allowMultipleWindows": false,
+      "allowNavigation": [
+        "capacitorjs\.com",
+        "ionic\.io\/blog\/.*capacitor.*"
+      ],
+      "enableBridge": true,
+      "overrideUserAgent": "Mozilla/5.0 (CapacitorJS) CapacitorApp/1.0",
+      "appendUserAgent": "CapacitorApp/1.0",
+      "backgroundColor": "#ffffff",
+      "androidOverrideUserAgent": "Mozilla/5.0 (Android) CapacitorApp/1.0",
+      "androidAppendUserAgent": "CapacitorApp/1.0 (Android)",
+      "androidBackgroundColor": "#ffffff",
+      "androidAllowMixedContent": false,
+      "electronOverrideUserAgent": "Mozilla/5.0 (Electron) CapacitorApp/1.0",
+      "electronAppendUserAgent": "CapacitorApp/1.0 (Electron)",
+      "electronBackgroundColor": "#ffffff",
+      "electronAllowMixedContent": false
+    }
+  }
+}
+\end{minted}
+
+In \code{capacitor.config.ts}:
+
+\begin{minted}{typescript}
+/// <reference types="capacitor-browserview" />
+
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorBrowserView: {
+      url: "https://capacitorjs.com/",
+      allowMultipleWindows: false,
+      allowNavigation: [
+        "capacitorjs\.com",
+        "ionic\.io\/blog\/.*capacitor.*"
+      ],
+      enableBridge: true,
+      overrideUserAgent: "Mozilla/5.0 (CapacitorJS) CapacitorApp/1.0",
+      appendUserAgent: "CapacitorApp/1.0",
+      backgroundColor: "#ffffff",
+      androidOverrideUserAgent: "Mozilla/5.0 (Android) CapacitorApp/1.0",
+      androidAppendUserAgent: "CapacitorApp/1.0 (Android)",
+      androidBackgroundColor: "#ffffff",
+      androidAllowMixedContent: false,
+      electronOverrideUserAgent: "Mozilla/5.0 (Electron) CapacitorApp/1.0",
+      electronAppendUserAgent: "CapacitorApp/1.0 (Electron)",
+      electronBackgroundColor: "#ffffff",
+      electronAllowMixedContent: false,
+    },
+  },
+};
+
+export default config;
+\end{minted}
+
+\printfn

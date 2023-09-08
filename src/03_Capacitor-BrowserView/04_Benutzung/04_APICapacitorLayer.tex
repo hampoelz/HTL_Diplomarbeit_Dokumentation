@@ -1,0 +1,1043 @@
+\subsubsection{API - Capacitor layer}
+\label{sec:Capacitor-BrowserView:API_CapacitorLayer}
+
+\begin{note}[Note]
+  The following documentation is based on parts of the Android WebView and Electron BrowserView documentation.
+  \cite{android:api, electron}
+\end{note}
+
+A \code{BrowserView} can be used to embed additional web content into the Capacitor-App.
+It is like a child window, except that it is positioned relative to its owning window. 
+It has the following methods:
+
+\begin{multicols}{2}
+  \begin{itemize}
+    \setlength\itemsep{-0.8em}
+    %\small
+    \item \code{create(...)}
+    \item \code{destroy()}
+    \item \code{setBounds(...)}
+    \item \code{getBounds()}
+    \item \code{setBackgroundColor(...)}
+    \item \code{loadUrl(...)}
+    \item \code{getUrl()}
+    \item \code{getTitle()}
+    \item \code{stop()}
+    \item \code{reload()}
+    \item \code{canGoBack()}
+    \item \code{canGoForward()}
+    \item \code{clearHistory()}
+    \item \code{goBack()}
+    \item \code{goForward()}
+    \item \code{setUserAgent(...)}
+    \item \code{appendUserAgent(...)}
+    \item \code{getUserAgent()}
+    \item \code{executeJavaScript(...)}
+    \item \code{setAllowMultipleWindows(...)}
+    \item \code{getAllowMultipleWindows()}
+    \item \code{setAllowedNavigation(...)}
+    \item \code{getAllowedNavigation()}
+    \item \code{sendMessage(...)}
+    \item \code{addMessageListener(...)}
+    \end{itemize}
+\end{multicols}
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{addListener('new-window', ...)}
+  \item \code{addListener('close-window', ...)}
+  \item \code{addListener('page-favicon-updated', ...)}
+  \item \code{addListener('page-title-updated', ...)}
+  \item \code{addListener('enter-html-full-screen', ...)}
+  \item \code{addListener('leave-html-full-screen', ...)}
+  \item \code{addListener('will-navigate', ...)}
+  \item \code{addListener('did-start-loading', ...)}
+  \item \code{addListener('did-finish-load', ...)}
+  \item \code{addListener('did-fail-load', ...)}
+  \item \code{addListener('dom-ready', ...)}
+  \item \code{addListener('http-error', ...)}
+  \item \code{addListener('render-process-gone', ...)}
+  \item \code{addListener('unresponsive', ...)}
+  \item \code{addListener('responsive', ...)}
+  \item \code{removeListener(...)}
+  \item \code{removeAllListeners(...)}
+\end{itemize}
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item Interfaces
+  \item Type Aliases
+\end{itemize}
+
+%\vspace{1em}
+
+
+% -------------------- %
+
+\newpage
+
+\paragraph{create(...)}
+
+\begin{minted}{typescript}
+  create(
+    options?: CreateOptions
+  ) => Promise<BrowserView>
+\end{minted}
+
+Creates a new BrowserView with properties as set by the \code{options}.
+
+\textbf{Returns:} \code[typescript]{Promise<BrowserView>}
+
+% -------------------- %
+
+
+\paragraph{destroy()}
+
+\begin{minted}{typescript}
+  destroy() => Promise<void>
+\end{minted}
+
+Removes the BrowserView from the app and destroys its internal state.
+No other methods may be called on this BrowserView after destroy.
+
+% -------------------- %
+
+
+\paragraph{setBounds(...)}
+
+\begin{minted}{typescript}
+  setBounds(
+    args: BoundsPayloadData
+  ) => Promise<void>
+\end{minted}
+
+Resizes and moves the view to the supplied bounds relative to the window.
+
+% -------------------- %
+
+
+\paragraph{getBounds()}
+
+\begin{minted}{typescript}
+  getBounds() => Promise<BoundsPayloadData>
+\end{minted}
+
+Gets the bounds of the view relative to the window.
+
+\textbf{Returns:} \code[typescript]{Promise<BoundsPayloadData>}
+
+% -------------------- %
+
+
+\paragraph{setBackgroundColor(...)}
+
+\begin{minted}{typescript}
+  setBackgroundColor(
+    args: ColorPayloadData
+  ) => Promise<void>
+\end{minted}
+
+Sets the background color for this view.
+
+% -------------------- %
+
+
+\paragraph{loadUrl(...)}
+
+\begin{minted}{typescript}
+  loadUrl(
+    args: UrlPayloadData
+  ) => Promise<void>
+\end{minted}
+
+Loads the given url in the view.
+The url must contain the protocol prefix, e.g.\ the \code{https://}.
+
+% -------------------- %
+
+\newpage
+
+\paragraph{getUrl()}
+
+\begin{minted}{typescript}
+  getUrl() => Promise<UrlPayloadData>
+\end{minted}
+
+Gets the \ac{url} of the current page.
+This is not always the same as the \ac{url} passed to \code[javascript]{BrowserView.addListener('will-navigate', callback)}
+because although the load for that \ac{url} has begun, the current page may not have changed.
+
+\textbf{Returns:} \code[typescript]{Promise<UrlPayloadData>}
+
+% -------------------- %
+
+
+\paragraph{getTitle()}
+
+\begin{minted}{typescript}
+  getTitle() => Promise<TitlePayloadData>
+\end{minted}
+
+Gets the title of the current page.
+This is the title of the current page until \code[javascript]{BrowserView.addListener('page-title-updated', callback)} is called.
+
+\textbf{Returns:} \code[typescript]{Promise<TitlePayloadData>}
+
+% -------------------- %
+
+
+\paragraph{stop()}
+
+\begin{minted}{typescript}
+  stop() => Promise<void>
+\end{minted}
+
+Stops any pending navigation.
+
+% -------------------- %
+
+
+\paragraph{reload()}
+
+\begin{minted}{typescript}
+  reload() => Promise<void>
+\end{minted}
+
+Reloads the current web page.
+
+% -------------------- %
+
+
+\paragraph{canGoBack()}
+
+\begin{minted}{typescript}
+  canGoBack() => Promise<CanGoBackPayloadData>
+\end{minted}
+
+Gets whether the browser can go back to previous web page.
+
+\textbf{Returns:} \code[typescript]{Promise<CanGoBackPayloadData>}
+
+% -------------------- %
+
+
+\paragraph{canGoForward()}
+
+\begin{minted}{typescript}
+  canGoForward() => Promise<CanGoForwardPayloadData>
+\end{minted}
+
+Gets whether the browser can go forward to next web page.
+
+\textbf{Returns:} \code[typescript]{Promise<CanGoForwardPayloadData>}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{clearHistory()}
+
+\begin{minted}{typescript}
+  clearHistory() => Promise<void>
+\end{minted}
+
+Clears the internal back/forward navigation history list.
+
+% -------------------- %
+
+
+\paragraph{goBack()}
+
+\begin{minted}{typescript}
+  goBack() => Promise<void>
+\end{minted}
+
+Makes the browser go back a web page.
+
+% -------------------- %
+
+
+\paragraph{goForward()}
+
+\begin{minted}{typescript}
+  goForward() => Promise<void>
+\end{minted}
+
+Makes the browser go forward a web page.
+
+% -------------------- %
+
+
+\paragraph{setUserAgent(...)}
+
+\begin{minted}{typescript}
+  setUserAgent(
+    args: UserAgentPayloadData
+  ) => Promise<void>
+\end{minted}
+
+Overrides the user-agent string for this web page.
+If the string is empty, the system default value will be used.
+
+\textbf{Note:} Starting from Android KitKat (4.4), changing the user-agent while
+loading a web page causes the BrowserView to initiate loading once again.~\cite{android:api}
+
+% -------------------- %
+
+
+\paragraph{appendUserAgent(...)}
+
+\begin{minted}{typescript}
+  appendUserAgent(
+    args: UserAgentPayloadData
+  ) => Promise<void>
+\end{minted}
+
+Appends the specified user-agent to the current user-agent string for this web page.
+
+\textbf{Note:} Starting from Android KitKat (4.4), changing the user-agent while
+loading a web page causes the BrowserView to initiate loading once again.~\cite{android:api}
+
+% -------------------- %
+
+
+\paragraph{getUserAgent()}
+
+\begin{minted}{typescript}
+  getUserAgent() => Promise<UserAgentPayloadData>
+\end{minted}
+
+Gets the user-agent string for this web page.
+
+\textbf{Returns:} \code[typescript]{Promise<UserAgentPayloadData>}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{executeJavaScript(...)}
+
+\begin{minted}{typescript}
+  executeJavaScript(
+    args: CodeExecutePayloadData
+  ) => Promise<CodeExecuteResultData>
+\end{minted}
+
+Asynchronously evaluates JavaScript in the context of the currently displayed page.
+Returns a promise that resolves with the result of the executed code.
+
+\textbf{Returns:} \code[typescript]{Promise<CodeExecuteResultData>}
+
+% -------------------- %
+
+
+\paragraph{setAllowMultipleWindows(...)}
+
+\begin{minted}{typescript}
+  setAllowMultipleWindows(
+    args: AllowMultipleWindowsPayloadData
+  ) => Promise<void>
+\end{minted}
+
+Sets whether the BrowserView supports multiple windows.
+If set to \code[typescript]{true}, links that request a new tab or window \textit{(e.g.\ by \code[javascript]{window.open()}, a link with \code[javascript]{target="_blank"},
+shift+clicking on a link, or submitting a form with \code[html]{<form target="_blank">}.)} open in the external browser
+instead of the BrowserView.
+
+% -------------------- %
+
+
+\paragraph{getAllowMultipleWindows()}
+
+\begin{minted}{typescript}
+  getAllowMultipleWindows() => Promise<AllowMultipleWindowsPayloadData>
+\end{minted}
+
+Gets whether the BrowserView supports multiple windows.
+
+\textbf{Returns:} \code[typescript]{Promise<AllowMultipleWindowsPayloadData>}
+
+% -------------------- %
+
+
+\paragraph{setAllowedNavigation(...)}
+
+\begin{minted}{typescript}
+  setAllowedNavigation(
+    args: AllowedNavigationPayloadData
+  ) => Promise<void>
+\end{minted}
+
+Sets regular expressions to which the BrowserView can navigate additional.
+
+By default, all external \acp{url} are opened in the external browser (not the BrowserView).
+
+% -------------------- %
+
+
+\paragraph{getAllowedNavigation()}
+
+\begin{minted}{typescript}
+  getAllowedNavigation() => Promise<AllowedNavigationPayloadData>
+\end{minted}
+
+Gets the list of regular expressions that the BrowserView can additional navigate to.
+
+\textbf{Returns:} \code[typescript]{Promise<AllowedNavigationPayloadData>}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{sendMessage(...)}
+
+\begin{minted}{typescript}
+  sendMessage(
+    args: MessageChannelPayloadData
+  ) => Promise<void>
+\end{minted}
+
+Sends a message to the current page in the BrowserView.
+
+\textbf{Note:} This method is only available if the bridge was enabled during the BrowserView creation or globally via the plugin configuration.
+
+% -------------------- %
+
+
+\paragraph{addListener('new-window', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'new-window',
+    listenerFunc: BrowserViewListenerCallback<NavigationPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc(data)} when the current page request a new tab or window, e.g.\ by \code[javascript]{window.open()},
+a link with \code[javascript]{target="_blank"}, shift+clicking on a link, or submitting a form with \code[html]{<form target="_blank">}.
+
+Whether links should be opened in the external browser or in the BrowserView itself can be set with
+the method \code{BrowserView.setAllowMultipleWindows()} or with the global option \code{allowMultipleWindows}.
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{addListener('close-window', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'close-window',
+    listenerFunc: BrowserViewListenerCallback<EmptyPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc()} when the browser has stopped any loading in this window
+and has removed any cross-scripting ability in JavaScript.
+
+The application's implementation of this callback should remove the specific BrowserView if this is not already done
+and ensure that any \ac{url} or security indicator displayed is updated so that the user can tell that the page they were
+interacting with has been closed.
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{addListener('page-favicon-updated', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'page-favicon-updated',
+    listenerFunc: BrowserViewListenerCallback<IconPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc(data)} when the current page receives a new favicon.
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{addListener('page-title-updated', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'page-title-updated',
+    listenerFunc: BrowserViewListenerCallback<TitlePayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc(data)} when the document title changes.
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{addListener('enter-html-full-screen', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'enter-html-full-screen',
+    listenerFunc: BrowserViewListenerCallback<EmptyPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc()} when the window enters a full-screen state triggered by the Web-\acs{api}.
+
+\textbf{Note:} On Android this event requires \ac{api} level 7 or higher to be fired.~\cite{android:api}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{addListener('leave-html-full-screen', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'leave-html-full-screen',
+    listenerFunc: BrowserViewListenerCallback<EmptyPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc()} when the window leaves a full-screen state triggered by the Web-\acs{api}.
+
+\textbf{Note:} On Android this event requires \ac{api} level 7 or higher to be fired.~\cite{android:api}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{addListener('will-navigate', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'will-navigate',
+    listenerFunc: BrowserViewListenerCallback<NavigationPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc(data)} when a user or the page wants to start navigation on the main frame.
+It can happen when the \code[javascript]{window.location} object is changed or a user clicks a link in the page.
+
+This event will not emit when the navigation is started programmatically with \acsp{api}
+like \code{BrowserView.loadUrl()} and \code{BrowserView.goBack()} or for POST requests.
+
+It is also not emitted for in-page navigations, such as clicking anchor links or
+updating the \code[javascript]{window.location.hash}.
+
+\textit{On Android it may be called for subframes too.~\cite{android:api}}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{addListener('did-start-loading', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'did-start-loading',
+    listenerFunc: BrowserViewListenerCallback<EmptyPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc()} when the page has started loading.
+Corresponds to the points in time when the spinner of the tab started spinning.
+
+On Android, this callback is called only once for each main frame load so a page with iframes or framesets will
+call this only one time for the main frame. This also means that this callback will not be called when the contents of an
+embedded frame changes.~\cite{android:api}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{addListener('did-finish-load', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'did-finish-load',
+    listenerFunc: BrowserViewListenerCallback<EmptyPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc()} when the page has finished loading, i.e.\ the spinner of the tab has stopped spinning.
+This does not guarantee that the next frame drawn by the BrowserView will reflect the state of the \ac{dom} at this point.
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{addListener('did-fail-load', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'did-fail-load',
+    listenerFunc: BrowserViewListenerCallback<ErrorPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc(data)} when the page failed to load. These errors usually indicate inability to connect to the server.
+
+On Android at \ac{api} level 23 or higher, this event is fired for any resource (iframe, image, etc.), not just for the main page.~\cite{android:api}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{addListener('dom-ready', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'dom-ready',
+    listenerFunc: BrowserViewListenerCallback<EmptyPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc()} when the document in the top-level frame is loaded.
+
+This callback is called when the body of the \ac{http} response has started loading, is reflected in the \ac{dom},
+and will be visible in subsequent draws. This callback occurs early in the document loading process,
+and as such it should be expected that linked resources (for example, \ac{css} and images) may not be available.
+
+\textbf{Note:} On Android this event requires \ac{api} level 23 or higher to be fired.~\cite{android:api}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{addListener('http-error', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'http-error',
+    listenerFunc: BrowserViewListenerCallback<ResponsePayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc(data)} when an \ac{http} error has been received from the server while loading a resource.
+\ac{http} errors have status codes >= 400.
+
+This callback will be called for any resource (iframe, image, etc.), not just for the main page.
+
+\textbf{Note:} On Android this event requires \ac{api} level 23 or higher to be fired.~\cite{android:api}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{addListener('render-process-gone', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'render-process-gone',
+    listenerFunc: BrowserViewListenerCallback<RenderProcessGonePayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc(data)} when the renderer process unexpectedly disappears.
+This is normally because it was crashed or killed.
+
+Multiple BrowserView instances may be associated with a single render process.
+This callback will be called for each BrowserView that was affected.
+
+The application's implementation of this callback should only attempt to clean up the specific BrowserView,
+and should not assume that other BrowserView instances are affected.
+
+The BrowserView can't be used, and should be removed from the application.
+
+To cause an render process crash for test purpose, the application can
+call \code[javascript]{BrowserView.loadUrl("chrome://crash")} on the BrowserView.
+Note that multiple BrowserView instances may be affected if they share a render process,
+not just the specific BrowserView which loaded \code{chrome://crash}.
+
+\textbf{Note:} On Android this event requires \ac{api} level 26 or higher to be fired.~\cite{android:api}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{addListener('unresponsive', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'unresponsive',
+    listenerFunc: BrowserViewListenerCallback<EmptyPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc()} when the renderer of the web page becomes unresponsive as a result
+of a long running blocking task such as the execution of JavaScript.
+
+If a BrowserView fails to process an input event, or successfully navigate to a new \ac{url} within a reasonable time frame,
+the renderer is considered to be unresponsive, and this callback will be called.
+
+\textbf{Note:} On Android this event requires \ac{api} level 29 or higher to be fired.~\cite{android:api}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{addListener('responsive', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'responsive',
+    listenerFunc: BrowserViewListenerCallback<EmptyPayloadData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Calls \code{listenerFunc()} when the unresponsive renderer of the web page becomes responsive.
+
+\textbf{Note:} On Android this event requires \ac{api} level 29 or higher to be fired.~\cite{android:api}
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{addMessageListener(...)}
+
+\begin{minted}{typescript}
+  addMessageListener(
+    eventName: string,
+    listenerFunc: BrowserViewListenerCallback<MessageChannelCallbackData>
+  ) => Promise<PluginListenerHandle> & PluginListenerHandle
+\end{minted}
+
+Listens to \code{eventName} and calls \code{listenerFunc(data)} when a new message arrives from the web page.
+
+\textbf{Note:} This listener is only available if the bridge was enabled during the BrowserView creation or globally via the plugin configuration.
+
+\textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
+Use \code{removeListener(listenerFunc)} instead.
+
+\textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
+
+% -------------------- %
+
+
+\paragraph{removeListener(...)}
+
+\begin{minted}{typescript}
+  removeListener(
+    listenerHandle: PluginListenerHandle
+  ) => Promise<void>
+\end{minted}
+
+Removes the specified \code{listenerHandle} from the listener array for the event it refers to.
+
+% -------------------- %
+
+
+\paragraph{removeAllListeners(...)}
+
+\begin{minted}{typescript}
+  removeAllListeners(
+    eventName?: string
+  ) => Promise<void>
+\end{minted}
+
+Removes all listeners, or those of the specified \code{eventName}, of the BrowserView.
+
+% -------------------- %
+
+\newpage
+
+\paragraph{Interfaces}
+
+
+\subparagraph{CreateOptions}
+
+An interface containing the options used when creating a BrowserView.
+They override the global plugin configurations for this specific BrowserView.
+
+\begin{interfacedesc}[Capacitor-BrowserView / CreateOptions]
+  \code{url}                  & \code[typescript]{string}   & Initial \ac{url} that is loaded immediately after the BrowserView has been created. \\ \hline
+  \code{allowMultipleWindows} & \code[typescript]{boolean}  & Open links that request a new tab or window \textit{e.g.\ by \code[javascript]{window.open()}, a link with \code[javascript]{target="_blank"}, shift+clicking on a link, or submitting a form with \code[html]{<form target="_blank">}.} in the external browser instead of the BrowserViews. \\
+                              &                             & Defaults to \code[typescript]{true} \\ \hline
+  \code{enableBridge}         & \code[typescript]{boolean}  & Enable a bridge between the Capacitor layer and the loaded web page. \\
+                              &                             & Defaults to \code[typescript]{false} \\ \hline
+  \code{overrideUserAgent}    & \code[typescript]{string}   & Default user-agent. \\ \hline
+  \code{appendUserAgent}      & \code[typescript]{string}   & String to append to the original user-agent. This is disregarded if \code{overrideUserAgent} is used. \\ \hline
+  \code{backgroundColor}      & \code[typescript]{Color}    & Default background color. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{BoundsPayloadData}
+
+\begin{interface}[Capacitor-BrowserView / BoundsPayloadData]
+  \code{bounds} & \code[typescript]{Rectangle} \\ \hline
+\end{interface}
+
+\newpage
+
+\subparagraph{Rectangle}
+
+An interface that holds two integer coordinates and two integer dimensions for a rectangle.
+The coordinates are specified in terms of the upper-left corner of the rectangle.
+The width and height are the dimensions of the rectangle.
+These fields can be accessed directly.
+
+\begin{interfacedesc}[Capacitor-BrowserView / Rectangle]
+  \code{x}      & \code[typescript]{number} & The x coordinate of the origin of the rectangle \textit{(must be an integer)}. \\ \hline
+  \code{y}      & \code[typescript]{number} & The y coordinate of the origin of the rectangle \textit{(must be an integer)}. \\ \hline
+  \code{width}  & \code[typescript]{number} & The width of the rectangle \textit{(must be an integer)}. \\ \hline
+  \code{height} & \code[typescript]{number} & The height of the rectangle \textit{(must be an integer)}. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{ColorPayloadData}
+
+\begin{interface}[Capacitor-BrowserView / ColorPayloadData]
+  \code{color} & \code[typescript]{Color} \\ \hline
+\end{interface}
+
+\subparagraph{UrlPayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / UrlPayloadData]
+  \code{url} & \code[typescript]{string} & The \ac{url} of a web page. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{TitlePayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / TitlePayloadData]
+  \code{title} & \code[typescript]{string} & The title of a web page. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{CanGoBackPayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / CanGoBackPayloadData]
+  \code{canGoBack} & \code[typescript]{boolean} & Whether the browser can go back to previous web page. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{CanGoForwardPayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / CanGoForwardPayloadData]
+  \code{canGoForward} & \code[typescript]{boolean} & Whether the browser can go forward to next web page. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{UserAgentPayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / UserAgentPayloadData]
+  \code{userAgent} & \code[typescript]{string} & The BrowserView's user-agent string. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{CodeExecuteResultData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / CodeExecuteResultData]
+  \code{result} & \code[typescript]{any} & The result of the execution (if any). \\ \hline
+\end{interfacedesc}
+
+\subparagraph{CodeExecutePayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / CodeExecutePayloadData]
+  \code{code} & \code[typescript]{string} & The JavaScript to execute. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{AllowMultipleWindowsPayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / AllowMultipleWindowsPayloadData]
+  \code{allowMultipleWindows} & \code[typescript]{boolean} & Whether the BrowserView supports multiple windows. If set to \code[typescript]{true}, links that request a new tab or window \textit{e.g.\ by \code[javascript]{window.open()}, a link with \code[javascript]{target="_blank"}, shift+clicking on a link, or submitting a form with \code[html]{<form target="_blank">}.} open in the external browser instead of the BrowserView. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{AllowedNavigationPayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / AllowedNavigationPayloadData]
+  \code{allowedNavigation} & \code[typescript]{string[]} & The list of regular expressions that the BrowserView can additional navigate to. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{MessageChannelPayloadData}
+
+The payload data to send a message to the web page via \code{eventName},
+along with arguments. Arguments will be serialized with \ac{json}.
+
+\begin{interfacedesc}[Capacitor-BrowserView / MessageChannelPayloadData]
+  \code{eventName} & \code[typescript]{string} & The name of the event being send to. \\ \hline
+  \code{args}      & \code[typescript]{any[]}  & The array of arguments to send. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{PluginListenerHandle}
+
+\begin{interface}[Capacitor-BrowserView / PluginListenerHandle]
+  \code{remove} & \code[typescript]{() => Promise<void>} \\ \hline
+\end{interface}
+
+\subparagraph{NavigationPayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / NavigationPayloadData]
+  \code{url}        & \code[typescript]{string}  & The \ac{url} of a web page. \\ \hline
+  \code{isExternal} & \code[typescript]{boolean} & Whether the \ac{url} is opened in the external browser or in the BrowserView. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{EmptyPayloadData}
+
+An empty interface that represents no data.
+
+
+\subparagraph{IconPayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / IconPayloadData]
+  \code{icon} & \code[typescript]{string} & The favicon of a web page as base64 encoded string. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{ErrorPayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / ErrorPayloadData]
+  \code{error} & \code[typescript]{WebResourceError} & Information about the error occurred. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{WebResourceError}
+
+An interface that encapsulates information about the error that occurred during loading of web resources.
+
+\begin{interfacedesc}[Capacitor-BrowserView / WebResourceError]
+  \code{errorCode}        & \code[typescript]{number} & The error code of the error. \\ \hline
+  \code{errorDescription} & \code[typescript]{string} & A string describing the error. Descriptions are localized, and thus can be used for communicating the problem to the user. \\ \hline
+  \code{validatedURL}     & \code[typescript]{string} & The \ac{url} that failed to load. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{ResponsePayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / ResponsePayloadData]
+  \code{url}           & \code[typescript]{string}              & The \ac{url} that failed to load. \\ \hline
+  \code{errorResponse} & \code[typescript]{WebResourceResponse} & Information about the error occurred. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{WebResourceResponse}
+
+An interface that encapsulates a resource response about the error that occurred.
+
+\begin{interfacedesc}[Capacitor-BrowserView / WebResourceResponse]
+  \code{httpResponseCode} & \code[typescript]{number} & The status code of the error response. \\ \hline
+  \code{httpStatusText}   & \code[typescript]{string} & The description of the status code of the error response. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{RenderProcessGonePayloadData}
+
+\begin{interfacedesc}[Capacitor-BrowserView / RenderProcessGonePayloadData]
+  \code{details} & \code[typescript]{RenderProcessGoneDetail} & The reason why the renderer process exited. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{RenderProcessGoneDetail}
+
+An interface that encapsulates information about why the render process exited.
+The application may use this to decide how to handle the situation.
+
+\begin{interfacedesc}[Capacitor-BrowserView / RenderProcessGoneDetail]
+  \code{crashed} & \code[typescript]{boolean} & Indicates whether the render process was observed to crash, or whether it was killed by the system. If the render process was killed, this is most likely caused by the system being low on memory. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{MessageChannelCallbackData}
+
+The callback data object when a message from the web page arrives.
+
+\begin{interfacedesc}[Capacitor-BrowserView / MessageChannelCallbackData]
+  \code{args} & \code[typescript]{any[]} & The received array of arguments. \\ \hline
+\end{interfacedesc}
+
+\newpage
+
+\paragraph{Type Aliases}
+
+
+\subparagraph{Color}
+
+A string that represents a color.
+
+Supported formats are \code*{\#RRGGBB} and \code*{\#AARRGGBB}. The following names are also accepted: \code{red}, \code{blue}, \code{green}, \code{black}, \code{white}, \code{gray},
+\code{cyan}, \code{magenta}, \code{yellow}, \code{darkgray}, \code{lightgrey}, \code{aqua}, \code{fuchsia}, \code{lime}, \code{maroon}, \code{navy}, \code{olive}, \code{purple}, \code{silver}, and \code{teal}.
+
+\begin{minted}{typescript}
+  `#${string}`
+  | 'red'
+  | 'blue'
+  | 'green'
+  | 'black'
+  | 'white'
+  | 'gray'
+  | 'cyan'
+  | 'magenta'
+  | 'yellow'
+  | 'darkgray'
+  | 'lightgrey'
+  | 'aqua'
+  | 'fuchsia'
+  | 'lime'
+  | 'maroon'
+  | 'navy'
+  | 'olive'
+  | 'purple'
+  | 'silver'
+  | 'teal'
+\end{minted}
+
+\subparagraph{BrowserViewListenerCallback}
+
+The callback function to be called when events are emitted.
+
+\code[typescript]{(data: T): void}
+
+\printfn

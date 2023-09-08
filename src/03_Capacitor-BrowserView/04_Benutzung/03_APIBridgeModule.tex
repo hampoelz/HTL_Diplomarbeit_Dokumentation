@@ -1,0 +1,57 @@
+\subsubsection{API - Bridge module}
+\label{sec:Capacitor-BrowserView:API_BridgeModule}
+
+This plugin includes a bridge between the Capacitor layer and the loaded web page in the BrowserView(s).
+However, this feature is disabled by default. It can be enabled either globally via the plugin configuration or for each BrowserView individually during its creation.
+
+If the bridge feature is enabled, the global object \code[javascript]{window.CapacitorBrowserView} is available on web pages within the corresponding BrowserView.
+
+The \code[javascript]{window.CapacitorBrowserView} object provides an \ac{api} to communicate between the Capacitor layer and the web pages.
+
+It has the following methods to listen for events and send messages:
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{send(...)}
+  \item \code{addListener(string, ...)}
+\end{itemize}
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.send(...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: string,
+    ...args: any[]
+  ) => void
+\end{minted}
+
+Sends a message to the Capacitor layer via \code{eventName}, along with arguments.
+Arguments will be serialized with \ac{json}.
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{eventName}: The name of the event being send to.
+  \item \code{args}: The Array of arguments to send.
+\end{itemize}
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.addListener(string, ...)}
+
+\begin{minted}{typescript}
+  addListener: (
+    eventName: string,
+    callback: (...args: any[]) => void
+  ) => void
+\end{minted}
+
+Listens to \code{eventName} and calls \code{callback(args...)} when a new message arrives from the Capacitor layer.
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{args}: The received array of arguments.
+\end{itemize}
+
+% -------------------- %
