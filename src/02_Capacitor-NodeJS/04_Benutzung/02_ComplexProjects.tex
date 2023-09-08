@@ -237,6 +237,11 @@ import { NodeJS } from 'capacitor-nodejs';
 
 // Starts the Node.js engine.
 NodeJS.start();
+
+// Waits for the Node.js process to initialize.
+NodeJS.whenReady().then(() => {
+  // Communicate with the Node.js process.
+});
 \end{minted}
 
 Manually starting the Node.js runtime provides options to override the \code{nodeDir} configuration or even the path for the main script.
@@ -259,6 +264,11 @@ const options = {
 // Starts the Node.js engine with properties as set by the `options`.
 NodeJS.start(options);
 \end{minted}
+
+\begin{note}[Note]
+  Due to limitations in the Node.js for Mobile Apps toolkit, restarting the runtime after it has finished is not supported.
+  \cite{nodejs-mobile:docs}
+\end{note}
 
 \newpage
 
