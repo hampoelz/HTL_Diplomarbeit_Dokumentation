@@ -1,36 +1,27 @@
-\addurlfn{electron}{Electron}{https://electronjs.org/}
-\addurlfn{nodejs}{Node.js}{https://nodejs.org/}
-\addurlfn{capacitor}{Capacitor}{https://capacitorjs.com/}
-\addurlfn{browserview}{BrowserView-API}{https://electronjs.org/docs/latest/api/browser-view}
-
 \unnumberedSection{Kurzbeschreibung}
 
-Durch das Framework \fn{electron} werden Desktop"=Anwendungen mit Webtechnologien \textit{(Frontend)} und \fn{nodejs} \textit{(Backend)} entwickelt.
-Um Mobile"=Anwendungen mit Webtechnologien zu entwickeln, steht das \fn{capacitor}-Framework zur Verfügung.
-Allerdings fehlen dort Funktionen wie ein \fn{nodejs} Backend oder eine \fn{browserview} um zusätzliche Webinhalte einzubetten.
+In dieser Diplomarbeit wird ein WebApp-Wrapper entwickelt, der für alle gängigen Plattformen (Windows, Linux, macOS, Android und iOS) kompiliert werden kann.
+Der WebApp-Wrapper ermöglicht es, Webseiten als Anwendungen auszuführen sowie ein Node.js Projekt einzubinden, um den Funktionsumfang der Anwendung zu erweitern.
 
-Im Rahmen dieser Diplomarbeit wurden die Erweiterungen \textsc{Capacitor-NodeJS} und \textsc{Capacitor-BrowserView} entwickelt,
-um ein \fn{nodejs} Backend in \fn{capacitor} zu integrieren und die \fn{browserview} von \fn{electron} zu portiert.
+Um dies zu erreichen, werden zwei Erweiterungen für das Capacitor Framework entwickelt:
 
-Mit den Frameworks \fn{capacitor} und \fn{electron}, und den beiden Erweiterungen, wurde ein plattformübergreifender WebApp-Wrapper erstellt,
-welcher über eine Benutzeroberfläche für den Fall von Internetproblemen oder anderen Ereignissen verfügt.
-Darüber hinaus werden mehrere APIs zur Steuerung des WebApp-Wrappers und der Web-App bereitgestellt.
+\begin{itemize}
+    \item \textbf{Capacitor-NodeJS:} Diese Erweiterung ermöglicht das Einbinden eines Node.js Projekts in Capacitor Anwendungen.
+    \item \textbf{Capacitor-BrowserView:} Diese Erweiterung ermöglicht das Anzeigen externer Webinhalte in Capacitor Anwendungen.
+\end{itemize}
 
-Entwickler können damit ohne großen Aufwand eine plattformübergreifende Anwendungen mit zusätzlichem Backend für ihre Website/Web-App erstellen. 
+Mit den beiden Erweiterungen kann schließlich der WebApp-Wrapper erfolgreich realisiert werden.
 
 \unnumberedSection{Abstract}
 
-The \fn{electron} framework is used to develop desktop applications using web technologies \textit{(frontend)} and \fn{nodejs} \textit{(backend)}.
-To develop mobile apps using web technologies, the \fn{capacitor} framework is used.
-However, it lacks features like a \fn{nodejs} backend or a \fn{browserview} to embed additional web content.
+In this diploma thesis, a WebApp wrapper is developed that can be compiled for all common platforms (Windows, Linux, macOS, Android and iOS).
+The WebApp wrapper allows to run web pages as applications and to include a Node.js project to extend the functionality of the application.
 
-As part of this thesis, the extensions \textsc{Capacitor-NodeJS} and \textsc{Capacitor-BrowserView} were developed
-to integrate a \fn{nodejs} backend into \fn{capacitor} and to port the \fn{browserview} from \fn{electron}.
+To achieve this, two extensions for the Capacitor framework are developed:
 
-Using the \fn{capacitor} and \fn{electron} frameworks, and the two extensions, a cross-platform WebApp-Wrapper was developed,
-which features a user interface in case of internet problems or other events.
-In addition, several APIs are provided to control the WebApp-Wrapper and the web app.
+\begin{itemize}
+    \item \textbf{Capacitor-NodeJS:} This extension allows to include a Node.js project in Capacitor applications.
+    \item \textbf{Capacitor-BrowserView:} This extension allows displaying external web content in Capacitor applications.
+\end{itemize}
 
-Developers can use it to create a cross-platform app with an additional backend for their website/web-app without much effort.
-
-\printfn
+Finally, with the two extensions, the WebApp wrapper can be successfully implemented.
