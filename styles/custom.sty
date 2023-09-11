@@ -2,10 +2,11 @@
 %      Add custom packages and styles     
 % ========================================
 
-\usepackage{xspace}
 \usepackage{fontawesome}
 \usepackage{titlesec}
 \usepackage{caption}
+
+\setlength\itemsep{-0.5em}
 
 % ---------------- colors ----------------
 \definecolor{inlinecode}{HTML}{eff1f3}
@@ -29,7 +30,6 @@
 
 % -------------- inline code -------------
 \NewDocumentCommand{\code}{ s O{text} m }{\IfBooleanTF{#1}{\codeplain{#3}}{\codeminted{#2}{#3}}}
-%\newcommand{\code}[2][text]{\@ifstar{\codeplain{#2}}{\codeminted{#1}{#2}}}
 
 \newcommand{\codeminted}[2]{%
     \highLight[inlinecode]{%
@@ -62,39 +62,8 @@
     \code[#1]{#3}%
 }
 
-
-
 % --------------- footnotes --------------
-
-\def\FootnotesText{}
-\newcommand{\setFootnoteNumber}[2]{\expandafter\edef\csname FootnoteNumber_#1 \endcsname{#2}}
-\newcommand{\getFootnoteNumber}[1]{\csname FootnoteNumber_#1 \endcsname}
-\newcommand{\setFootnoteMark}[2]{\expandafter\def\csname FootnoteMark_#1 \endcsname{#2\footnotemark[\getFootnoteNumber{#1}]}}
-\newcommand{\getFootnoteMark}[1]{\csname FootnoteMark_#1 \endcsname}
-\newcommand{\addFootnoteText}[2]{\apptocmd{\FootnotesText}{\footnotetext[\getFootnoteNumber{#1}]{#2}}{}{}}
-\newcommand{\getFootnotesText}{\FootnotesText}
-\newcommand{\resetFootnotesText}{\def\FootnotesText{}}
-
-\newcounter{FNCount}
-
-\newcommand{\fn}[1]{%
-    \getFootnoteMark{#1}%
-}
-
-\newcommand{\addfn}[3]{%
-    \stepcounter{FNCount}%
-    \setFootnoteNumber{#1}{\theFNCount}%
-    \setFootnoteMark{#1}{#2}%
-    \addFootnoteText{#1}{#3}%
-}
-
-\newcommand{\printfn}{%
-    \setcounter{FNCount}{0}%
-    \getFootnotesText%
-    \resetFootnotesText%
-}
-
-\newcommand{\addurlfn}[3]{\addfn{#1}{\href{#3}{#2}}{\url{#3}}}
+\newcommand{\urlfn}[2]{\href{#2}{#1}\footnote{\url{#2}}}
 
 % --------- alert and quote boxes --------
 \newenvironment{baseAlertBox}[1]{
@@ -165,10 +134,10 @@
 \let\savesubparagraph\subparagraph
 \renewcommand{\subparagraph}[1]{\savesubparagraph{#1}\mbox{}}
 
-% ---- style paragraphs like sections ----
+% ----- tables to display interfaces -----
 \def\bfstart#1\bfstop{\textbf{#1}}
 
-\NewDocumentEnvironment{interfacedesc}{ o O{10em} O{6em} }{
+\NewDocumentEnvironment{interfacedesc}{ m O{10em} O{6em} }{
     \begin{table}[H]
         \begin{tabular}{ | >{\bfstart} L{#2} <{\bfstop} | L{#3} | p{\textwidth - #2 - #3 - 2em} | }
             \hline
@@ -176,25 +145,27 @@
             \hline
 }{
         \end{tabular}
-        \IfNoValueTF{#1}{}{\captionlistentry[table]{#1}}
+        \captionsetup{font=small,name=Table,justification=raggedleft,singlelinecheck=false}
+        \caption[#1]{}
     \end{table}
 }
 
-\NewDocumentEnvironment{interface}{o}{
+\NewDocumentEnvironment{interface}{ m O{10em} }{
     \begin{table}[H]
-        \begin{tabular}{ | >{\bfstart} L{10em} <{\bfstop} | l | }
+        \begin{tabular}{ | >{\bfstart} L{#2} <{\bfstop} | l | }
             \hline
             \textbf{Prop} & \textbf{Type} \\
             \hline
 }{
         \end{tabular}
-        \IfNoValueTF{#1}{}{\captionlistentry[table]{#1}}
+        \captionsetup{font=small,name=Table,justification=raggedright,singlelinecheck=false}
+        \caption[#1]{}
     \end{table}
 }
 
-\newenvironment{config}[1][]{
+\newenvironment{config}[1]{
     \renewcommand{\arraystretch}{1.5}
-    \begin{interfacedesc}[#1]
+    \begin{interfacedesc}{#1}
 }{
     \end{interfacedesc}
 }

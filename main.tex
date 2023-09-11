@@ -35,23 +35,23 @@
 
 
 \bigsection{Einführung}
-\include{src/01_Einführung/01_Zielsetzung.tex}
-\include{src/01_Einführung/02_Frontend-Backend.tex}
-\include{src/01_Einführung/03_GewählteTechnologien.tex}
-\include{src/01_Einführung/04_ProjektAufbau.tex}
+\include{src/01_Einführung/01_Technologien.tex}
+\include{src/01_Einführung/02_Zielsetzung.tex}
+\include{src/01_Einführung/03_Problemstellung.tex}
+\include{src/01_Einführung/04_Projektaufbau.tex}
 
-\bigsection{Capacitor-NodeJS}
+\bigsection[sec:Capacitor-NodeJS]{Capacitor-NodeJS}
 \include{src/02_Capacitor-NodeJS/01_Zielsetzung.tex}
 \include{src/02_Capacitor-NodeJS/02_Bibliotheken.tex}
 \include{src/02_Capacitor-NodeJS/03_Implementation.tex}
 \include{src/02_Capacitor-NodeJS/04_Benutzung.tex}
 
-\bigsection{Capacitor-BrowserView}
+\bigsection[sec:Capacitor-BrowserView]{Capacitor-BrowserView}
 \include{src/03_Capacitor-BrowserView/01_Zielsetzung.tex}
 \include{src/03_Capacitor-BrowserView/02_Implementation.tex}
 \include{src/03_Capacitor-BrowserView/04_Benutzung.tex}
 
-\bigsection{WebApp-Wrapper}
+\bigsection[sec:WebApp-Wrapper]{WebApp-Wrapper}
 \include{src/04_WebApp-Wrapper/01_Zielsetzung.tex}
 \include{src/04_WebApp-Wrapper/02_Benutzeroberfläche.tex}
 \include{src/04_WebApp-Wrapper/03_Implementation.tex}
@@ -62,7 +62,10 @@
 \printAbbildungen   % Abbildungsverzeichnis
 \printTabellen      % Tabellenverzeichnis
 \printAkronyme      % Abkürzungsverzeichnis
-\printAppendix      % Anhang
+\begin{singlespacing}
+    \include{src/Arbeitsaufwand.tex}
+\end{singlespacing}
+%\printAppendix      % Anhang
 \printFullChangelog % Vollständiger Änderungsverlauf
 
 \end{document}
