@@ -1,21 +1,24 @@
-\addurlfn{capacitor-electron-plattform}{Capacitor-Community Electron Plattform}{https://github.com/capacitor-community/electron}
-\addurlfn{electron-browserview}{Electron BrowserView}{https://electronjs.org/docs/latest/api/browser-view}
-
 \subsection{Zielsetzung}
 
-Das Hauptziel des Capacitor-BrowserView Plugins ist die Entwicklung eines Plugins für Capacitor, welches es Entwicklern ermöglicht, zusätzliche Webinhalte durch WebViews in Capacitor Anwendungen zu integrieren.
-Das Plugin soll eine \ac{api} bereitstellen, mit der WebViews erstellt und gesteuert werden können.
-Außerdem soll eine Kommunikation zwischen geladenen Webinhalten und der Anwendung ermöglicht werden.
+Das Hauptziel des Capacitor-BrowserView Plugins ist die Entwicklung eines Plugins für Capacitor, welches Entwicklern ermöglicht, zusätzliche Webbrowser-Fenster (WebViews) innerhalb einer Capacitor Anwendung zu erstellen und zu steuern.
+Diese Fenster können zum Anzeigen und Manipulieren von zusätzlichen Webinhalten verwendet werden.
+Dies ist praktisch, um externe Inhalte dynamisch anzuzeigen und von der Capacitor-Anwendung zu isolieren.
+
+Darüber hinaus soll eine optional zu aktivierende Kommunikation zwischen geladenen Webinhalten und der Capacitor Anwendung ermöglicht werden.
+Dies ist sinnvoll, wenn ein vertrauenswürdiger externer Inhalt geladen wird, der nicht vollständig isoliert werden soll, da ein Datenaustausch mit diesem Inhalt und der Capacitor Anwendung benötigt wird.
+
+Das Plugin soll ohne zusätzlichen Aufwand sowohl in Mobile"=Anwendungen als auch in Desktop"=Anwendungen eingesetzt werden können.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{assets/03_Capacitor-BrowserView/01_Zielsetzung.drawio.pdf}
+    \includegraphics[width=0.8\textwidth]{assets/03_Capacitor-BrowserView/01_Zielsetzung.drawio.pdf}
     \caption[Capacitor-BrowserView / Zielsetzung]{Zielsetzung des Capacitor-BrowserView Plugins}
 \end{figure}
 
-Als weiteres Ziel soll die Kompatibilität des Plugins mit der \fn{capacitor-electron-plattform} gewährleistet werden.
-So soll das Plugin ohne zusätzlichen Aufwand sowohl in Mobile"=Anwendungen als auch in Desktop"=Anwendungen eingesetzt werden können.
+Die vom Plugin implementierten Webbrowser-Fenster bzw.\ unter Android und iOS genannten WebViews werden im Plugin als BrowserViews bezeichnet, um die Ähnlichkeit mit den bereits in Electron existierenden BrowserViews zu verdeutlichen.
+\cite{android:api, ios:api, electron:docs}
 
-Die vom Plugin implementierten WebViews werden auch als BrowserViews bezeichnet, um die Ähnlichkeit mit der \fn{electron-browserview} zu verdeutlichen.
-
-\printfn
+\begin{note}
+    Die offizielle Entwicklungsumgebung für iOS, Xcode, ist ausschließlich für macOS verfügbar.~\cite{xcode:support}
+    Da während der Entwicklung nur Windows- und Linux-Geräte zur Verfügung standen, war das Implementieren und Testen des Plugins für iOS nicht möglich.
+\end{note}

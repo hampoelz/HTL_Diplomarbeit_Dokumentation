@@ -2,18 +2,17 @@
 \label{sec:Capacitor-BrowserView:API_CapacitorLayer}
 
 \begin{note}[Note]
-  The following documentation is based on parts of the Android WebView and Electron BrowserView documentation.
-  \cite{android:api, electron}
+  Parts of the following documentation are based on the Android WebView and Electron BrowserView documentation.
+  \cite{android:api, electron:docs}
 \end{note}
 
 A \code{BrowserView} can be used to embed additional web content into the Capacitor-App.
-It is like a child window, except that it is positioned relative to its owning window. 
+It is like a child window, except that it is positioned relative to its owning window.
 It has the following methods:
 
 \begin{multicols}{2}
   \begin{itemize}
     \setlength\itemsep{-0.8em}
-    %\small
     \item \code{create(...)}
     \item \code{destroy()}
     \item \code{setBounds(...)}
@@ -575,8 +574,8 @@ Calls \code{listenerFunc()} when the page has started loading.
 Corresponds to the points in time when the spinner of the tab started spinning.
 
 On Android, this callback is called only once for each main frame load so a page with iframes or framesets will
-call this only one time for the main frame. This also means that this callback will not be called when the contents of an
-embedded frame changes.~\cite{android:api}
+call this only one time for the main frame.
+This also means that this callback will not be called when the contents of an embedded frame changes.~\cite{android:api}
 
 \textbf{Note:} When using the Electron platform, \code{PluginListenerHandle.remove()} does not work due to limitations.~\cite{capacitor-electron}
 Use \code{removeListener(listenerFunc)} instead.
@@ -816,7 +815,7 @@ Removes all listeners, or those of the specified \code{eventName}, of the Browse
 An interface containing the options used when creating a BrowserView.
 They override the global plugin configurations for this specific BrowserView.
 
-\begin{interfacedesc}[Capacitor-BrowserView / CreateOptions]
+\begin{interfacedesc}{Capacitor-BrowserView / CreateOptions}
   \code{url}                  & \code[typescript]{string}   & Initial \ac{url} that is loaded immediately after the BrowserView has been created. \\ \hline
   \code{allowMultipleWindows} & \code[typescript]{boolean}  & Open links that request a new tab or window \textit{e.g.\ by \code[javascript]{window.open()}, a link with \code[javascript]{target="_blank"}, shift+clicking on a link, or submitting a form with \code[html]{<form target="_blank">}.} in the external browser instead of the BrowserViews. \\
                               &                             & Defaults to \code[typescript]{true} \\ \hline
@@ -829,7 +828,7 @@ They override the global plugin configurations for this specific BrowserView.
 
 \subparagraph{BoundsPayloadData}
 
-\begin{interface}[Capacitor-BrowserView / BoundsPayloadData]
+\begin{interface}{Capacitor-BrowserView / BoundsPayloadData}
   \code{bounds} & \code[typescript]{Rectangle} \\ \hline
 \end{interface}
 
@@ -842,7 +841,7 @@ The coordinates are specified in terms of the upper-left corner of the rectangle
 The width and height are the dimensions of the rectangle.
 These fields can be accessed directly.
 
-\begin{interfacedesc}[Capacitor-BrowserView / Rectangle]
+\begin{interfacedesc}{Capacitor-BrowserView / Rectangle}
   \code{x}      & \code[typescript]{number} & The x coordinate of the origin of the rectangle \textit{(must be an integer)}. \\ \hline
   \code{y}      & \code[typescript]{number} & The y coordinate of the origin of the rectangle \textit{(must be an integer)}. \\ \hline
   \code{width}  & \code[typescript]{number} & The width of the rectangle \textit{(must be an integer)}. \\ \hline
@@ -851,61 +850,63 @@ These fields can be accessed directly.
 
 \subparagraph{ColorPayloadData}
 
-\begin{interface}[Capacitor-BrowserView / ColorPayloadData]
+\begin{interface}{Capacitor-BrowserView / ColorPayloadData}
   \code{color} & \code[typescript]{Color} \\ \hline
 \end{interface}
 
 \subparagraph{UrlPayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / UrlPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / UrlPayloadData}
   \code{url} & \code[typescript]{string} & The \ac{url} of a web page. \\ \hline
 \end{interfacedesc}
 
 \subparagraph{TitlePayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / TitlePayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / TitlePayloadData}
   \code{title} & \code[typescript]{string} & The title of a web page. \\ \hline
 \end{interfacedesc}
 
 \subparagraph{CanGoBackPayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / CanGoBackPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / CanGoBackPayloadData}
   \code{canGoBack} & \code[typescript]{boolean} & Whether the browser can go back to previous web page. \\ \hline
 \end{interfacedesc}
 
 \subparagraph{CanGoForwardPayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / CanGoForwardPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / CanGoForwardPayloadData}
   \code{canGoForward} & \code[typescript]{boolean} & Whether the browser can go forward to next web page. \\ \hline
 \end{interfacedesc}
 
 \subparagraph{UserAgentPayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / UserAgentPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / UserAgentPayloadData}
   \code{userAgent} & \code[typescript]{string} & The BrowserView's user-agent string. \\ \hline
 \end{interfacedesc}
 
 \subparagraph{CodeExecuteResultData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / CodeExecuteResultData]
+\begin{interfacedesc}{Capacitor-BrowserView / CodeExecuteResultData}
   \code{result} & \code[typescript]{any} & The result of the execution (if any). \\ \hline
 \end{interfacedesc}
 
 \subparagraph{CodeExecutePayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / CodeExecutePayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / CodeExecutePayloadData}
   \code{code} & \code[typescript]{string} & The JavaScript to execute. \\ \hline
 \end{interfacedesc}
 
 \subparagraph{AllowMultipleWindowsPayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / AllowMultipleWindowsPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / AllowMultipleWindowsPayloadData}
   \code{allowMultipleWindows} & \code[typescript]{boolean} & Whether the BrowserView supports multiple windows. If set to \code[typescript]{true}, links that request a new tab or window \textit{e.g.\ by \code[javascript]{window.open()}, a link with \code[javascript]{target="_blank"}, shift+clicking on a link, or submitting a form with \code[html]{<form target="_blank">}.} open in the external browser instead of the BrowserView. \\ \hline
 \end{interfacedesc}
 
+\newpage
+
 \subparagraph{AllowedNavigationPayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / AllowedNavigationPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / AllowedNavigationPayloadData}
   \code{allowedNavigation} & \code[typescript]{string[]} & The list of regular expressions that the BrowserView can additional navigate to. \\ \hline
 \end{interfacedesc}
 
@@ -914,20 +915,20 @@ These fields can be accessed directly.
 The payload data to send a message to the web page via \code{eventName},
 along with arguments. Arguments will be serialized with \ac{json}.
 
-\begin{interfacedesc}[Capacitor-BrowserView / MessageChannelPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / MessageChannelPayloadData}
   \code{eventName} & \code[typescript]{string} & The name of the event being send to. \\ \hline
   \code{args}      & \code[typescript]{any[]}  & The array of arguments to send. \\ \hline
 \end{interfacedesc}
 
 \subparagraph{PluginListenerHandle}
 
-\begin{interface}[Capacitor-BrowserView / PluginListenerHandle]
+\begin{interface}{Capacitor-BrowserView / PluginListenerHandle}
   \code{remove} & \code[typescript]{() => Promise<void>} \\ \hline
 \end{interface}
 
 \subparagraph{NavigationPayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / NavigationPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / NavigationPayloadData}
   \code{url}        & \code[typescript]{string}  & The \ac{url} of a web page. \\ \hline
   \code{isExternal} & \code[typescript]{boolean} & Whether the \ac{url} is opened in the external browser or in the BrowserView. \\ \hline
 \end{interfacedesc}
@@ -939,13 +940,13 @@ An empty interface that represents no data.
 
 \subparagraph{IconPayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / IconPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / IconPayloadData}
   \code{icon} & \code[typescript]{string} & The favicon of a web page as base64 encoded string. \\ \hline
 \end{interfacedesc}
 
 \subparagraph{ErrorPayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / ErrorPayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / ErrorPayloadData}
   \code{error} & \code[typescript]{WebResourceError} & Information about the error occurred. \\ \hline
 \end{interfacedesc}
 
@@ -953,7 +954,7 @@ An empty interface that represents no data.
 
 An interface that encapsulates information about the error that occurred during loading of web resources.
 
-\begin{interfacedesc}[Capacitor-BrowserView / WebResourceError]
+\begin{interfacedesc}{Capacitor-BrowserView / WebResourceError}
   \code{errorCode}        & \code[typescript]{number} & The error code of the error. \\ \hline
   \code{errorDescription} & \code[typescript]{string} & A string describing the error. Descriptions are localized, and thus can be used for communicating the problem to the user. \\ \hline
   \code{validatedURL}     & \code[typescript]{string} & The \ac{url} that failed to load. \\ \hline
@@ -961,7 +962,7 @@ An interface that encapsulates information about the error that occurred during 
 
 \subparagraph{ResponsePayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / ResponsePayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / ResponsePayloadData}
   \code{url}           & \code[typescript]{string}              & The \ac{url} that failed to load. \\ \hline
   \code{errorResponse} & \code[typescript]{WebResourceResponse} & Information about the error occurred. \\ \hline
 \end{interfacedesc}
@@ -970,14 +971,16 @@ An interface that encapsulates information about the error that occurred during 
 
 An interface that encapsulates a resource response about the error that occurred.
 
-\begin{interfacedesc}[Capacitor-BrowserView / WebResourceResponse]
+\begin{interfacedesc}{Capacitor-BrowserView / WebResourceResponse}
   \code{httpResponseCode} & \code[typescript]{number} & The status code of the error response. \\ \hline
   \code{httpStatusText}   & \code[typescript]{string} & The description of the status code of the error response. \\ \hline
 \end{interfacedesc}
 
+\newpage
+
 \subparagraph{RenderProcessGonePayloadData}
 
-\begin{interfacedesc}[Capacitor-BrowserView / RenderProcessGonePayloadData]
+\begin{interfacedesc}{Capacitor-BrowserView / RenderProcessGonePayloadData}
   \code{details} & \code[typescript]{RenderProcessGoneDetail} & The reason why the renderer process exited. \\ \hline
 \end{interfacedesc}
 
@@ -986,7 +989,7 @@ An interface that encapsulates a resource response about the error that occurred
 An interface that encapsulates information about why the render process exited.
 The application may use this to decide how to handle the situation.
 
-\begin{interfacedesc}[Capacitor-BrowserView / RenderProcessGoneDetail]
+\begin{interfacedesc}{Capacitor-BrowserView / RenderProcessGoneDetail}
   \code{crashed} & \code[typescript]{boolean} & Indicates whether the render process was observed to crash, or whether it was killed by the system. If the render process was killed, this is most likely caused by the system being low on memory. \\ \hline
 \end{interfacedesc}
 
@@ -994,7 +997,7 @@ The application may use this to decide how to handle the situation.
 
 The callback data object when a message from the web page arrives.
 
-\begin{interfacedesc}[Capacitor-BrowserView / MessageChannelCallbackData]
+\begin{interfacedesc}{Capacitor-BrowserView / MessageChannelCallbackData}
   \code{args} & \code[typescript]{any[]} & The received array of arguments. \\ \hline
 \end{interfacedesc}
 
@@ -1039,5 +1042,3 @@ Supported formats are \code*{\#RRGGBB} and \code*{\#AARRGGBB}. The following nam
 The callback function to be called when events are emitted.
 
 \code[typescript]{(data: T): void}
-
-\printfn
