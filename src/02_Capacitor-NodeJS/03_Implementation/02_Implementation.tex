@@ -1,12 +1,3 @@
-\addurlfn{child_process}{\code{child_process}}{https://nodejs.org/api/child_process.html}
-\addurlfn{napi}{Node-API}{https://nodejs.org/api/n-api.html}
-\addurlfn{node_path}{\code{NODE_PATH}}{https://nodejs.org/api/modules.html}
-
-\addurlfn{rollup}{Rollup.js}{https://rollupjs.org}
-\addurlfn{rollup-copy}{\enquote{copy}}{https://npmjs.com/package/rollup-plugin-copy}
-\addurlfn{rollup-dts}{\enquote{dts}}{https://npmjs.com/package/rollup-plugin-dts}
-\addurlfn{type-declarations}{Typendeklarations-Dateien}{https://typescriptlang.org/docs/handbook/2/type-declarations.html}
-
 \subsubsection{Detaillierte Implementation}
 
 Eine Übersicht der einzelnen Komponenten mit ihren genauen Zusammenhängen wird in Abbildung~\ref{asset:Capacitor-NodeJS:Implementation} dargestellt.
@@ -23,7 +14,8 @@ Eine Übersicht der einzelnen Komponenten mit ihren genauen Zusammenhängen wird
 
 \paragraph{Plugin API}
 
-Das Capacitor-NodeJS Plugin erweitert seine \ac{api} um einen zusätzlichen JavaScript"=Layer, der zusätzliche nicht-native Funktionen wie das Entfernen bestimmter oder aller Event-Listener implementiert.
+Das Capacitor-NodeJS Plugin erweitert seine \ac{api} um einen zusätzlichen JavaScript"=Layer, der zusätzliche nicht-native Funktionen implementiert.
+Damit wird das das Entfernen bestimmter oder aller Event-Listener ermöglicht.
 
 \paragraph{Implementierungen}
 
@@ -31,65 +23,75 @@ Um die Implementierung des Plugins auf allen Plattformen übersichtlich und wart
 Sie bestehen jeweils aus zwei Teilen:
 
 \begin{enumerate}
-    \item Der erste Teil wird von der Capacitor Runtime aufgerufen. Er implementiert die \acs{api}-Struktur und wertet die Parameter der Methoden aus.
-    \item Der zweite Teil implementiert die tatsächlichen Funktionen, wie das Starten der Node.js Runtime sowie das Senden und Empfangen von Nachrichten zwischen den Prozessen.
+    \item 
+    Der erste Teil wird von der Capacitor Runtime aufgerufen.
+    Er implementiert die \acs{api}-Struktur und wertet die Parameter der Methoden aus.
+    \item 
+    Der zweite Teil implementiert die tatsächlichen Funktionen,
+    wie das Starten der Node.js Runtime sowie das Senden und Empfangen von Nachrichten zwischen den Prozessen.
 \end{enumerate}
 
-Android Anwendungen sind wie Archive aufgebaut.
-Das bedeutet, dass sie aus einer Reihe von Dateien bestehen, die in einem komprimierten Format gespeichert sind.
-Daher muss das Node.js Projekt von der Anwendung in das Android Dateisystem kopiert werden, damit die Node.js Runtime darauf zugreifen kann.
-\cite{nodejs-mobile:docs}
+Um eine Node.js Runtime auf Desktop"=Plattformen (Windows, Linux und macOS) zu starten, wird bei der Electron Implementierung das von Electron bzw.\ Node.js bereitgestellte Modul \code{child_process} verwendet.
+\cite{electron:docs}
 
-Um von der Implementierung auf die nativen Binärdateien der Node.js Runtime zuzugreifen, ist unter Android und iOS ein C++ Code als Schnittstelle erforderlich.
-Für die Integration nativen Codes unter Android ist zusätzlich das \ac{ndk} erforderlich.
-Der verwendete Code für die Schnittstelle stammt aus der Dokumentation des Node.js for Mobile Apps Toolsets.
-\cite{nodejs-mobile:docs}
+Bei der Android Implementierung müssen für das Starten der Runtime jedoch mehrere Punkte beachtet werden:
 
-In der Electron Implementierung wird das in Electron bzw.\ Node.js enthaltene Modul \fn{child_process} verwendet, um einen Node.js Unterprozess zu starten.
+\begin{itemize}
+    \item
+    Android Anwendungen sind wie Archive aufgebaut.
+    Das bedeutet, dass sie aus einer Reihe von Dateien bestehen, die in einem komprimierten Format gespeichert sind.
+    Daher muss das Node.js Projekt von der Anwendung in das Android Dateisystem kopiert werden, damit die Node.js Runtime darauf zugreifen kann.
+    \cite{nodejs-mobile:docs}
 
-\begin{note}
-    Die offizielle Entwicklungsumgebung für iOS, Xcode, ist ausschließlich für macOS verfügbar.~\cite{xcode:support}
-    Da während der Entwicklung nur Windows- und Linux-Geräte zur Verfügung standen, war das Implementieren und Testen des Plugins für iOS nicht möglich.
-\end{note}
+    \item 
+    Um von der Implementierung auf die nativen Binärdateien der Node.js Runtime zuzugreifen, ist unter Android und iOS ein C++ Code als Schnittstelle erforderlich.
+    Für die Integration des nativen Codes unter Android ist zusätzlich das \ac{ndk} erforderlich.
+    Der verwendete Code für diese Schnittstelle stammt aus der Dokumentation des Node.js for Mobile Apps Toolsets.
+    \cite{nodejs-mobile:docs}
+\end{itemize}
 
 \newpage
 
 \paragraph{Interprozesskommunikation}
 
-Die Kommunikation zwischen dem Node.js Projekt und der Capacitor Anwendung erfordert unter Android und iOS erneut nativen C++ Code.
-Dieser Code dient als \ac{ipc} Schnittstelle und ist von der Plugin"=Implementierung aufrufbar und über die \fn{napi} auch für JavaScript-Code in der Node.js Runtime zugänglich.
-Dadurch kann eine Art Event-Emitter realisiert werden.
+Die Kommunikation zwischen der Node.js Runtime, der Plugin Implementierung und der Capacitor Anwendung wird unter Windows, Linux und MacOS bzw.\ in der Electron Implementierung des Plugins hauptsächlich durch das \code{child_process} Modul verwaltet.
+\cite{electron:docs}
 
-Der verwendete Code für die \ac{ipc} Schnittstelle stammt aus dem Node.js for Mobile Apps Cordova Plugin.
+Unter Android und iOS erfordert diese Kommunikation erneut nativen C++ Code.
+Dieser Code dient als native \acp{ipc} Schnittstelle und ist von der Android Implementierung des Plugins aufrufbar und über die Node-API auch für JavaScript-Code in der Node.js Runtime zugänglich.
+Dadurch kann eine Art Event-Emitter realisiert werden.
+\cite{nodejs-mobile-cordova, nodejs}
+
+Der verwendete Code für diese \ac{ipc} Schnittstelle stammt aus dem Node.js for Mobile Apps Cordova Plugin.
 \cite{nodejs-mobile-cordova}
 
 \vspace{1em}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{assets/02_Capacitor-NodeJS/03_Interprozesskommunikation.drawio.pdf}
+    \includegraphics[width=0.8\textwidth]{assets/02_Capacitor-NodeJS/03_Interprozesskommunikation.drawio.pdf}
     \caption[Capacitor-NodeJS / Interprozesskommunikation]{Interprozesskommunikation zwischen der Capacitor Anwendung, dem Capacitor-NodeJS Plugin und der Node.js Runtime.}
 \end{figure}
 
-Um Daten von der Capacitor Anwendung zu empfangen, registriert ein JavaScript-Code in der nativen \ac{ipc} Schnittstelle eine Callback-Funktion.
-Das Capacitor-NodeJS Plugin kann dann eine Funktion von der Schnittstelle mit Nutzdaten aufrufen.
-Diese Funktion leitet die Daten an die JavaScript"=Callback"=Funktion weiter.
+\vspace{-1em}
 
-Um Daten an die Capacitor Anwendung zu senden, ruft der JavaScript-Code in der Schnittstelle eine Funktion mit Nutzdaten auf.
-Diese Funktion leitet die Daten an das Capacitor-NodeJS Plugin weiter.
+Um Daten von der Capacitor Anwendung zu empfangen, registriert ein JavaScript-Code aus der Node.js Runtime eine Callback-Funktion in der nativen \ac{ipc} Schnittstelle.
+Eine Callback-Funktion ist eine Funktion, die als Parameter an eine andere Funktion übergeben wird.
+Das Capacitor-NodeJS Plugin kann dann über die native Schnittstelle die Callback-Funktion aufrufen und Nutzdaten übergeben.
 
-In der Electron"=Implementierung wird die Kommunikation zum untergeordneten Node.js Prozess durch das \fn{child_process} Modul verwaltet.
+Um Daten an die Capacitor Anwendung zu senden, ruft ein JavaScript-Code aus der Node.js Runtime eine Funktion in der nativen Schnittstelle auf und übergibt die Nutzdaten.
+Die Funktion in der Schnittstelle leitet die Daten schließlich an die Android Implementierung des Plugins weiter.
 
-Um die Benutzerfreundlichkeit zu verbessern, wurde der JavaScript-Code für die Handhabung der Kommunikation sowie für die Serialisierung und Deserialisierung der Nutzdaten mittels \ac{json} in das \code{bridge} Modul verlagert.
-Es erweitert die Node.js Event-Emitter Klasse, um die Kompatibilität mit vorhandenen Projekten zu verbessern.
-Das Modul wird automatisch geladen, so dass Benutzer keine zusätzlichen Schritte ausführen müssen.
+Unter Android können Nutzdaten nur als primitive Datentypen übergeben werden, daher müssen diese Daten serialisiert und deserialisiert werden.
+Für die Serialisierung wurde das \ac{json} Datenformat verwendet.
 
-Das \code{bridge} Modul wird mit \fn{rollup} gebündelt und mit dem Rollup plugin \fn{rollup-copy} in die Unterverzeichnisse der jeweiligen Plattformen kopiert.
-Um auch eine TypeScript Unterstützung zu gewährleisten, wird mit dem Rollup plugin \fn{rollup-dts} ein zusätzliches Paket erstellt, das nur die \fn{type-declarations} enthält, um Informationen über die \ac{api} zu liefern.
+Um auch in der Node.js Runtime eine Benutzerfreundliche \ac{api} zur Kommunikation mit der Capacitor Anwendung bereitzustellen, wurde ein \code{bridge} Modul erstellt, welches den JavaScript-Code für die Handhabung der Kommunikation sowie für die Serialisierung und Deserialisierung beinhaltet.
+Es erweitert die Node.js Event-Emitter Klasse, um die Kompatibilität mit vorhandenen Node.js Projekten zu verbessern.
+Unter Android kommuniziert das Modul wie oben beschrieben mit der nativen \ac{ipc} Schnittstelle
+Unter Windows, Linux und macOS kommuniziert es über das \code{child_process} Modul von Node.js.
+Das \code{bridge} Modul wird automatisch in der Node.js Runtime geladen, so dass Benutzer keine zusätzlichen Schritte ausführen müssen.
 
-Um das automatische Laden von Modulen zu ermöglichen, wird beim Start der Runtime die Umgebungsvariable \fn{node_path} gesetzt.
-Diese Umgebungsvariable enthält eine Liste von Pfaden, die durch ein Semikolon getrennt sind.
-Node.js durchsucht diese Pfade nach Modulen, die im Node.js Projekt nicht gefunden wurden.
+Um das automatische Laden zu ermöglichen, wird beim Start der Runtime die Umgebungsvariable \code{NODE_PATH} gesetzt.
+Diese Umgebungsvariable enthält eine Liste von Pfaden, welche die Node.js Runtime nach Modulen durchsucht.
+Gefundene Module werden dann für das Node.js Projekt bereit gestellt.
 \cite{nodejs-mobile:docs, nodejs}
-
-\printfn

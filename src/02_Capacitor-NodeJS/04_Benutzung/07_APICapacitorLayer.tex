@@ -109,7 +109,7 @@ Removes all listeners, or those of the specified \code{eventName}, for this plug
 
 An interface containing the options used when starting the Node.js engine manually.
 
-\begin{interfacedesc}[Capacitor-NodeJS / StartOptions][5em]
+\begin{interfacedesc}{Capacitor-NodeJS / StartOptions}[5em]
   \code{nodeDir} & \code[typescript]{string}   & Relative path of the integrated Node.js project based on the Capacitor webdir. Defaults to the \code{nodeDir} field of the global plugin configuration. If the \code{nodeDir} config is not set, \code{nodejs} in the Capacitor webdir is used as Node.js project directory. \\ \hline
   \code{script}  & \code[typescript]{string}   & The primary entry point to the Node.js program. This should be a module relative to the root of the Node.js project folder. Defaults to the \code{main} field in the project's package.json. If the \code{main} field is not set, \code{index.js} in the project's root folder is used. \\ \hline
   \code{args}    & \code[typescript]{string[]} & A list of string arguments. \\ \hline
@@ -129,7 +129,7 @@ An interface that holds environment variables as string key-value pairs.
 The payload data to send a message to the web page via \code{eventName},
 along with arguments. Arguments will be serialized with \ac{json}.
 
-\begin{interfacedesc}[Capacitor-NodeJS / ChannelPayloadData]
+\begin{interfacedesc}{Capacitor-NodeJS / ChannelPayloadData}
   \code{eventName} & \code[typescript]{string} & The name of the event being send to. \\ \hline
   \code{args}      & \code[typescript]{any[]}  & The array of arguments to send. \\ \hline
 \end{interfacedesc}   
@@ -138,7 +138,7 @@ along with arguments. Arguments will be serialized with \ac{json}.
 
 \subparagraph{PluginListenerHandle}
 
-\begin{interface}[Capacitor-NodeJS / PluginListenerHandle]
+\begin{interface}{Capacitor-NodeJS / PluginListenerHandle}
   \code{remove} & \code[typescript]{() => Promise<void>} \\ \hline
 \end{interface}
 
@@ -148,13 +148,11 @@ along with arguments. Arguments will be serialized with \ac{json}.
 
 The callback data object when a message from the Node.js process arrives.
 
-\begin{interfacedesc}[Capacitor-NodeJS / ChannelCallbackData]
+\begin{interfacedesc}{Capacitor-NodeJS / ChannelCallbackData}
   \code{args} & \code[typescript]{any[]} & The received array of arguments. \\ \hline
 \end{interfacedesc}
 
 % -------------------- %
-
-\newpage
 
 \paragraph{Type Aliases}
 

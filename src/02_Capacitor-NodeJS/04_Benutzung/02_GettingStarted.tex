@@ -1,5 +1,3 @@
-\addurlfn{vite}{Vite}{https://vitejs.dev}
-
 \subsubsection{Getting Started}
 \label{sec:Capacitor-NodeJS:GettingStarted}
 
@@ -8,7 +6,8 @@ This guide shows how to add a minimal Node.js project to a Capacitor application
 \paragraph{Basics}
 \label{sec:Capacitor-NodeJS:Basics}
 
-In the example below the \fn{vite} build system is used. However, any build system can be used as long as the following criteria are met:
+In the example below the Vite build system is used.
+However, any build system can be used as long as the following criteria are met:
 
 \begin{enumerate}
   \item The Node.js project (to be executed by the engine) must be located in a subdirectory named \code{nodejs} \textit{(or the path set via \code{nodeDir})} of the Capacitor \code{webDir}.
@@ -27,7 +26,7 @@ In the example below the \fn{vite} build system is used. However, any build syst
 In this example the directory for the app's source files is named \code{src}, the directory for static assets is named \code{static},
 the directory for the compiled files is named \code{dist}, and the directory for the Node.js project is named \code{nodejs}.
 
-So the configurations should contain at least the following values. \cite{vite, capacitor:docs}
+So the configurations should contain at least the following values.~\cite{vite, capacitor:docs}
 
 \textbf{Vite Configurations:}
 
@@ -58,11 +57,11 @@ So the configurations should contain at least the following values. \cite{vite, 
 
 \vspace{1em}
 
-To meet the criteria from above using \fn{vite}, just create a new directory called \code{nodejs} inside the \code{static} directory.
+To meet the criteria from above using Vite, just create a new directory called \code{nodejs} inside the \code{static} directory.
 And create a new file called \code{index.js} in it as the starting point.
 
 \begin{quote}
-  \fn{vite} will copy assets from the \code{static} directory to the root of the \code{dist} directory as-is.~\cite{vite}
+  Vite will copy assets from the \code{static} directory to the root of the \code{dist} directory as-is.~\cite{vite}
   So the created \code{nodejs} project directory will be placed in the Capacitor \code{webdir} after build.
 \end{quote}
 
@@ -87,7 +86,7 @@ The project structure should now look something like this:
 
 After building and syncing the project, the main script will be executed by the Node.js runtime when the app is launched.
 
-A guide for a more complex Node.js project can be found in the \hyperref[sec:Capacitor-NodeJS:ComplexProjects]{Complex Projects} section.
+A guide for a more complex Node.js project can be found in the \nameref{sec:Capacitor-NodeJS:ComplexProjects} section.
 
 \paragraph{Inter-Process Communication}
 \label{sec:Capacitor-NodeJS:InterprocessCommunication}
@@ -142,6 +141,4 @@ NodeJS.whenReady().then(() => {
 });
 \end{minted}
 
-A full \ac{api} documentation can be found in the \hyperref[sec:Capacitor-NodeJS:API_BridgeModule]{API - Bridge module} section.
-
-\printfn
+A full \ac{api} documentation can be found in the \nameref{sec:Capacitor-NodeJS:API_BridgeModule} section.

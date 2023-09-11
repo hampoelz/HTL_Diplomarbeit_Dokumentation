@@ -1,29 +1,18 @@
-\addurlfn{gitignore}{\code{@github/gitignore}/Node.gitignore}{https://github.com/github/gitignore/blob/main/Node.gitignore}
-\addurlfn{capacitor-electron}{\code{@capacitor-community/electron}}{https://github.com/capacitor-community/electron}
-
-\addurlfn{vite-web}{Vite}{https://vitejs.dev}
-\addurlfn{rollup-web}{Rollup.js}{https://rollupjs.org}
-
-\addurlfn{rollup}{Rollup}{https://npmjs.com/package/rollup}
-\addurlfn{rollup-commonjs}{\enquote{commonjs}}{https://npmjs.com/package/@rollup/plugin-commonjs}
-\addurlfn{rollup-node-resolve}{\enquote{node-resolve}}{https://npmjs.com/package/@rollup/plugin-node-resolve}
-\addurlfn{rollup-json}{\enquote{json}}{https://npmjs.com/package/@rollup/plugin-json}
-
-
 \subsubsection{Complex Projects}
 \label{sec:Capacitor-NodeJS:ComplexProjects}
 
-The examples in this guide are a continuation of the examples in the \hyperref[sec:Capacitor-NodeJS:GettingStarted]{Getting Started} guide.
+The examples in this guide are a continuation of the examples in the \nameref{sec:Capacitor-NodeJS:GettingStarted} guide.
 
 \paragraph{Custom starting point}
 \label{sec:Capacitor-NodeJS:CustomStartingPoint}
 
-In the \hyperref[sec:Capacitor-NodeJS:GettingStarted]{Getting Started} guide, the default starting point \code{index.js} was used for the Node.js project.
+In the \nameref{sec:Capacitor-NodeJS:GettingStarted} guide, the default starting point \code{index.js} was used for the Node.js project.
 However, the main script can be renamed or moved to subdirectories for a better organized project.
 
 To change this starting point, add a file called \code{package.json} to the Node.js project, which describes the project more in detail.
 Using the \code{main} field in this file, a custom starting point for the Node.js project can be specified.
-This should be a module relative to the root of the Node.js project directory. \cite{npm}
+This should be a module relative to the root of the Node.js project directory.
+\cite{npm}
 
 The package.json file could look like the following, if the \code{main} field is set to \code{server.js}:
 
@@ -59,7 +48,7 @@ The project structure should then change to something like this:
 \label{sec:Capacitor-NodeJS:InstallModules}
 
 To install Node.js modules, the project requires a \code{package.json} file.~\cite{npm}
-See section \hyperref[sec:Capacitor-NodeJS:CustomStartingPoint]{Custom starting point} for more details.
+See section \nameref{sec:Capacitor-NodeJS:CustomStartingPoint} for more details.
 
 The modules have to be installed in the Node.js project directory in which the \code{package.json} file was created using the npm CLI.
 After installing modules, rebuild and sync the Capacitor project to update the application with the Node.js project.
@@ -78,11 +67,11 @@ For convenience, a postinstall script can be added to the main \code{package.jso
 
 \begin{quote}
   You may also want to add a gitignore file to ignore unnecessary files.
-  To do this, create a new file called \code{.gitignore} in the Node.js project directory and copy the contents of \fn{gitignore} into it.
+  To do this, create a new file called \code{.gitignore} in the Node.js project directory and copy the contents of \urlfn{\code{@github/gitignore}/Node.gitignore}{https://github.com/github/gitignore/blob/main/Node.gitignore} into it.
 \end{quote}
 
 \begin{important}[Important]
-  If the \fn{capacitor-electron} plugin is used, packaging with the electron-builder may cause problems since it does not include the modules installed in the Node.js project by default. \cite{electron-builder}
+  If the \code{@capacitor-community/electron} plugin is used, packaging with the electron-builder may cause problems since it does not include the modules installed in the Node.js project by default. \cite{electron-builder}
   \\[1em]
   To fix this issue, add the configuration \code[javascript]{"includeSubNodeModules": true} to the \code{electron-builder.config.json}.
   \cite{electron-builder}
@@ -97,12 +86,12 @@ The Node.js project can quickly grow very large when installing modules.
 For projects that contain a large number of files, the load time can be reduced by decreasing the number of files and the file sizes.
 \cite{nodejs-mobile:docs}
 
-For this reason, it is recommended to use bunder tools such as \fn{rollup-web}.
-In the following example, \fn{rollup-web} is used to bundle the Node.js project with all its modules to a single file.
+For this reason, it is recommended to use bunder tools such as Rollup.js.
+In the following example, Rollup.js is used to bundle the Node.js project with all its modules to a single file.
 \cite{rollup, rollup-plugins}
 
-To get started install \fn{rollup} and its plugins \fn{rollup-commonjs}, \fn{rollup-node-resolve} and \fn{rollup-json} into the root of the Capacitor project.
-If \fn{vite-web} is used as build system, \fn{rollup} is already pre-installed and does not need to be installed:
+To get started install Rollup and its plugins \enquote{commonjs}, \enquote{node-resolve} and \enquote{json} into the root of the Capacitor project.
+If Vite is used as build system, Rollup is already pre-installed and does not need to be installed:
 
 \begin{minted}{bash}
 # Install Rollup (If Vite is used, this command is not needed)
@@ -115,7 +104,7 @@ npm i --save-dev @rollup/plugin-node-resolve
 \end{minted}
 
 Since the Node.js project is now to be bundled, the project structure needs some changes.
-The Node.js project should no longer be copied directly from \fn{vite-web} to the Capacitor webDir directory, instead it will be bundled with \fn{rollup}.
+The Node.js project should no longer be copied directly from Vite to the Capacitor webDir directory, instead it will be bundled with Rollup.
 
 This means that the Node.js project directory needs to be moved from the static assets to somewhere else.
 For example to the root directory of the Capcitor project:
@@ -143,12 +132,12 @@ For example to the root directory of the Capcitor project:
 
 \begin{quote}
   Don't forget to update the new path to the project in the postinstall script,
-  if one is used, as described in the \hyperref[sec:Capacitor-NodeJS:InstallModules]{Installing Node.js modules} section. 
+  if one is used, as described in the \nameref{sec:Capacitor-NodeJS:InstallModules} section.
 \end{quote}
 
 \newpage
 
-After the restructuring of the project, \fn{rollup} can be configured.
+After the restructuring of the project, Rollup can be configured.
 Create a new file called \code{rollup.config.mjs} with the following content \cite{rollup, rollup-plugins}:
 
 \begin{minted}{typescript}
@@ -213,7 +202,7 @@ After building and syncing the project, the Node.js runtime should start faster 
 \label{sec:Capacitor-NodeJS:ManualRuntimeStart}
 
 By default, the Node.js runtime starts automatically with application start.
-However, this behavior may not be suitable for all projects. 
+However, this behavior may not be suitable for all projects.
 
 This behavior can be disabled globally via the \code{startMode} plugin configuration:
 
@@ -305,5 +294,3 @@ const tmpPath = os.tmpdir();
   On Android, the files in the cache are kept until the system needs space, so it increases the application's disk space unless the developer manually deletes them.
   \cite{nodejs-mobile:docs}
 \end{warning}
-
-\printfn

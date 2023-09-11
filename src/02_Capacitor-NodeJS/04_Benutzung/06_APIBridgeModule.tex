@@ -1,5 +1,3 @@
-\addurlfn{event-emitter}{Event-Emitter}{https://nodejs.org/api/events.html}
-
 \subsubsection{API - Bridge module}
 \label{sec:Capacitor-NodeJS:API_BridgeModule}
 
@@ -31,7 +29,7 @@ Returns a path for a per-user application data directory on each platform, where
 
 \paragraph{channel}
 
-The \code{channel} class of the \code{bridge} module is an \fn{event-emitter}.
+The \code{channel} class of the \code{bridge} module is an Event-Emitter.
 It provides a few methods to send messages from the Node.js process to the Capacitor layer, and to receive replies from the Capacitor layer.
 
 It has the following method to listen for events and send messages:
@@ -146,5 +144,3 @@ Removes all listeners, or those of the specified \code{eventName}.
 \end{itemize}
 
 % -------------------- %
-
-\printfn
