@@ -1,0 +1,213 @@
+\subsubsection{API - Webseite}
+
+Der WebApp-Wrapper bietet auf der Webseite eine \ac{api} an, um Konfigurationen des zu ändern und Nachrichten zwischen der Webseite und dem Node.js Projekt auszutauschen.
+
+Die folgenden Methoden stehen zur Verfügung:
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{CapacitorBrowserView.send('wrapper:updateColor', ...)}
+  \item \code{CapacitorBrowserView.send('wrapper:updateMenuColor', ...)}
+  \item \code{CapacitorBrowserView.send('wrapper:enableMenu', ...)}
+  \item \code{CapacitorBrowserView.send('wrapper:addMenuItem', ...)}
+  \item \code{CapacitorBrowserView.send('wrapper:removeMenuItem', ...)}
+  \item \code{CapacitorBrowserView.send('wrapper:openMessageScreen', ...)}
+  \item \code{CapacitorBrowserView.send('wrapper:closeMessageScreen')}
+  \item \code{CapacitorBrowserView.send('wrapper:sendMessage', ...)}
+  \item \code{CapacitorBrowserView.addListener('wrapper:onMessage', ...)}
+  \item \code{CapacitorBrowserView.addListener('wrapper:onMenuClick', ...)}
+  \item Interfaces
+\end{itemize}
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.send('wrapper:updateColor', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:updateColor',
+    color: string
+  ) => void
+\end{minted}
+
+Aktualisiert die Hauptfarbe der Benutzeroberfläche.
+
+\begin{arguments}
+  \item \code{color}: Die neue Hauptfarbe im \code*{\#RRGGBB}-Format.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.send('wrapper:updateMenuColor', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:updateMenuColor',
+    color: string
+  ) => void
+\end{minted}
+
+Ändert die Hintergrundfarbe der Menüleiste.
+
+\begin{arguments}
+  \item \code{color}: Die neue Hintergrundfarbe im \code*{\#RRGGBB}-Format.
+\end{arguments}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{CapacitorBrowserView.send('wrapper:enableMenu', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:enableMenu',
+    enable: boolean
+  ) => void
+\end{minted}
+
+Aktiviert oder deaktiviert die Menüleiste.
+
+\begin{arguments}
+  \item \code{enable}: \code[javascript]{true}, um die Menüleiste zu aktivieren. \code[javascript]{false}, um sie zu deaktivieren.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.send('wrapper:addMenuItem', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:addMenuItem',
+    item: MenuItem
+  ) => void
+\end{minted}
+
+Fügt ein Menüelement zur Menüleiste hinzu.
+
+\begin{arguments}
+  \item \code{item}: Das Menüelement \code*{MenuItem}, das hinzugefügt werden soll.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.send('wrapper:removeMenuItem', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:removeMenuItem',
+    itemId: string
+  ) => void
+\end{minted}
+
+Entfernt ein Menüelement mit der eindeutigen ID \code{itemId} aus der Menüleiste.
+
+\begin{arguments}
+  \item \code{itemId}: Die ID des Menüelements, das entfernt werden soll.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.send('wrapper:openMessageScreen', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:openMessageScreen',
+    html: string
+  ) => void
+\end{minted}
+
+Öffnet oder Aktualisiert das Meldungsfenster.
+Das Meldungsfenster kann mit \ac{html} angepasst werden und wird automatisch mit Stilen des PicoCSS Frameworks versehen.
+
+\begin{arguments}
+  \item \code{html}: Der \ac{html}-Code für das Meldungsfenster.
+\end{arguments}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{CapacitorBrowserView.send('wrapper:closeMessageScreen')}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:closeMessageScreen'
+  ) => void
+\end{minted}
+
+Schließt das Meldungsfenster.
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.send('wrapper:sendMessage', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:updateColor',
+    ...args: any[]
+  ) => void
+\end{minted}
+
+Sendet eine Nachricht an das Node.js Projekt zusammen mit Argumenten.
+Die Argumente werden mit \ac{json} serialisiert.
+
+\begin{arguments}
+  \item \code{args}: Eine Liste der Argumente, die gesendet werden sollen.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.addListener('wrapper:onMessage', ...)}
+
+\begin{minted}{typescript}
+  addListener: (
+    eventName: 'wrapper:onMessage',
+    listener: (...args: any[]) => void
+  ) => void
+\end{minted}
+
+Ruft \code{listener(args...)} auf, wenn eine neue Nachricht von dem Node.js Projekt eintrifft.
+
+\begin{arguments}
+  \item \code{args}: Eine Liste der Argumente, die empfangenen wurden.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{CapacitorBrowserView.addListener('wrapper:onMenuClick', ...)}
+
+\begin{minted}{typescript}
+  addListener: (
+    eventName: 'wrapper:onMenuClick',
+    listener: (itemId: string) => void
+  ) => void
+\end{minted}
+
+Ruft \code{listener(data)} auf, wenn auf eine Schaltfläche in der Menüleiste geklickt wurde.
+
+\begin{arguments}
+  \item \code{itemId}: Die ID des Menüelements, das angeklickt wurde.
+\end{arguments}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{Interfaces}
+
+% -------------------- %
+
+\subparagraph{MenuItem}
+
+Ein Interface, das Informationen über einen Menüelement enthält.
+
+\begin{interfacedesc}{WebApp-Wrapper / MenuItem (Webseite API)}
+  \code{id}   & \code[typescript]{string} & Eine eindeutige ID für das Menüelement. \\ \hline
+  \code{type} & \code[typescript]{string} & Der Anzeigetyp des Menüelements. Die folgenden Typen sind verfügbar: \\
+              &                           & \textbf{\code{text}}: Ein einfaches Textelement. \\
+              &                           & \textbf{\code{separator}}: Ein Trennstrich. \\
+              &                           & \textbf{\code{button}}: Eine Schaltfläche mit Text. \\
+              &                           & \textbf{\code{button_primary}}: Eine Schaltfläche mit Text und hervorgehobener Farbe. \\ \hline
+  \code{text} & \code[typescript]{string} & Der Text, der in der Menüleiste für dieses Element angezeigt wird. \\ \hline
+\end{interfacedesc}

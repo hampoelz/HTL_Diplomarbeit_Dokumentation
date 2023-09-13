@@ -1,0 +1,44 @@
+\subsubsection{API - Meldungsfenster}
+
+Der WebApp-Wrapper bietet im Meldungsfenster eine \ac{api} an, das Meldungsfenster wieder zu schließen und Nachrichten an das Node.js Projekt oder an die Webseite zu senden.
+
+Die folgenden Methoden stehen zur Verfügung:
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{closeMessageScreen()}
+  \item \code{sendMessage(...)}
+\end{itemize}
+
+% -------------------- %
+
+\paragraph{closeMessageScreen()}
+
+\begin{minted}{typescript}
+  closeMessageScreen: () => void
+\end{minted}
+
+Schließt das Meldungsfenster.
+
+% -------------------- %
+
+\paragraph{sendMessage(...)}
+
+\begin{minted}{typescript}
+  sendMessage: (
+    receiver: 'nodejs' | 'pwa',
+    ...args: any[]
+  ) => void
+\end{minted}
+
+Sendet eine Nachricht an das Node.js Projekt oder and die Webseite zusammen mit Argumenten.
+Die Argumente werden mit \ac{json} serialisiert.
+
+\begin{itemize}
+  \setlength\itemsep{-0.5em}
+  \item \code{receiver}: Der Empfänger der Nachricht.\\
+    \hspace*{1em} Die folgenden Werte werden akzeptiert:\\
+    \hspace*{1em}\code{nodejs}: Sendet die Nachricht an das Node.js Projekt\\
+    \hspace*{1em}\code{pwa}: Sendet die Nachricht an die Webseite
+  \item \code{args}: Eine Liste der Argumente, die gesendet werden sollen.
+\end{itemize}

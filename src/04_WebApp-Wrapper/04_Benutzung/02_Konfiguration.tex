@@ -1,0 +1,45 @@
+\subsubsection{Konfiguration}
+\label{sec:WebApp-Wrapper:Konfiguration}
+
+Die folgenden Konfigurationen sind verfügbar:
+
+\begin{configuration}{WebApp-Wrapper / Konfiguration}
+  \code{appId}        & \code[typescript]{string}     & Ein eindeutiger Bezeichner für die Anwendung. Sie wird auch als Bundle-ID in iOS und als Anwendungs-ID in Android bezeichnet. Sie muss in umgekehrter Domänennamenschreibweise angegeben werden, was im Allgemeinen einen Domänennamen darstellen, der dem Unternehmen gehört.\\ \hline
+  \code{appName}      & \code[typescript]{string}     & Der benutzerfreundliche Name der Anwendung. Dies sollte der Name sein, der im AppStore angezeigt wird. \\ \hline
+  \code{appUrl}       & \code[typescript]{string}     & Die Adresse der Webseite, die in der Anwendung angezeigt wird. \\ \hline
+  \code{primaryColor} & \code[typescript]{string}     & Die Hauptfarbe der Benutzeroberfläche. Der Standardwert ist \textcolor[HTML]{BB4747}{\code*{"\#1095c1"}} \\ \hline
+  \code{menuColor}    & \code[typescript]{string}     & Die Hintergrundfarbe der Menüleiste. \\ \hline
+  \code{menu}         & \code[typescript]{MenuItem[]} & Eine Liste von Menüelementen. Jedes angegebene Menüelement wird in der Menüleiste angezeigt. Wenn diese Konfiguration nicht festgelegt wurde, wird keine Menüleiste angezeigt. \\ \hline
+  \code{contactUrl}   & \code[typescript]{string}     & Eine Webseite, unter der ein Fehlerbericht erstellt werden kann, wenn die angegebene Webseite aufgrund eines Serverfehlers nicht geladen werden kann. \\ \hline
+\end{configuration}
+
+\newpage
+
+\textbf{Beispiele}
+
+In \code{capacitor.config.json}:
+
+\begin{minted}{json}
+{
+  "appId": "com.company.app",
+  "appName": "Company App",
+  "appUrl": "https://app.company.com/",
+  "primaryColor": "#1b66c9",
+  "menuColor": "#202124",
+  "menu": [
+    {
+      "id": "test-button",
+      "type": "button",
+      "text": "Hello World"
+    }
+  ],
+  "contactUrl": "",
+  "webDir": "dist"
+}
+\end{minted}
+
+\begin{warning}
+    Die Konfiguration \code{webDir} darf nicht verändert werden.
+    Capacitor verwendet diese Konfiguration, um die Plattformen mit den Projektdateien zu synchronisieren.
+    Wenn Sie diese Konfiguration ändern, kann es zu Problemen bei der Synchronisierung kommen.
+\end{warning}

@@ -1,0 +1,420 @@
+\subsubsection{API - Node.js Projekt}
+
+Der WebApp-Wrapper bietet im Node.js Projekt eine \ac{api} an, um Konfigurationen zu ändern, die Webseite zu steuern und Nachrichten zwischen dem Node.js Projekt und der Webseite auszutauschen.
+
+Die \acs{api}-Methoden sind über das Modul \code{bridge} verfügbar.
+Das Modul verfügt über die folgenden Methoden:
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{channel.send('wrapper:updateColor', ...)}
+  \item \code{channel.send('wrapper:updateMenuColor', ...)}
+  \item \code{channel.send('wrapper:enableMenu', ...)}
+  \item \code{channel.send('wrapper:addMenuItem', ...)}
+  \item \code{channel.send('wrapper:removeMenuItem', ...)}
+  \item \code{channel.send('wrapper:openMessageScreen', ...)}
+  \item \code{channel.send('wrapper:closeMessageScreen')}
+  \item \code{channel.send('wrapper:sendMessage', ...)}
+  \item \code{channel.addListener('wrapper:onMessage', ...)}
+  \item \code{channel.addListener('wrapper:onMenuClick', ...)}
+\end{itemize}
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item \code{channel.send('wrapper:loadUrl', ...)}
+  \item \code{channel.send('wrapper:reload')}
+  \item \code{channel.send('wrapper:clearHistory')}
+  \item \code{channel.send('wrapper:goBack')}
+  \item \code{channel.send('wrapper:goForward')}
+  \item \code{channel.send('wrapper:executeJavaScript', ...)}
+  \item \code{channel.addListener('will-navigate', ...)}
+  \item \code{channel.addListener('did-start-loading', ...)}
+  \item \code{channel.addListener('did-finish-load', ...)}
+  \item \code{channel.addListener('did-fail-load', ...)}
+  \item \code{channel.addListener('dom-ready', ...)}
+\end{itemize}
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item Interfaces
+\end{itemize}
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:updateColor', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:updateColor',
+    color: string
+  ) => void
+\end{minted}
+
+Aktualisiert die Hauptfarbe der Benutzeroberfläche.
+
+\begin{arguments}
+  \item \code{color}: Die neue Hauptfarbe im \code*{\#RRGGBB}-Format.
+\end{arguments}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{channel.send('wrapper:updateMenuColor', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:updateMenuColor',
+    color: string
+  ) => void
+\end{minted}
+
+Ändert die Hintergrundfarbe der Menüleiste.
+
+\begin{arguments}
+  \item \code{color}: Die neue Hintergrundfarbe im \code*{\#RRGGBB}-Format.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:enableMenu', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:enableMenu',
+    enable: boolean
+  ) => void
+\end{minted}
+
+Aktiviert oder deaktiviert die Menüleiste.
+
+\begin{arguments}
+  \item \code{enable}: \code[javascript]{true}, um die Menüleiste zu aktivieren. \code[javascript]{false}, um sie zu deaktivieren.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:addMenuItem', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:addMenuItem',
+    item: MenuItem
+  ) => void
+\end{minted}
+
+Fügt ein \code*{MenuItem} zur Menüleiste hinzu.
+
+\begin{arguments}
+  \item \code{item}: Das Menüelement, das hinzugefügt werden soll.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:removeMenuItem', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:removeMenuItem',
+    itemId: string
+  ) => void
+\end{minted}
+
+Entfernt ein Menüelement mit der eindeutigen ID \code{itemId} aus der Menüleiste.
+
+\begin{arguments}
+  \item \code{itemId}: Die ID des Menüelements, das entfernt werden soll.
+\end{arguments}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{channel.send('wrapper:openMessageScreen', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:openMessageScreen',
+    html: string
+  ) => void
+\end{minted}
+
+Öffnet oder Aktualisiert das Meldungsfenster.
+Das Meldungsfenster kann mit \ac{html} angepasst werden und wird automatisch mit Stilen des PicoCSS Frameworks versehen.
+
+\begin{arguments}
+  \item \code{html}: Der \ac{html}-Code für das Meldungsfenster.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:closeMessageScreen')}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:closeMessageScreen'
+  ) => void
+\end{minted}
+
+Schließt das Meldungsfenster.
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:sendMessage', ...)}
+
+\begin{minted}{typescript}
+  send: (
+    eventName: 'wrapper:updateColor',
+    ...args: any[]
+  ) => void
+\end{minted}
+
+Sendet eine Nachricht an die Webseite zusammen mit Argumenten.
+Die Argumente werden mit \ac{json} serialisiert.
+
+\begin{arguments}
+  \item \code{args}: Eine Liste der Argumente, die gesendet werden sollen.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{channel.addListener('wrapper:onMessage', ...)}
+
+\begin{minted}{typescript}
+  addListener: (
+    eventName: 'wrapper:onMessage',
+    listener: (...args: any[]) => void
+  ) => void
+\end{minted}
+
+Ruft \code{listener(args...)} auf, wenn eine neue Nachricht von der Webseite eintrifft.
+
+\begin{arguments}
+  \item \code{args}: Eine Liste der Argumente, die empfangenen wurden.
+\end{arguments}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{channel.addListener('wrapper:onMenuClick', ...)}
+
+\begin{minted}{typescript}
+  addListener: (
+    eventName: 'wrapper:onMenuClick',
+    listener: (itemId: string) => void
+  ) => void
+\end{minted}
+
+Ruft \code{listener(data)} auf, wenn auf eine Schaltfläche in der Menüleiste geklickt wurde.
+
+\begin{arguments}
+  \item \code{itemId}: Die ID des Menüelements, das angeklickt wurde.
+\end{arguments}
+
+% -------------------- %
+
+
+%! The following APIs are forwarded from the Capacitor-BrowserView plugin
+% -------------------- %
+
+\paragraph{channel.send('wrapper:loadUrl', ...)}
+
+\begin{minted}{typescript}
+  send(
+    eventName: 'wrapper:loadUrl',
+    url: string
+  ) => void
+\end{minted}
+
+Lädt die angegebene \ac{url} in die Ansicht.
+Die \ac{url} muss einen Protokollpräfix enthalten, z.B.\ den \code{https://}.
+
+\begin{arguments}
+  \item \code{url}: Die \ac{url} einer Webseite.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:reload')}
+
+\begin{minted}{typescript}
+  send(
+    eventName: 'wrapper:reload'
+  ) => void
+\end{minted}
+
+Lädt die aktuelle Webseite neu.
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:clearHistory')}
+
+\begin{minted}{typescript}
+  send(
+    eventName: 'wrapper:clearHistory'
+  ) => void
+\end{minted}
+
+Löscht die interne Liste der Rück- und Vorwärtsnavigation.
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:goBack')}
+
+\begin{minted}{typescript}
+  send(
+    eventName: 'wrapper:goBack'
+  ) => void
+\end{minted}
+
+Bringt den Browser dazu, eine Webseite zurückzugehen.
+
+% -------------------- %
+
+\newpage
+
+\paragraph{channel.send('wrapper:goForward')}
+
+\begin{minted}{typescript}
+  send(
+    eventName: 'wrapper:goForward'
+  ) => void
+\end{minted}
+
+Bringt den Browser dazu, eine Webseite weiterzuleiten.
+
+% -------------------- %
+
+\paragraph{channel.send('wrapper:executeJavaScript', ...)}
+
+\begin{minted}{typescript}
+  send(
+    eventName: 'wrapper:executeJavaScript',
+    code: string
+  ) => void
+\end{minted}
+
+Führt JavaScript asynchron im Kontext der aktuell angezeigten Webseite aus.
+
+\begin{arguments}
+  \item \code{code}: Der JavaScript-Code, der ausgeführt werden soll.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{channel.addListener('will-navigate', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'will-navigate',
+    listenerFunc: (
+      url: string,
+      isExternal: boolean
+    ) => void
+  ) => void
+\end{minted}
+
+Ruft \code{listenerFunc(data)} auf, wenn ein Benutzer oder die Webseite eine Navigation starten will.
+Dies kann geschehen, wenn das Objekt \code[javascript]{window.location} geändert wird oder ein Benutzer auf einen Link auf der Webseite klickt.
+
+Dieses Ereignis wird nicht ausgelöst, wenn die Navigation programmgesteuert mit \acsp{api} gestartet wird wie \code{wrapper:loadUrl} und \code{wrapper:goBack} oder für POST"=Anfragen.
+
+Es wird auch nicht für seiteninterne Navigationen ausgelöst, wie das Anklicken von Ankerlinks oder die Aktualisierung des \code[javascript]{window.location.hash}.
+
+\begin{arguments}
+  \item \code{url}: Die \ac{url} einer Webseite.
+  \item \code{isExternal}: Ob die \ac{url} im externen Browser oder in der BrowserView geöffnet wird.
+\end{arguments}
+
+% -------------------- %
+
+\newpage
+
+\paragraph{channel.addListener('did-start-loading', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'did-start-loading',
+    listenerFunc: () => void
+  ) => void
+\end{minted}
+
+Ruft \code{listenerFunc()} auf, wenn die Webseite mit dem Laden begonnen hat.
+
+% -------------------- %
+
+\paragraph{channel.addListener('did-finish-load', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'did-finish-load',
+    listenerFunc: () => void
+  ) => void
+\end{minted}
+
+Ruft \code{listenerFunc()} auf, wenn das Laden der Webseite abgeschlossen ist.
+Dies garantiert nicht, dass der nächste gezeichnete Frame den Zustand des \ac{dom} zu diesem Zeitpunkt wiedergibt.
+
+% -------------------- %
+
+\paragraph{channel.addListener('did-fail-load', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'did-fail-load',
+    listenerFunc: (error: WebResourceError) => void
+  ) => void
+\end{minted}
+
+Ruft \code{listenerFunc(data)} auf, wenn die Webseite nicht geladen werden kann.
+Diese Fehler weisen in der Regel darauf hin, dass keine Verbindung zum Server hergestellt werden kann.
+
+\begin{arguments}
+  \item \code{error}: Informationen über den aufgetretenen Fehler.
+\end{arguments}
+
+% -------------------- %
+
+\paragraph{channel.addListener('dom-ready', ...)}
+
+\begin{minted}{typescript}
+  addListener(
+    eventName: 'dom-ready',
+    listenerFunc: () => void
+  ) => void
+\end{minted}
+
+Ruft \code{listenerFunc()} auf, wenn das Dokument im Frame der obersten Ebene geladen wurde.
+
+% -------------------- %
+
+\newpage
+
+\paragraph{Interfaces}
+
+% -------------------- %
+
+\subparagraph{MenuItem}
+
+Ein Interface, das Informationen über einen Menüelement enthält.
+
+\begin{interfacedesc}{WebApp-Wrapper / MenuItem (Node.js Projekt API)}
+  \code{id}   & \code[typescript]{string} & Eine eindeutige ID für das Menüelement. \\ \hline
+  \code{type} & \code[typescript]{string} & Der Anzeigetyp des Menüelements. Die folgenden Typen sind verfügbar: \\
+              &                           & \textbf{\code{text}}: Ein einfaches Textelement. \\
+              &                           & \textbf{\code{separator}}: Ein Trennstrich. \\
+              &                           & \textbf{\code{button}}: Eine Schaltfläche mit Text. \\
+              &                           & \textbf{\code{button_primary}}: Eine Schaltfläche mit Text und hervorgehobener Farbe. \\ \hline
+  \code{text} & \code[typescript]{string} & Der Text, der in der Menüleiste für dieses Element angezeigt wird. \\ \hline
+\end{interfacedesc}
+
+\subparagraph{WebResourceError}
+
+Ein Interface, das Informationen über den Fehler enthält, der beim Laden von Webressourcen aufgetreten ist.
+
+\begin{interfacedesc}{WebApp-Wrapper / WebResourceError}
+  errorCode         & \code[typescript]{string} & Der Fehlercode des Fehlers. \\ \hline
+  errorDescription  & \code[typescript]{string} & Eine Zeichenfolge, die den Fehler beschreibt. Beschreibungen sind lokalisiert und können daher verwendet werden, um dem Benutzer das Problem mitzuteilen. \\ \hline
+  validatedURL      & \code[typescript]{string} & Die \ac{url}, die nicht geladen werden konnte. \\ \hline
+\end{interfacedesc}

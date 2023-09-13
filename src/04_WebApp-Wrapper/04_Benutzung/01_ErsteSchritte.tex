@@ -1,0 +1,98 @@
+\subsubsection{Erste Schritte}
+
+\paragraph{Projektdateien herunterladen}
+
+Um mit der Erstellung einer neuen Anwendung mithilfe des WebApp-Wrappers zu beginnen, müssen zunächst die Projektdateien heruntergeladen und die Abhängigkeiten installiert werden.
+
+Dieser Schritt ist mit den folgenden Befehlen einfach zu bewerkstelligen:
+
+\begin{minted}[breaklines,breakafter=/]{bash}
+# Lädt alle erforderlichen Dateien in den Ordner "AppProjectDir" herunter
+git clone https://github.com/hampoelz/WebApp-Wrapper.git AppProjectDir
+
+# Wechselt das Arbeitsverzeichnis in den Ordner "AppProjectDir"
+cd AppProjectDir
+
+# Installiert alle Abhängigkeiten des WebApp-Wrappers
+npm install
+\end{minted}
+
+\paragraph{Konfigurationen anpassen}
+
+Bevor die neue Anwendung gestartet werden kann, müssen zunächst die erforderlichen Konfigurationen in der Datei \code{capacitor.config.json} angepasst werden. Die folgenden Konfigurationen sind erforderlich:
+
+\begin{itemize}
+  \setlength\itemsep{-0.5em}
+  \item \textbf{\code{appId}}: Eine eindeutige Anwendungs-ID
+  \item \textbf{\code{appName}}: Der Name der Anwendung
+  \item \textbf{\code{appUrl}}: Die \ac{url} der Webseite, die in der Anwendung angezeigt wird.
+\end{itemize}
+
+Weitere Konfigurationen können im Kapitel \nameref{sec:WebApp-Wrapper:Konfiguration} gefunden werden.
+
+\newpage
+
+\paragraph{Plattformen hinzufügen}
+
+Nachdem die Konfiguration abgeschlossen ist, können Plattformen hinzugefügt werden, auf denen die Anwendung ausgeführt werden soll.
+
+Die folgenden Befehle können verwendet werden, um Plattformen hinzuzufügen:
+
+\begin{minted}{bash}
+# Erzeugt die Projektdateien für die Plattformen
+npm run build
+
+# Fügt der Anwendung Unterstützung für eine Plattform hinzu
+npx cap add <Plattform>
+
+# Synchronisiert die Plattform mit den Projektdateien
+npx cap sync <Plattform>
+\end{minted}
+
+Die verfügbaren Plattformen sind \code{android}, \code{ios} und \code{electron}.
+Die Plattform \enquote{Electron} bezieht sich auf Desktop"=Plattformen, also Windows, Linux und macOS.
+
+Wenn die Konfiguration später geändert wird, müssen die folgenden Befehle erneut ausgeführt werden:
+
+\begin{minted}{bash}
+# Aktualisiert die Projektdateien mit den neuen Konfigurationen
+npm run build
+
+# Synchronisiert die angegebenen Plattform mit den Projektdateien
+npx cap sync <Plattform>
+\end{minted}
+
+\paragraph{Node.js Projekt hinzufügen}
+
+Um zusätzliche Funktionen in die Anwendung zu integrieren, kann ein Node.js Projekt in das Verzeichnis \code{nodejs} hinzugefügt werden.
+Dieses Verzeichnis ist bereits vorkonfiguriert, sodass ein Node.js Projekt einfach integrieren werden kann.
+
+Nach dem Hinzufügen oder Ändern des Node.js Projekts müssen die folgenden Befehle ausgeführt werden, um die Projektdateien zu aktualisieren:
+
+\begin{minted}{bash}
+# Aktualisiert die Projektdateien mit dem Node.js Projekt
+npm run build
+
+# Synchronisiert die Plattform mit den Projektdateien
+npx cap sync <Plattform>
+\end{minted}
+
+\newpage
+
+\paragraph{Anwendung starten}
+
+Um die Anwendung schließlich zu starten, kann der folgende Befehl verwendet werden.
+
+\begin{minted}{bash}
+# Öffnet das Projekt für die angegebene Plattform
+npx cap open <Plattform>
+\end{minted}
+
+Dieser Befehl öffnet das Projekt für die angegebene Plattform in der entsprechenden Entwicklungsumgebung. 
+Bei Android und iOS wird Android Studio bzw.\ Xcode geöffnet, wenn diese auf dem System installiert sind.
+In der Entwicklungsumgebung können weitere Aktionen durchgeführt werden, wie das Testen im Emulator, Debuggen oder Kompilieren.
+
+Alternativ kann das Projekt für eine Plattform auch manuell geöffnet werden. Die entsprechenden Plattform"=Projektdateien befinden sich in den Verzeichnissen \code{android} und \code{ios}.
+
+Bei Electron wird die Anwendung direkt gestartet. Weitere Aktionen können dabei im Plattform"=Projektordner \code{electron} durchgeführt werden.
+

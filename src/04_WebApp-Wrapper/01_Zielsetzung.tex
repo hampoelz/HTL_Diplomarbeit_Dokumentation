@@ -1,9 +1,31 @@
 \subsection{Zielsetzung}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{assets/04_WebApp-Wrapper/01_Zielsetzung.drawio.pdf}
-\end{figure}
+Das Hauptziel des WebApp-Wrappers ist es, Webentwicklern zu ermöglichen, eine Webseite mit geringem Aufwand in eine Anwendung zu verpacken, die für alle gängigen Desktop- und Mobile"=Plattformen (Windows, Linux, macOS, Android und iOS) kompiliert werden kann.
 
+Um den Funktionsumfang der Anwendung zu erweitern, soll es auch möglich sein, ein Node.js Projekt zu integrieren.
 
-\clearpage
+Der WebApp-Wrapper soll eine einfache Benutzeroberfläche enthalten, um Webentwicklern das Erstellen einer intuitiven Benutzererfahrung in der Anwendung zu erleichtern.
+Die Oberfläche soll folgende Funktionen enthalten:
+
+\begin{itemize}
+  \setlength\itemsep{-0.5em}
+  \item \textbf{Ladebildschirm:}
+  Informiert den Endbenutzer über das Laden der Webseite.
+  \item \textbf{Fehlerbildschirm:}
+  Informiert den Endbenutzer über mögliche Fehler, wenn etwa Serverprobleme vorliegen oder die Internetverbindung fehlt.
+  \item \textbf{Meldungsfenster:}
+  Zeigt Nachrichten an, um den Endbenutzer um eine Eingabe zu bitten oder ihm Informationen zu liefern.
+  \item \textbf{Menüleiste:}
+  Bietet die Möglichkeit zusätzliche Schaltflächen anzuzeigen, die nicht in der Webseite selbst enthalten sind.
+\end{itemize}
+
+Darüber hinaus soll eine \ac{api} bereitgestellt werden, über die die Webseite und das Node.js Projekt miteinander kommunizieren können.
+Um die Anpassung der Anwendung an die individuellen Bedürfnisse zu ermöglichen, soll die \ac{api} auf der Webseite sowie im Node.js Projekt die folgenden Funktionen bieten:
+
+\begin{itemize}
+  \setlength\itemsep{-0.8em}
+  \item Steuern der geladenen Webseite
+  \item Ändern der Hauptfarbe von der Benutzeroberfläche
+  \item Anpassen, Anzeigen und Ausblenden des Meldungsfensters
+  \item Nachträgliches Ändern, Anzeigen und Ausblenden der Menüleiste
+\end{itemize}
