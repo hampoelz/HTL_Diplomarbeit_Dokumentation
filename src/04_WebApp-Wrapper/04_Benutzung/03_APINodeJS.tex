@@ -3,7 +3,7 @@
 Der WebApp-Wrapper bietet im Node.js Projekt eine \ac{api} an, um Konfigurationen zu ändern, die Webseite zu steuern und Nachrichten zwischen dem Node.js Projekt und der Webseite auszutauschen.
 
 Die \acs{api}-Methoden sind über das Modul \code{bridge} verfügbar.
-Das Modul verfügt über die folgenden Methoden:
+Es verfügt über die folgenden Methoden:
 
 \begin{itemize}
   \setlength\itemsep{-0.8em}
@@ -139,8 +139,8 @@ Entfernt ein Menüelement mit der eindeutigen ID \code{itemId} aus der Menüleis
   ) => void
 \end{minted}
 
-Öffnet oder Aktualisiert das Meldungsfenster.
-Das Meldungsfenster kann mit \ac{html} angepasst werden und wird automatisch mit Stilen des PicoCSS Frameworks versehen.
+Öffnet oder aktualisiert das Meldungsfenster.
+Es kann mit \ac{html} angepasst werden und wird automatisch mit Stilen des PicoCSS Frameworks versehen.
 
 \begin{arguments}
   \item \code{html}: Der \ac{html}-Code für das Meldungsfenster.
@@ -318,7 +318,7 @@ Führt JavaScript asynchron im Kontext der aktuell angezeigten Webseite aus.
 Ruft \code{listenerFunc(data)} auf, wenn ein Benutzer oder die Webseite eine Navigation starten will.
 Dies kann geschehen, wenn das Objekt \code[javascript]{window.location} geändert wird oder ein Benutzer auf einen Link auf der Webseite klickt.
 
-Dieses Ereignis wird nicht ausgelöst, wenn die Navigation programmgesteuert mit \acsp{api} gestartet wird wie \code{wrapper:loadUrl} und \code{wrapper:goBack} oder für POST"=Anfragen.
+Dieses Ereignis wird nicht ausgelöst, wenn die Navigation programmgesteuert mit \acsp{api} gestartet wird, wie \code{wrapper:loadUrl} und \code{wrapper:goBack}, oder für POST"=Anfragen.
 
 Es wird auch nicht für seiteninterne Navigationen ausgelöst, wie das Anklicken von Ankerlinks oder die Aktualisierung des \code[javascript]{window.location.hash}.
 

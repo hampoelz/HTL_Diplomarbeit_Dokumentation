@@ -13,7 +13,7 @@ After that, just set its bounds and load a website.
 \begin{minted}{typescript}
 import { BrowserView } from 'capacitor-browserview';
 
-// Creates a new BrowserView, sets its bounds and loads a website.
+// Creates a new BrowserView, sets its bounds and loads a website
 const myView = await BrowserView.create();
 myView.setBounds({ bounds: { x: 0, y: 0, width: 300, height: 600 } });
 myView.loadUrl({ url: "https://capacitorjs.com/" });
@@ -23,25 +23,25 @@ At this point, the BrowserView should be created within the application and the 
 Using the returned reference to the BrowserView, it is easy to interact with it, as shown here in a few examples:
 
 \begin{minted}{typescript}
-// Reloads the current web page.
+// Reloads the current web page
 myView.reload();
 
-// Gets the user-agent for this web page.
+// Gets the user-agent for this web page
 const { userAgent } = await myView.getUserAgent();
 console.log("The following UserAgent is used for this web page: "
   + userAgent);
 
-// Handles finished page load.
+// Handles finished page load
 myView.addListener('did-finish-load', () => {
   console.log("Congratulations! The web page loaded successfully.");
 });
 
-// Handles title changes of the web page.
+// Handles title changes of the web page
 myView.addListener('page-title-updated', event => {
   console.log(`The web page has changed its title to '${event.title}'.`);
 });
 
-// Removes the BrowserView from the app, and cleans up references.
+// Removes the BrowserView from the app, and cleans up references
 myView.destroy();
 \end{minted}
 
@@ -60,11 +60,11 @@ To use the bridge, the website first needs to be modified so that it is capable 
 For example, add the following sample code to the web page:
 
 \begin{minted}{javascript}
-// Listens to "msg-from-capacitor" from the Capacitor layer.
+// Listens to "msg-from-capacitor" from the Capacitor layer
 CapacitorBrowserView.addListener("msg-from-capacitor", message => {
   console.log('Message from Capacitor application: ' + message);
 
-  // Sends a message back to the Capacitor layer.
+  // Sends a message back to the Capacitor layer
   CapacitorBrowserView.send("msg-from-web",
     `Replying to the message '${message}'.`,
     "And optionally add further args"
@@ -83,15 +83,15 @@ import { BrowserView } from 'capacitor-browserview';
 const myView = await BrowserView.create({ enableBridge: true });
 myView.setBounds({ bounds: { x: 0, y: 0, width: 300, height: 600 } });
 
-// Listens to "msg-from-web" from the web page.
+// Listens to "msg-from-web" from the web page
 myView.addMessageListener('msg-from-web', data => {
   console.log("Message from web page: ", data.args);
 });
 
-// Waits for the web page to finish loading.
+// Waits for the web page to finish loading
 myView.addListener('did-finish-load', () => {
 
-  // Sends a message to the web page.
+  // Sends a message to the web page
   myView.sendMessage({
     eventName: "msg-from-capacitor",
     args: [ "Hello from Capacitor!" ]

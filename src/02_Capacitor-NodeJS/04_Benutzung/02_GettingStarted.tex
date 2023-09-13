@@ -98,11 +98,11 @@ Use the following code in a Node.js script to wait for messages from the Capacit
 \begin{minted}{javascript}
 const { channel } = require('bridge');
 
-// Listens to "msg-from-capacitor" from the Capacitor layer.
+// Listens to "msg-from-capacitor" from the Capacitor layer
 channel.addListener('msg-from-capacitor', message => {
   console.log('[Node.js] Message from Capacitor: ' + message);
   
-  // Sends a message back to the Capacitor layer.
+  // Sends a message back to the Capacitor layer
   channel.send("msg-from-nodejs",
     `Replying to the message '${message}'.`,
     "And optionally add more arguments."
@@ -117,7 +117,7 @@ Now it is possible to communicate with the Node.js process in the Capacitor appl
 \begin{minted}{typescript}
 import { NodeJS } from 'capacitor-nodejs';
 
-// Listens to "msg-from-nodejs" from the Node.js process.
+// Listens to "msg-from-nodejs" from the Node.js process
 NodeJS.addListener('msg-from-nodejs', event => {
   document.body.innerHTML = `
     <p>
@@ -129,10 +129,10 @@ NodeJS.addListener('msg-from-nodejs', event => {
   console.log(event);
 });
 
-// Waits for the Node.js process to initialize.
+// Waits for the Node.js process to initialize
 NodeJS.whenReady().then(() => {
 
-  // Sends a message to the Node.js process.
+  // Sends a message to the Node.js process
   NodeJS.send({
     eventName: "msg-from-capacitor",
     args: [ "Hello from Capacitor!" ]

@@ -12,5 +12,11 @@
     ],
     "latex-workshop.linting.lacheck.enabled": true,
     "gitlens.showWelcomeOnInstall": false,
-    "gitlens.showWhatsNewAfterUpgrades": false
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "cSpell.words": [
+        "rollup",
+        "Rollup",
+        "vite",
+        "Vite"
+    ]
 }

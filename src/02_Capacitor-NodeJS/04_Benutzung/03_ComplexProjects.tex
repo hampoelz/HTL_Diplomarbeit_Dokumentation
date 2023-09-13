@@ -50,7 +50,7 @@ The project structure should then change to something like this:
 To install Node.js modules, the project requires a \code{package.json} file.~\cite{npm}
 See section \nameref{sec:Capacitor-NodeJS:CustomStartingPoint} for more details.
 
-The modules have to be installed in the Node.js project directory in which the \code{package.json} file was created using the npm CLI.
+The modules have to be installed in the Node.js project directory in which the \code{package.json} file was created using the npm CLI\@.
 After installing modules, rebuild and sync the Capacitor project to update the application with the Node.js project.
 
 For convenience, a postinstall script can be added to the main \code{package.json} in the root of the Capacitor project to automatically install the modules of the Node.js project \cite{npm}:
@@ -86,7 +86,7 @@ The Node.js project can quickly grow very large when installing modules.
 For projects that contain a large number of files, the load time can be reduced by decreasing the number of files and the file sizes.
 \cite{nodejs-mobile:docs}
 
-For this reason, it is recommended to use bunder tools such as Rollup.js.
+For this reason, it is recommended to use bundler tools such as Rollup.js.
 In the following example, Rollup.js is used to bundle the Node.js project with all its modules to a single file.
 \cite{rollup, rollup-plugins}
 
@@ -107,7 +107,7 @@ Since the Node.js project is now to be bundled, the project structure needs some
 The Node.js project should no longer be copied directly from Vite to the Capacitor webDir directory, instead it will be bundled with Rollup.
 
 This means that the Node.js project directory needs to be moved from the static assets to somewhere else.
-For example to the root directory of the Capcitor project:
+For example to the root directory of the Capacitor project:
 
 \begin{minted}{diff}
   capacitor-app/
@@ -224,12 +224,12 @@ Now the Node.js runtime has to be started manually with the \code{NodeJS.start()
 \begin{minted}{typescript}
 import { NodeJS } from 'capacitor-nodejs';
 
-// Starts the Node.js engine.
+// Starts the Node.js engine
 NodeJS.start();
 
-// Waits for the Node.js process to initialize.
+// Waits for the Node.js process to initialize
 NodeJS.whenReady().then(() => {
-  // Communicate with the Node.js process.
+  // Communicate with the Node.js process
 });
 \end{minted}
 
@@ -240,7 +240,7 @@ In addition, arguments can be passed to the main script and environment variable
 \begin{minted}{typescript}
 import { NodeJS } from 'capacitor-nodejs';
 
-// Options for starting the Node.js engine manually.
+// Options for starting the Node.js engine manually
 const options = {
   args: [ "--option", "value" ],
   env: {
@@ -250,7 +250,7 @@ const options = {
   }
 }
 
-// Starts the Node.js engine with properties as set by the `options`.
+// Starts the Node.js engine with properties as set by the `options`
 NodeJS.start(options);
 \end{minted}
 
@@ -272,7 +272,7 @@ The built-in bridge module provides an \ac{api} to get a per-user application da
 \begin{minted}{javascript}
 const { getDataPath } = require('bridge');
 
-// Get a path where data can be read and written.
+// Get a path where data can be read and written
 const dataPath = getDataPath();
 \end{minted}
 
@@ -286,7 +286,7 @@ To get a path for temporary files, the node.js inbuilt method \code{os.tmpdir()}
 \begin{minted}{javascript}
 const os = require('os');
 
-// Get a path for temporary files.
+// Get a path for temporary files
 const tmpPath = os.tmpdir();
 \end{minted}
 

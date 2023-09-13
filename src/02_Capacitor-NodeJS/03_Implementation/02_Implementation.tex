@@ -38,7 +38,7 @@ Bei der Android Implementierung müssen für das Starten der Runtime jedoch mehr
 
 \begin{itemize}
   \item
-  Android Anwendungen sind wie Archive aufgebaut.
+  Android"=Anwendungen sind wie Archive aufgebaut.
   Das bedeutet, dass sie aus einer Reihe von Dateien bestehen, die in einem komprimierten Format gespeichert sind.
   Daher muss das Node.js Projekt von der Anwendung in das Android Dateisystem kopiert werden, damit die Node.js Runtime darauf zugreifen kann.
   \cite{nodejs-mobile:docs}
@@ -54,7 +54,7 @@ Bei der Android Implementierung müssen für das Starten der Runtime jedoch mehr
 
 \paragraph{Interprozesskommunikation}
 
-Die Kommunikation zwischen der Node.js Runtime, der Plugin Implementierung und der Capacitor Anwendung wird unter Windows, Linux und MacOS bzw.\ in der Electron Implementierung des Plugins hauptsächlich durch das \code{child_process} Modul verwaltet.
+Die Kommunikation zwischen der Node.js Runtime, der Plugin Implementierung und der Capacitor"=Anwendung wird unter Windows, Linux und MacOS bzw.\ in der Electron Implementierung des Plugins hauptsächlich durch das \code{child_process} Modul verwaltet.
 \cite{electron:docs}
 
 Unter Android und iOS erfordert diese Kommunikation erneut nativen C++ Code.
@@ -70,26 +70,26 @@ Der verwendete Code für diese \ac{ipc} Schnittstelle stammt aus dem Node.js for
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{assets/02_Capacitor-NodeJS/03_Interprozesskommunikation.drawio.pdf}
-  \caption[Capacitor-NodeJS / Interprozesskommunikation]{Interprozesskommunikation zwischen der Capacitor Anwendung, dem Capacitor-NodeJS Plugin und der Node.js Runtime.}
+  \caption[Capacitor-NodeJS / Interprozesskommunikation]{Interprozesskommunikation zwischen der Capacitor"=Anwendung, dem Capacitor-NodeJS Plugin und der Node.js Runtime.}
 \end{figure}
 
 \vspace{-1em}
 
-Um Daten von der Capacitor Anwendung zu empfangen, registriert ein JavaScript-Code aus der Node.js Runtime eine Callback"=Funktion in der nativen \ac{ipc} Schnittstelle.
+Um Daten von der Capacitor"=Anwendung zu empfangen, registriert ein JavaScript-Code aus der Node.js Runtime eine Callback"=Funktion in der nativen \ac{ipc} Schnittstelle.
 Eine Callback"=Funktion ist eine Funktion, die als Parameter an eine andere Funktion übergeben wird.
 Das Capacitor-NodeJS Plugin kann dann über die native Schnittstelle die Callback"=Funktion aufrufen und Nutzdaten übergeben.
 
-Um Daten an die Capacitor Anwendung zu senden, ruft ein JavaScript-Code aus der Node.js Runtime eine Funktion in der nativen Schnittstelle auf und übergibt die Nutzdaten.
+Um Daten an die Capacitor"=Anwendung zu senden, ruft ein JavaScript-Code aus der Node.js Runtime eine Funktion in der nativen Schnittstelle auf und übergibt die Nutzdaten.
 Die Funktion in der Schnittstelle leitet die Daten schließlich an die Android Implementierung des Plugins weiter.
 
 Unter Android können Nutzdaten nur als primitive Datentypen übergeben werden, daher müssen diese Daten serialisiert und deserialisiert werden.
 Für die Serialisierung wurde das \ac{json} Datenformat verwendet.
 
-Um auch in der Node.js Runtime eine Benutzerfreundliche \ac{api} zur Kommunikation mit der Capacitor Anwendung bereitzustellen, wurde ein \code{bridge} Modul erstellt, welches den JavaScript-Code für die Handhabung der Kommunikation sowie für die Serialisierung und Deserialisierung beinhaltet.
+Um auch in der Node.js Runtime eine benutzerfreundliche \ac{api} zur Kommunikation mit der Capacitor"=Anwendung bereitzustellen, wurde ein \code{bridge} Modul erstellt, welches den JavaScript-Code für die Handhabung der Kommunikation sowie für die Serialisierung und Deserialisierung beinhaltet.
 Es erweitert die Node.js Event-Emitter Klasse, um die Kompatibilität mit vorhandenen Node.js Projekten zu verbessern.
-Unter Android kommuniziert das Modul wie oben beschrieben mit der nativen \ac{ipc} Schnittstelle
+Unter Android kommuniziert das Modul wie oben beschrieben mit der nativen \ac{ipc} Schnittstelle.
 Unter Windows, Linux und macOS kommuniziert es über das \code{child_process} Modul von Node.js.
-Das \code{bridge} Modul wird automatisch in der Node.js Runtime geladen, so dass Benutzer keine zusätzlichen Schritte ausführen müssen.
+Das \code{bridge} Modul wird automatisch in der Node.js Runtime geladen, sodass Benutzer keine zusätzlichen Schritte ausführen müssen.
 
 Um das automatische Laden zu ermöglichen, wird beim Start der Runtime die Umgebungsvariable \code{NODE_PATH} gesetzt.
 Diese Umgebungsvariable enthält eine Liste von Pfaden, welche die Node.js Runtime nach Modulen durchsucht.

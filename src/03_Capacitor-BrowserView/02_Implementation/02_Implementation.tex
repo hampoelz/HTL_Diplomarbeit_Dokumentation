@@ -37,7 +37,7 @@ Sie bestehen jeweils aus zwei Teilen:
   Er implementiert die \acs{api}-Struktur und wertet die Parameter der Methoden aus.
   \item
   Der zweite Teil implementiert die tatsächlichen Funktionen, wie das Erstellen und Steuern von WebViews
-  sowie das Senden und Empfangen von Nachrichten zwischen der Capacitor Anwendung und den geladenen Webinhalten.
+  sowie das Senden und Empfangen von Nachrichten zwischen der Capacitor"=Anwendung und den geladenen Webinhalten.
 \end{enumerate}
 
 Für die Implementierung des Plugins wurden ausschließlich die jeweiligen Plattform"=\acsp{api} verwendet, da WebViews auf jeder Plattform nativ unterstützt werden.
@@ -50,23 +50,23 @@ Einige fehlende Funktionen wurden im Plugin nachgebaut, und einige Funktionen we
 \begin{itemize}
   \setlength\itemsep{-0.5em}
   \item
-  Um die Position einer WebViews unter Android festzulegen, muss die Pixeldichte des Geräts berücksichtigt werden.
-  Andernfalls stimmen die Koordinaten und Abmessungen der WebView nicht mit der Capacitor Anwendung überein.
+  Um die Position von WebViews unter Android festzulegen, muss die Pixeldichte des Geräts berücksichtigt werden.
+  Andernfalls stimmen die Koordinaten und Abmessungen der WebView nicht mit der Capacitor"=Anwendung überein.
   Auch die Höhe der Statusleiste von Android muss berücksichtigt werden, da sich die WebView sonst mit ihr überschneiden würde.
   Die von Electron unter Windows, Linux und macOS bereitgestellte BrowserView führt diese erforderlichen Umrechnungen selbständig durch.
   \item
   Die Android WebView bietet eine Einstellung, um das Öffnen von Webinhalten in einem neuen Fenster über Web \acp{api} zu erlauben oder zu verbieten.~\cite{android:api}
   Diese Einstellung ist in Electron unter Windows, Linux und macOS nicht direkt in dieser Form verfügbar.~\cite{electron:docs}
-  Daher wurde sie in das Plugin nachträglich für Electron implementiert.
+  Daher wurde sie für Electron nachträglich in das Plugin implementiert.
   \item
   Favicons, kleine Symbole für das Branding von Webinhalten, werden in der Android WebView direkt in einem Binärformat bereitgestellt,
   während unter Windows, Linux und macO in Electron nur der Link zum Symbol bereitgestellt wird.~\cite{android:api, electron:docs}
   Daher wird es vom Plugin nachträglich heruntergeladen.
-  Um das Symbol über die Plugin \ac{api} leicht zugänglich zu machen, wird es zudem vom Plugin mit Base64 in eine Zeichenkette kodiert
+  Um das Symbol über die Plugin \ac{api} leicht zugänglich zu machen, wird es zudem vom Plugin mit Base64 in eine Zeichenkette kodiert.
   \item
   Android WebViews unterstützen standardmäßig keinen Vollbildmodus.
   Daher wurde diese Funktion nachträglich in das Plugin implementiert.
-  Notwendige Parameter für einen vollständigen Vollbildmodus in einer Android Anwendung wurden von StackOverflow bezogen.
+  Notwendige Parameter für einen vollständigen Vollbildmodus in einer Android"=Anwendung wurden von StackOverflow bezogen.
   \cite{android:api, stackoverflow}
 \end{itemize}
 
@@ -78,22 +78,22 @@ Standardmäßig ist die Kommunikation zwischen Webinhalten und der Capacitor"=An
 Dies dient der Isolation von möglichen unsicheren Inhalten.
 Wenn jedoch ein vertrauenswürdiger Inhalt geladen wird, mit dem ein Datenaustausch erforderlich ist, wird dennoch eine Interprozesskommunikation vom Plugin bereitgestellt.
 
-Um die Kommunikation zwischen vertrauenswürdigen Webinhalten, der Plugin Implementierung und der Capacitor Anwendung zu ermöglichen, wird unter Android die \code{addJavascriptInterface}"=\acs{api} der WebView verwendet.
+Um die Kommunikation zwischen vertrauenswürdigen Webinhalten, der Plugin Implementierung und der Capacitor"=Anwendung zu ermöglichen, wird unter Android die \code{addJavascriptInterface}"=\acs{api} der WebView verwendet.
 Diese \ac{api} ermöglicht es, eine Java-Funktion in die Webseite einzuspeisen.~\cite{android:api}
 
 Für Windows, Linux und macOS wurde unter Electron für ein ähnliches Verhalten das Preload-Skript mit der \code{contextBridge}"=\acs{api} verwendet.
 Diese \ac{api} ermöglicht es ebenfalls, eine Funktion in die Webseite einzuspeisen.~\cite{electron:docs}
 
 Die eingespeiste Funktion dient als Schnittstelle, um Daten von der geladenen Webseite an das Capacitor-BrowserView Plugin zu senden.
-Das Plugin leitet dann die empfangenen Daten an die Capacitor Anwendung weiter.
+Das Plugin leitet dann die empfangenen Daten an die Capacitor"=Anwendung weiter.
 
-Um Daten von der Capacitor Anwendung an die Webseite zu senden, verwendet das Plugin die \code{evaluateJavascript}"=Methode der Android WebView bzw.\ die \code{executeJavaScript}"=Methode der Electron BrowserView unter Windows, Linux und macOS\@.
+Um Daten von der Capacitor"=Anwendung an die Webseite zu senden, verwendet das Plugin die \code{evaluateJavascript}"=Methode der Android WebView bzw.\ die \code{executeJavaScript}"=Methode der Electron BrowserView unter Windows, Linux und macOS\@.
 Dadurch kann ein JavaScript-Code auf der Webseite ausgeführt werden~\cite{android:api, electron:docs}, der die Daten über die \code{dispatchEvent} Web-\acs{api} an die entsprechenden Event-Listener auf der Webseite verteilt.~\cite{web:api}
 
-Unter Android können Nutzdaten nur als primitive Datentypen übergeben werden \cite{android:api}, daher müssen diese Daten Serialisiert und Deserialisiert werden.
+Unter Android können Nutzdaten nur als primitive Datentypen übergeben werden \cite{android:api}, daher müssen diese Daten serialisiert und deserialisiert werden.
 Für die Serialisierung wurde das \ac{json} Datenformat verwendet.
 
-Zur Verbesserung der Benutzerfreundlichkeit wurde ein Brückenmodul entwickelt, welches eine vereinfachte \ac{api} für die Kommunikation zur Capacitor Anwendung auf der Webseite bereitstellt.
+Zur Verbesserung der Benutzerfreundlichkeit wurde ein Brückenmodul entwickelt, welches eine vereinfachte \ac{api} für die Kommunikation zur Capacitor"=Anwendung auf der Webseite bereitstellt.
 Das Modul übernimmt den Zugriff auf die eingespeiste Funktion \textit{(um Daten zu senden)}, die Registrierung von Event-Listener \textit{(um Daten zu empfangen)} sowie die Serialisierung und Deserialisierung der Nutzdaten.
 
 Um das automatische Laden des Brückenmoduls zu ermöglichen, wird das Modul beim Start des Ladevorgangs der Webseite ausgeführt.
