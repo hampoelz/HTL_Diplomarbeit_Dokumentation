@@ -3,11 +3,11 @@
 Eine Übersicht der einzelnen Komponenten mit ihren genauen Zusammenhängen wird in Abbildung~\ref{asset:Capacitor-NodeJS:Implementation} dargestellt.
 
 \begin{figure}[H]
-    \centering
-    \vspace{1em}
-    \includegraphics[width=\textwidth]{assets/02_Capacitor-NodeJS/04_Implementation.drawio.pdf}
-    \caption[Capacitor-NodeJS / Implementierung]{Implementierung des Capacitor-NodeJS Plugins}
-    \label{asset:Capacitor-NodeJS:Implementation}
+  \centering
+  \vspace{1em}
+  \includegraphics[width=\textwidth]{assets/02_Capacitor-NodeJS/04_Implementation.drawio.pdf}
+  \caption[Capacitor-NodeJS / Implementierung]{Implementierung des Capacitor-NodeJS Plugins}
+  \label{asset:Capacitor-NodeJS:Implementation}
 \end{figure}
 
 \newpage
@@ -23,12 +23,12 @@ Um die Implementierung des Plugins auf allen Plattformen übersichtlich und wart
 Sie bestehen jeweils aus zwei Teilen:
 
 \begin{enumerate}
-    \item 
-    Der erste Teil wird von der Capacitor Runtime aufgerufen.
-    Er implementiert die \acs{api}-Struktur und wertet die Parameter der Methoden aus.
-    \item 
-    Der zweite Teil implementiert die tatsächlichen Funktionen,
-    wie das Starten der Node.js Runtime sowie das Senden und Empfangen von Nachrichten zwischen den Prozessen.
+  \item 
+  Der erste Teil wird von der Capacitor Runtime aufgerufen.
+  Er implementiert die \acs{api}-Struktur und wertet die Parameter der Methoden aus.
+  \item 
+  Der zweite Teil implementiert die tatsächlichen Funktionen,
+  wie das Starten der Node.js Runtime sowie das Senden und Empfangen von Nachrichten zwischen den Prozessen.
 \end{enumerate}
 
 Um eine Node.js Runtime auf Desktop"=Plattformen (Windows, Linux und macOS) zu starten, wird bei der Electron Implementierung das von Electron bzw.\ Node.js bereitgestellte Modul \code{child_process} verwendet.
@@ -37,17 +37,17 @@ Um eine Node.js Runtime auf Desktop"=Plattformen (Windows, Linux und macOS) zu s
 Bei der Android Implementierung müssen für das Starten der Runtime jedoch mehrere Punkte beachtet werden:
 
 \begin{itemize}
-    \item
-    Android Anwendungen sind wie Archive aufgebaut.
-    Das bedeutet, dass sie aus einer Reihe von Dateien bestehen, die in einem komprimierten Format gespeichert sind.
-    Daher muss das Node.js Projekt von der Anwendung in das Android Dateisystem kopiert werden, damit die Node.js Runtime darauf zugreifen kann.
-    \cite{nodejs-mobile:docs}
+  \item
+  Android Anwendungen sind wie Archive aufgebaut.
+  Das bedeutet, dass sie aus einer Reihe von Dateien bestehen, die in einem komprimierten Format gespeichert sind.
+  Daher muss das Node.js Projekt von der Anwendung in das Android Dateisystem kopiert werden, damit die Node.js Runtime darauf zugreifen kann.
+  \cite{nodejs-mobile:docs}
 
-    \item 
-    Um von der Implementierung auf die nativen Binärdateien der Node.js Runtime zuzugreifen, ist unter Android und iOS ein C++ Code als Schnittstelle erforderlich.
-    Für die Integration des nativen Codes unter Android ist zusätzlich das \ac{ndk} erforderlich.
-    Der verwendete Code für diese Schnittstelle stammt aus der Dokumentation des Node.js for Mobile Apps Toolsets.
-    \cite{nodejs-mobile:docs}
+  \item 
+  Um von der Implementierung auf die nativen Binärdateien der Node.js Runtime zuzugreifen, ist unter Android und iOS ein C++ Code als Schnittstelle erforderlich.
+  Für die Integration des nativen Codes unter Android ist zusätzlich das \ac{ndk} erforderlich.
+  Der verwendete Code für diese Schnittstelle stammt aus der Dokumentation des Node.js for Mobile Apps Toolsets.
+  \cite{nodejs-mobile:docs}
 \end{itemize}
 
 \newpage
@@ -68,16 +68,16 @@ Der verwendete Code für diese \ac{ipc} Schnittstelle stammt aus dem Node.js for
 \vspace{1em}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{assets/02_Capacitor-NodeJS/03_Interprozesskommunikation.drawio.pdf}
-    \caption[Capacitor-NodeJS / Interprozesskommunikation]{Interprozesskommunikation zwischen der Capacitor Anwendung, dem Capacitor-NodeJS Plugin und der Node.js Runtime.}
+  \centering
+  \includegraphics[width=0.8\textwidth]{assets/02_Capacitor-NodeJS/03_Interprozesskommunikation.drawio.pdf}
+  \caption[Capacitor-NodeJS / Interprozesskommunikation]{Interprozesskommunikation zwischen der Capacitor Anwendung, dem Capacitor-NodeJS Plugin und der Node.js Runtime.}
 \end{figure}
 
 \vspace{-1em}
 
-Um Daten von der Capacitor Anwendung zu empfangen, registriert ein JavaScript-Code aus der Node.js Runtime eine Callback-Funktion in der nativen \ac{ipc} Schnittstelle.
-Eine Callback-Funktion ist eine Funktion, die als Parameter an eine andere Funktion übergeben wird.
-Das Capacitor-NodeJS Plugin kann dann über die native Schnittstelle die Callback-Funktion aufrufen und Nutzdaten übergeben.
+Um Daten von der Capacitor Anwendung zu empfangen, registriert ein JavaScript-Code aus der Node.js Runtime eine Callback"=Funktion in der nativen \ac{ipc} Schnittstelle.
+Eine Callback"=Funktion ist eine Funktion, die als Parameter an eine andere Funktion übergeben wird.
+Das Capacitor-NodeJS Plugin kann dann über die native Schnittstelle die Callback"=Funktion aufrufen und Nutzdaten übergeben.
 
 Um Daten an die Capacitor Anwendung zu senden, ruft ein JavaScript-Code aus der Node.js Runtime eine Funktion in der nativen Schnittstelle auf und übergibt die Nutzdaten.
 Die Funktion in der Schnittstelle leitet die Daten schließlich an die Android Implementierung des Plugins weiter.

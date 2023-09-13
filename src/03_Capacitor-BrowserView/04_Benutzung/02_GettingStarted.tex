@@ -6,7 +6,7 @@ This guide shows how to add a BrowserView to a Capacitor application and communi
 \paragraph{Minimal example}
 \label{sec:Capacitor-BrowserView:MinimalExample}
 
-To embed an additional web page to the Capacitor app, first a new BrowserView needs to be created.
+To embed an additional web page to the Capacitor application, first a new BrowserView needs to be created.
 This is done by importing the BrowserView class from the Capacitor-BrowserView plugin and calling the create method.
 After that, just set its bounds and load a website.
 
@@ -29,16 +29,16 @@ myView.reload();
 // Gets the user-agent for this web page.
 const { userAgent } = await myView.getUserAgent();
 console.log("The following UserAgent is used for this web page: "
-    + userAgent);
+  + userAgent);
 
 // Handles finished page load.
 myView.addListener('did-finish-load', () => {
-    console.log("Congratulations! The web page loaded successfully.");
+  console.log("Congratulations! The web page loaded successfully.");
 });
 
 // Handles title changes of the web page.
 myView.addListener('page-title-updated', event => {
-    console.log(`The web page has changed its title to '${event.title}'.`);
+  console.log(`The web page has changed its title to '${event.title}'.`);
 });
 
 // Removes the BrowserView from the app, and cleans up references.
@@ -47,11 +47,12 @@ myView.destroy();
 
 \newpage
 
-\paragraph{Inter-Process Communication}
+\paragraph{Interprocess Communication}
 \label{sec:Capacitor-BrowserView:InterprocessCommunication}
 
 This plugin includes a bridge between the Capacitor layer and the loaded web page in the BrowserView(s).
-However, this feature is disabled by default. It can be enabled either globally via the plugin configuration or for each BrowserView individually during its creation.
+However, this feature is disabled by default
+It can be enabled either globally via the plugin configuration or for each BrowserView individually during its creation.
 
 If the bridge feature is enabled, the global object \code[javascript]{window.CapacitorBrowserView} is available on web pages within the corresponding BrowserView.
 
@@ -61,18 +62,18 @@ For example, add the following sample code to the web page:
 \begin{minted}{javascript}
 // Listens to "msg-from-capacitor" from the Capacitor layer.
 CapacitorBrowserView.addListener("msg-from-capacitor", message => {
-    console.log('Message from Capacitor-App: ' + message);
+  console.log('Message from Capacitor application: ' + message);
 
-    // Sends a message back to the Capacitor layer.
-    CapacitorBrowserView.send("msg-from-web",
-        `Replying to the message '${message}'.`,
-        "And optionally add further args"
-    );
+  // Sends a message back to the Capacitor layer.
+  CapacitorBrowserView.send("msg-from-web",
+    `Replying to the message '${message}'.`,
+    "And optionally add further args"
+  );
 });
 \end{minted}
 
 After that, a new BrowserView with an enabled bridge needs be set up.
-In addition, the Capacitor app should also be able to receive messages and send a message to the website.
+In addition, the Capacitor application should also be able to receive messages and send a message to the website.
 Note that the web page must be loaded entirely before it can receive messages.
 This could look something like this:
 
@@ -84,17 +85,17 @@ myView.setBounds({ bounds: { x: 0, y: 0, width: 300, height: 600 } });
 
 // Listens to "msg-from-web" from the web page.
 myView.addMessageListener('msg-from-web', data => {
-    console.log("Message from web page: ", data.args);
+  console.log("Message from web page: ", data.args);
 });
 
 // Waits for the web page to finish loading.
 myView.addListener('did-finish-load', () => {
 
-    // Sends a message to the web page.
-    myView.sendMessage({
-        eventName: "msg-from-capacitor",
-        args: [ "Hello from Capacitor!" ]
-    });
+  // Sends a message to the web page.
+  myView.sendMessage({
+    eventName: "msg-from-capacitor",
+    args: [ "Hello from Capacitor!" ]
+  });
 
 });
 

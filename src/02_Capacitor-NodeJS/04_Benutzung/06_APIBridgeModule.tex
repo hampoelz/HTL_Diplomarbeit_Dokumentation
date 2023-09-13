@@ -58,13 +58,14 @@ It has the following method to listen for events and send messages:
 Sends a message to the Capacitor layer via \code{eventName}, along with arguments.
 Arguments will be serialized with \ac{json}.
 
-\begin{itemize}
-  \setlength\itemsep{-0.8em}
+\begin{arguments}
   \item \code{eventName}: The name of the event being send to.
   \item \code{args}: The Array of arguments to send.
-\end{itemize}
+\end{arguments}
 
 % -------------------- %
+
+\newpage
 
 \paragraph{channel.on(string, ...)}
 
@@ -77,10 +78,9 @@ Arguments will be serialized with \ac{json}.
 
 Listens to \code{eventName} and calls \code{listener(args...)} when a new message arrives from the Capacitor layer.
 
-\begin{itemize}
-  \setlength\itemsep{-0.8em}
+\begin{arguments}
   \item \code{args}: The received array of arguments.
-\end{itemize}
+\end{arguments}
 
 % -------------------- %
 
@@ -95,10 +95,9 @@ Listens to \code{eventName} and calls \code{listener(args...)} when a new messag
 
 Listens one time to \code{eventName} and calls \code{listener(args...)} when a new message arrives from the Capacitor layer, after which it is removed.
 
-\begin{itemize}
-  \setlength\itemsep{-0.8em}
+\begin{arguments}
   \item \code{args}: The received array of arguments.
-\end{itemize}
+\end{arguments}
 
 % -------------------- %
 
@@ -138,9 +137,6 @@ Removes the specified \code{listener} from the listener array for the specified 
 
 Removes all listeners, or those of the specified \code{eventName}.
 
-\begin{itemize}
-  \setlength\itemsep{-0.8em}
+\begin{arguments}
   \item \code{eventName}: The name of the event all listeners will be removed from.
-\end{itemize}
-
-% -------------------- %
+\end{arguments}

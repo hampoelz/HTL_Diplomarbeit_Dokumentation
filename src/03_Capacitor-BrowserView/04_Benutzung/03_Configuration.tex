@@ -6,7 +6,7 @@ However, most of them can be overridden individually when a BrowserView is creat
 
 These config values are available:
 
-\begin{config}{Capacitor-BrowserView / Configuration}
+\begin{configuration}{Capacitor-BrowserView / Configuration}
   \code{url}                  & \code[typescript]{string}   & Default external \ac{url} loaded in BrowserViews. \\ \hline
   \code{allowMultipleWindows} & \code[typescript]{boolean}  & Open links that request a new tab or window in the external browser instead of the BrowserViews. \\
                               &                             & Defaults to \code[typescript]{true} \\ \hline
@@ -17,25 +17,25 @@ These config values are available:
   \code{overrideUserAgent}    & \code[typescript]{string}   & Default user-agent for BrowserViews. \\ \hline
   \code{appendUserAgent}      & \code[typescript]{string}   & String to append to the original user-agent for BrowserViews. This is disregarded if \code{overrideUserAgent} is used. \\ \hline
   \code{backgroundColor}      & \code[typescript]{Color}    & Default background color for BrowserViews. \\ \hline
-\end{config}
+\end{configuration}
 
-\begin{config}{Capacitor-BrowserView / Configuration (Android)}
+\begin{configuration}{Capacitor-BrowserView / Configuration (Android)}
   \codebreak{android}{OverrideUserAgent} & \code[typescript]{string}   & Overrides global \code{overrideUserAgent} option on Android. \\ \hline
   \codebreak{android}{AppendUserAgent}   & \code[typescript]{string}   & Overrides global \code{appendUserAgent} option on Android. \\ \hline
   \codebreak{android}{BackgroundColor}   & \code[typescript]{Color}    & Overrides global \code{backgroundColor} option on Android. \\ \hline
   \codebreak{android}{AllowMixedContent} & \code[typescript]{boolean}  & Enable mixed content in the BrowserViews for Android. Mixed content is disabled by default for security. During development, this option may need to be enabled to allow the BrowserViews to load files from different schemes. \\
                                          &                             & \textbf{This is not intended for use in production.} \\ 
                                          &                             & Defaults to \code[typescript]{false} \\ \hline
-\end{config}
+\end{configuration}
 
-\begin{config}{Capacitor-BrowserView / Configuration (Electron)}
+\begin{configuration}{Capacitor-BrowserView / Configuration (Electron)}
   \codebreak{electron}{OverrideUserAgent} & \code[typescript]{string}   & Overrides global \code{overrideUserAgent} option on Electron. \\ \hline
   \codebreak{electron}{AppendUserAgent}   & \code[typescript]{string}   & Overrides global \code{appendUserAgent} option on Electron. \\ \hline
   \codebreak{electron}{BackgroundColor}   & \code[typescript]{Color}    & Overrides global \code{backgroundColor} option  on Electron. \\ \hline
   \codebreak{electron}{AllowMixedContent} & \code[typescript]{boolean}  & Enable mixed content in the BrowserViews for Electron. Mixed content is disabled by default for security. During development, this option may need to be enabled to allow the BrowserViews to load files from different schemes. \\
                                           &                             & \textbf{This is not intended for use in production.} \\ 
                                           &                             & Defaults to \code[typescript]{false} \\ \hline
-\end{config}
+\end{configuration}
 
 \newpage
 

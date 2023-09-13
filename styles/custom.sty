@@ -20,9 +20,9 @@
 % -------------- code block --------------
 \usemintedstyle{emacs}
 \setminted{%
-    fontsize=\footnotesize,%
-    baselinestretch=1,%
-    bgcolor=codeblock%
+  fontsize=\footnotesize,%
+  baselinestretch=1,%
+  bgcolor=codeblock%
 }
 
 % https://github.com/gpoore/minted/issues/220
@@ -32,34 +32,34 @@
 \NewDocumentCommand{\code}{ s O{text} m }{\IfBooleanTF{#1}{\codeplain{#3}}{\codeminted{#2}{#3}}}
 
 \newcommand{\codeminted}[2]{%
-    \highLight[inlinecode]{%
-        \phantom{\hspace*{3px}}%
-        \mintinline[%
-            bgcolor={},%
-            breaklines,%
-            breakafter={,=-/},%
-            breakaftersymbolpost=\hspace*{3px},%
-            breakbefore={ABCDEFGHIJKLMNOPQRSTUVWXYZ},%
-            breakbeforesymbolpost=\hspace*{3px},%
-        ]{#1}{#2}%
-        \phantom{\hspace*{3px}}%
-    }%
+  \highLight[inlinecode]{%
+    \phantom{\hspace*{3px}}%
+    \mintinline[%
+      bgcolor={},%
+      breaklines,%
+      breakafter={,=-/},%
+      breakaftersymbolpost=\hspace*{3px},%
+      breakbefore={ABCDEFGHIJKLMNOPQRSTUVWXYZ},%
+      breakbeforesymbolpost=\hspace*{3px},%
+    ]{#1}{#2}%
+    \phantom{\hspace*{3px}}%
+  }%
 }
 
 \newcommand{\codeplain}[1]{%
-    \highLight[inlinecode]{%
-        \phantom{\hspace*{3px}}%
-        {\footnotesize\texttt{#1}}%
-        \phantom{\hspace*{3px}}%
-    }%
+  \highLight[inlinecode]{%
+    \phantom{\hspace*{3px}}%
+    {\footnotesize\texttt{#1}}%
+    \phantom{\hspace*{3px}}%
+  }%
 }
 
 \newcommand{\codebreak}[3][text]{%
-    \code[#1]{#2}%
-    \hspace*{-3px}%
-    \highLight[inlinecode]{\,\footnotesize\ensuremath{_\rfloor}}%
-    \newline%
-    \code[#1]{#3}%
+  \code[#1]{#2}%
+  \hspace*{-3px}%
+  \highLight[inlinecode]{\,\footnotesize\ensuremath{_\rfloor}}%
+  \newline%
+  \code[#1]{#3}%
 }
 
 % --------------- footnotes --------------
@@ -67,59 +67,59 @@
 
 % --------- alert and quote boxes --------
 \newenvironment{baseAlertBox}[1]{
-    \begin{tcolorbox}[%
-        enhanced,%
-        frame hidden,%
-        colback=white,%
-        borderline west={3px}{0pt}{#1}%
-    ]
+  \begin{tcolorbox}[%
+    enhanced,%
+    frame hidden,%
+    colback=white,%
+    borderline west={3px}{0pt}{#1}%
+  ]
 }{
-    \end{tcolorbox}
+  \end{tcolorbox}
 }
 
 \renewenvironment{quote}{
-    \begin{baseAlertBox}{blockquote}
-        \color{muted}
+  \begin{baseAlertBox}{blockquote}
+    \color{muted}
 }{
-    \end{baseAlertBox}
+  \end{baseAlertBox}
 }
 
 \newenvironment{titleAlertBox}[2]{
-    \begin{baseAlertBox}{#1}
-        {\large\color{#1}#2}
-        \\[0.5em]
+  \begin{baseAlertBox}{#1}
+    {\large\color{#1}#2}
+    \\[0.5em]
 }{
-    \end{baseAlertBox}
+  \end{baseAlertBox}
 }
 
 \newenvironment{iconAlertbox}[3]{
-    \begin{titleAlertBox}{#1}{#2\hspace{1ex}\textbf{#3}}
+  \begin{titleAlertBox}{#1}{#2\hspace{1ex}\textbf{#3}}
 }{
-    \end{titleAlertBox}
+  \end{titleAlertBox}
 }
 
 \newenvironment{alertbox}[2]{
-    \begin{titleAlertBox}{#1}{\textbf{#2}}
+  \begin{titleAlertBox}{#1}{\textbf{#2}}
 }{
-    \end{titleAlertBox}
+  \end{titleAlertBox}
 }
 
 \newenvironment{note}[1][Anmerkung]{
-    \begin{iconAlertbox}{note}{\faInfoCircle}{#1}
+  \begin{iconAlertbox}{note}{\faInfoCircle}{#1}
 }{
-    \end{iconAlertbox}
+  \end{iconAlertbox}
 }
 
 \newenvironment{important}[1][Wichtig]{
-    \begin{iconAlertbox}{important}{\faExclamation}{#1}
+  \begin{iconAlertbox}{important}{\faExclamation}{#1}
 }{
-    \end{iconAlertbox}
+  \end{iconAlertbox}
 }
 
 \newenvironment{warning}[1][Warnung]{
-    \begin{iconAlertbox}{warning}{\faExclamationTriangle}{#1}
+  \begin{iconAlertbox}{warning}{\faExclamationTriangle}{#1}
 }{
-    \end{iconAlertbox}
+  \end{iconAlertbox}
 }
 
 % ---- style paragraphs like sections ----
@@ -138,34 +138,41 @@
 \def\bfstart#1\bfstop{\textbf{#1}}
 
 \NewDocumentEnvironment{interfacedesc}{ m O{10em} O{6em} }{
-    \begin{table}[H]
-        \begin{tabular}{ | >{\bfstart} L{#2} <{\bfstop} | L{#3} | p{\textwidth - #2 - #3 - 2em} | }
-            \hline
-            \textbf{Prop} & \textbf{Type} & \textbf{Description} \\
-            \hline
+  \begin{table}[H]
+    \begin{tabular}{ | >{\bfstart} L{#2} <{\bfstop} | L{#3} | p{\textwidth - #2 - #3 - 2em} | }
+      \hline
+      \textbf{Prop} & \textbf{Type} & \textbf{Description} \\
+      \hline
 }{
-        \end{tabular}
-        \captionsetup{font=small,name=Table,justification=raggedleft,singlelinecheck=false}
-        \caption[#1]{}
-    \end{table}
+    \end{tabular}
+    \captionsetup{font=small,name=Table,justification=raggedleft,singlelinecheck=false}
+    \caption[#1]{}
+  \end{table}
 }
 
 \NewDocumentEnvironment{interface}{ m O{10em} }{
-    \begin{table}[H]
-        \begin{tabular}{ | >{\bfstart} L{#2} <{\bfstop} | l | }
-            \hline
-            \textbf{Prop} & \textbf{Type} \\
-            \hline
+  \begin{table}[H]
+    \begin{tabular}{ | >{\bfstart} L{#2} <{\bfstop} | l | }
+      \hline
+      \textbf{Prop} & \textbf{Type} \\
+      \hline
 }{
-        \end{tabular}
-        \captionsetup{font=small,name=Table,justification=raggedright,singlelinecheck=false}
-        \caption[#1]{}
-    \end{table}
+    \end{tabular}
+    \captionsetup{font=small,name=Table,justification=raggedright,singlelinecheck=false}
+    \caption[#1]{}
+  \end{table}
 }
 
-\newenvironment{config}[1]{
-    \renewcommand{\arraystretch}{1.5}
-    \begin{interfacedesc}{#1}
+\newenvironment{configuration}[1]{
+  \renewcommand{\arraystretch}{1.5}
+  \begin{interfacedesc}{#1}
 }{
-    \end{interfacedesc}
+  \end{interfacedesc}
+}
+
+\newenvironment{arguments}{
+  \begin{itemize}
+    \setlength\itemsep{-0.8em}
+}{
+  \end{itemize}
 }

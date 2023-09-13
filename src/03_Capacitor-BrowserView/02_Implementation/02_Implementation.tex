@@ -3,11 +3,11 @@
 Eine Übersicht der einzelnen Komponenten mit ihren genauen Zusammenhängen wird in Abbildung~\ref{asset:Capacitor-BrowserView:Implementation} dargestellt.
 
 \begin{figure}[H]
-    \centering
-    \vspace{1em}
-    \includegraphics[width=\textwidth]{assets/03_Capacitor-BrowserView/03_Implementation.drawio.pdf}
-    \caption[Capacitor-BrowserView / Implementierung]{Implementierung des Capacitor-BrowserView Plugins}
-    \label{asset:Capacitor-BrowserView:Implementation}
+  \centering
+  \vspace{1em}
+  \includegraphics[width=\textwidth]{assets/03_Capacitor-BrowserView/03_Implementation.drawio.pdf}
+  \caption[Capacitor-BrowserView / Implementierung]{Implementierung des Capacitor-BrowserView Plugins}
+  \label{asset:Capacitor-BrowserView:Implementation}
 \end{figure}
 
 \newpage
@@ -32,12 +32,12 @@ Um die Implementierung des Plugins auf allen Plattformen übersichtlich und wart
 Sie bestehen jeweils aus zwei Teilen:
 
 \begin{enumerate}
-    \item 
-    Der erste Teil wird von der Capacitor Runtime aufgerufen.
-    Er implementiert die \acs{api}-Struktur und wertet die Parameter der Methoden aus.
-    \item
-    Der zweite Teil implementiert die tatsächlichen Funktionen, wie das Erstellen und Steuern von WebViews
-    sowie das Senden und Empfangen von Nachrichten zwischen der Capacitor Anwendung und den geladenen Webinhalten.
+  \item 
+  Der erste Teil wird von der Capacitor Runtime aufgerufen.
+  Er implementiert die \acs{api}-Struktur und wertet die Parameter der Methoden aus.
+  \item
+  Der zweite Teil implementiert die tatsächlichen Funktionen, wie das Erstellen und Steuern von WebViews
+  sowie das Senden und Empfangen von Nachrichten zwischen der Capacitor Anwendung und den geladenen Webinhalten.
 \end{enumerate}
 
 Für die Implementierung des Plugins wurden ausschließlich die jeweiligen Plattform"=\acsp{api} verwendet, da WebViews auf jeder Plattform nativ unterstützt werden.
@@ -48,33 +48,33 @@ Daher musste für die Implementierung des Plugins ein Kompromiss gefunden werden
 Einige fehlende Funktionen wurden im Plugin nachgebaut, und einige Funktionen werden aufgrund großer Unterschiede nicht unterstützt.
 
 \begin{itemize}
-    \setlength\itemsep{-0.5em}
-    \item
-    Um die Position einer WebViews unter Android festzulegen, muss die Pixeldichte des Geräts berücksichtigt werden.
-    Andernfalls stimmen die Koordinaten und Abmessungen der WebView nicht mit der Capacitor Anwendung überein.
-    Auch die Höhe der Statusleiste von Android muss berücksichtigt werden, da sich die WebView sonst mit ihr überschneiden würde.
-    Die von Electron unter Windows, Linux und macOS bereitgestellte BrowserView führt diese erforderlichen Umrechnungen selbständig durch.
-    \item
-    Die Android WebView bietet eine Einstellung, um das Öffnen von Webinhalten in einem neuen Fenster über Web \acp{api} zu erlauben oder zu verbieten.~\cite{android:api}
-    Diese Einstellung ist in Electron unter Windows, Linux und macOS nicht direkt in dieser Form verfügbar.~\cite{electron:docs}
-    Daher wurde sie in das Plugin nachträglich für Electron implementiert.
-    \item
-    Favicons, kleine Symbole für das Branding von Webinhalten, werden in der Android WebView direkt in einem Binärformat bereitgestellt,
-    während unter Windows, Linux und macO in Electron nur der Link zum Symbol bereitgestellt wird.~\cite{android:api, electron:docs}
-    Daher wird es vom Plugin nachträglich heruntergeladen.
-    Um das Symbol über die Plugin \ac{api} leicht zugänglich zu machen, wird es zudem vom Plugin mit Base64 in eine Zeichenkette kodiert
-    \item
-    Android WebViews unterstützen standardmäßig keinen Vollbildmodus.
-    Daher wurde diese Funktion nachträglich in das Plugin implementiert.
-    Notwendige Parameter für einen vollständigen Vollbildmodus in einer Android App wurden von StackOverflow bezogen.
-    \cite{android:api, stackoverflow}
+  \setlength\itemsep{-0.5em}
+  \item
+  Um die Position einer WebViews unter Android festzulegen, muss die Pixeldichte des Geräts berücksichtigt werden.
+  Andernfalls stimmen die Koordinaten und Abmessungen der WebView nicht mit der Capacitor Anwendung überein.
+  Auch die Höhe der Statusleiste von Android muss berücksichtigt werden, da sich die WebView sonst mit ihr überschneiden würde.
+  Die von Electron unter Windows, Linux und macOS bereitgestellte BrowserView führt diese erforderlichen Umrechnungen selbständig durch.
+  \item
+  Die Android WebView bietet eine Einstellung, um das Öffnen von Webinhalten in einem neuen Fenster über Web \acp{api} zu erlauben oder zu verbieten.~\cite{android:api}
+  Diese Einstellung ist in Electron unter Windows, Linux und macOS nicht direkt in dieser Form verfügbar.~\cite{electron:docs}
+  Daher wurde sie in das Plugin nachträglich für Electron implementiert.
+  \item
+  Favicons, kleine Symbole für das Branding von Webinhalten, werden in der Android WebView direkt in einem Binärformat bereitgestellt,
+  während unter Windows, Linux und macO in Electron nur der Link zum Symbol bereitgestellt wird.~\cite{android:api, electron:docs}
+  Daher wird es vom Plugin nachträglich heruntergeladen.
+  Um das Symbol über die Plugin \ac{api} leicht zugänglich zu machen, wird es zudem vom Plugin mit Base64 in eine Zeichenkette kodiert
+  \item
+  Android WebViews unterstützen standardmäßig keinen Vollbildmodus.
+  Daher wurde diese Funktion nachträglich in das Plugin implementiert.
+  Notwendige Parameter für einen vollständigen Vollbildmodus in einer Android Anwendung wurden von StackOverflow bezogen.
+  \cite{android:api, stackoverflow}
 \end{itemize}
 
 \newpage
 
 \paragraph{Interprozesskommunikation}
 
-Standardmäßig ist die Kommunikation zwischen Webinhalten und der Capacitor-Anwendung deaktiviert.
+Standardmäßig ist die Kommunikation zwischen Webinhalten und der Capacitor"=Anwendung deaktiviert.
 Dies dient der Isolation von möglichen unsicheren Inhalten.
 Wenn jedoch ein vertrauenswürdiger Inhalt geladen wird, mit dem ein Datenaustausch erforderlich ist, wird dennoch eine Interprozesskommunikation vom Plugin bereitgestellt.
 

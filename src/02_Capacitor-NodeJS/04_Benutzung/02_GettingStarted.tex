@@ -84,11 +84,11 @@ The project structure should now look something like this:
 
 \vspace{1em}
 
-After building and syncing the project, the main script will be executed by the Node.js runtime when the app is launched.
+After building and syncing the project, the main script will be executed by the Node.js runtime when the application is launched.
 
 A guide for a more complex Node.js project can be found in the \nameref{sec:Capacitor-NodeJS:ComplexProjects} section.
 
-\paragraph{Inter-Process Communication}
+\paragraph{Interprocess Communication}
 \label{sec:Capacitor-NodeJS:InterprocessCommunication}
 
 A bridge module to communicate between the Capacitor layer and the Node.js process is built-in.
@@ -112,7 +112,7 @@ channel.addListener('msg-from-capacitor', message => {
 
 \vspace{1em}
 
-Now it is possible to communicate with the Node.js process in the Capacitor app:
+Now it is possible to communicate with the Node.js process in the Capacitor application:
 
 \begin{minted}{typescript}
 import { NodeJS } from 'capacitor-nodejs';

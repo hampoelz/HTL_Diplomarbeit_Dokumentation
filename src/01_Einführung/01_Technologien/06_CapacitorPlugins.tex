@@ -21,18 +21,18 @@ Dieser generiert alle erforderlichen Dateien, die für den Einstieg benötigt we
 \paragraph{Funktionsweise von Plugins}
 
 Eine der Philosophien hinter Capacitor Plugins ist, dass sie einen relativ kleinen Umfang aufweisen sollten.
-Dadurch werden unnötige Aufblähungen von Apps vermieden und die Bereitstellung, Zusammenarbeit und Wartung von Apps wird erleichtert.
+Dadurch werden unnötige Aufblähungen von Anwendungen vermieden und die Bereitstellung, Zusammenarbeit und Wartung von Anwendungen wird erleichtert.
 \cite{capacitor:docs}
 
 Aus diesem Grund bestehen Plugins grundsätzlich aus zwei Teilen:
 
 \begin{enumerate}
-    \setlength\itemsep{-0.8em}
-    \item \textbf{API Definitionen} 
-    \item \textbf{Native Implementierung}
+  \setlength\itemsep{-0.8em}
+  \item \textbf{API Definitionen} 
+  \item \textbf{Native Implementierung}
 \end{enumerate}
 
-Der erste Teil eines Plugins besteht aus einem TypeScript-Interface, das die Signatur der \acs{api}"=Methoden des Plugins definiert und dokumentiert.
+Der erste Teil eines Plugins besteht aus einem TypeScript"=Interface, das die Signatur der \acs{api}"=Methoden des Plugins definiert und dokumentiert.
 Der zweite Teil implementiert alle deklarierten Methoden auf den entsprechenden Plattformen.
 \cite{capacitor:docs}
 
@@ -40,9 +40,9 @@ Damit eine Capacitor Anwendung auf die Methoden des Plugins zugreifen kann, wird
 Wenn die Anwendung eine Methode des Plugins aufruft, führt die Capacitor Runtime die entsprechende native Implementierung dieser Methode aus.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{assets/01_Einführung/01_CapacitorPlugins.pdf}
-    \caption{Funktionsweise von Capacitor Plugins}
+  \centering
+  \includegraphics[width=0.8\textwidth]{assets/01_Einführung/01_CapacitorPlugins.pdf}
+  \caption{Funktionsweise von Capacitor Plugins}
 \end{figure}
 
 \vspace{-1em}
@@ -50,7 +50,7 @@ Wenn die Anwendung eine Methode des Plugins aufruft, führt die Capacitor Runtim
 Capacitor bietet für native Implementierungen verschiedene Methodentypen.
 Der Void"=Rückgabetyp kann nur einen Fehler zurückgeben.
 Der Value"=Rückgabetyp kann auch Daten zurückgeben.
-Der Callback"=Typ kann wiederholt Daten an die Capacitor-Anwendung zurückgeben.
+Der Callback"=Typ kann wiederholt Daten an die Capacitor"=Anwendung zurückgeben.
 \cite{capacitor:docs}
 
 Darüber hinaus können in dem TypeScript"=Interface auch Konfigurationen für das Plugin definiert werden.

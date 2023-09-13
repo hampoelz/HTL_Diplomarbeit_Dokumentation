@@ -2,11 +2,11 @@
 \label{sec:Capacitor-BrowserView:API_CapacitorLayer}
 
 \begin{note}[Note]
-  Parts of the following documentation are based on the Android WebView and Electron BrowserView documentation.
+  The following documentation is based on the Android WebView and Electron BrowserView documentation.
   \cite{android:api, electron:docs}
 \end{note}
 
-A \code{BrowserView} can be used to embed additional web content into the Capacitor-App.
+A \code{BrowserView} can be used to embed additional web content into the Capacitor application.
 It is like a child window, except that it is positioned relative to its owning window.
 It has the following methods:
 
@@ -68,9 +68,6 @@ It has the following methods:
   \item Type Aliases
 \end{itemize}
 
-%\vspace{1em}
-
-
 % -------------------- %
 
 \newpage
@@ -89,18 +86,16 @@ Creates a new BrowserView with properties as set by the \code{options}.
 
 % -------------------- %
 
-
 \paragraph{destroy()}
 
 \begin{minted}{typescript}
   destroy() => Promise<void>
 \end{minted}
 
-Removes the BrowserView from the app and destroys its internal state.
+Removes the BrowserView from the application and destroys its internal state.
 No other methods may be called on this BrowserView after destroy.
 
 % -------------------- %
-
 
 \paragraph{setBounds(...)}
 
@@ -114,7 +109,6 @@ Resizes and moves the view to the supplied bounds relative to the window.
 
 % -------------------- %
 
-
 \paragraph{getBounds()}
 
 \begin{minted}{typescript}
@@ -127,7 +121,6 @@ Gets the bounds of the view relative to the window.
 
 % -------------------- %
 
-
 \paragraph{setBackgroundColor(...)}
 
 \begin{minted}{typescript}
@@ -139,7 +132,6 @@ Gets the bounds of the view relative to the window.
 Sets the background color for this view.
 
 % -------------------- %
-
 
 \paragraph{loadUrl(...)}
 
@@ -170,7 +162,6 @@ because although the load for that \ac{url} has begun, the current page may not 
 
 % -------------------- %
 
-
 \paragraph{getTitle()}
 
 \begin{minted}{typescript}
@@ -184,7 +175,6 @@ This is the title of the current page until \code[javascript]{BrowserView.addLis
 
 % -------------------- %
 
-
 \paragraph{stop()}
 
 \begin{minted}{typescript}
@@ -195,7 +185,6 @@ Stops any pending navigation.
 
 % -------------------- %
 
-
 \paragraph{reload()}
 
 \begin{minted}{typescript}
@@ -205,7 +194,6 @@ Stops any pending navigation.
 Reloads the current web page.
 
 % -------------------- %
-
 
 \paragraph{canGoBack()}
 
@@ -218,7 +206,6 @@ Gets whether the browser can go back to previous web page.
 \textbf{Returns:} \code[typescript]{Promise<CanGoBackPayloadData>}
 
 % -------------------- %
-
 
 \paragraph{canGoForward()}
 
@@ -244,7 +231,6 @@ Clears the internal back/forward navigation history list.
 
 % -------------------- %
 
-
 \paragraph{goBack()}
 
 \begin{minted}{typescript}
@@ -255,7 +241,6 @@ Makes the browser go back a web page.
 
 % -------------------- %
 
-
 \paragraph{goForward()}
 
 \begin{minted}{typescript}
@@ -265,7 +250,6 @@ Makes the browser go back a web page.
 Makes the browser go forward a web page.
 
 % -------------------- %
-
 
 \paragraph{setUserAgent(...)}
 
@@ -283,7 +267,6 @@ loading a web page causes the BrowserView to initiate loading once again.~\cite{
 
 % -------------------- %
 
-
 \paragraph{appendUserAgent(...)}
 
 \begin{minted}{typescript}
@@ -298,7 +281,6 @@ Appends the specified user-agent to the current user-agent string for this web p
 loading a web page causes the BrowserView to initiate loading once again.~\cite{android:api}
 
 % -------------------- %
-
 
 \paragraph{getUserAgent()}
 
@@ -329,7 +311,6 @@ Returns a promise that resolves with the result of the executed code.
 
 % -------------------- %
 
-
 \paragraph{setAllowMultipleWindows(...)}
 
 \begin{minted}{typescript}
@@ -358,7 +339,6 @@ Gets whether the BrowserView supports multiple windows.
 
 % -------------------- %
 
-
 \paragraph{setAllowedNavigation(...)}
 
 \begin{minted}{typescript}
@@ -372,7 +352,6 @@ Sets regular expressions to which the BrowserView can navigate additional.
 By default, all external \acp{url} are opened in the external browser (not the BrowserView).
 
 % -------------------- %
-
 
 \paragraph{getAllowedNavigation()}
 
@@ -402,7 +381,6 @@ Sends a message to the current page in the BrowserView.
 
 % -------------------- %
 
-
 \paragraph{addListener('new-window', ...)}
 
 \begin{minted}{typescript}
@@ -424,7 +402,6 @@ Use \code{removeListener(listenerFunc)} instead.
 \textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
 
 % -------------------- %
-
 
 \paragraph{addListener('close-window', ...)}
 
@@ -469,7 +446,6 @@ Use \code{removeListener(listenerFunc)} instead.
 
 % -------------------- %
 
-
 \paragraph{addListener('page-title-updated', ...)}
 
 \begin{minted}{typescript}
@@ -487,7 +463,6 @@ Use \code{removeListener(listenerFunc)} instead.
 \textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
 
 % -------------------- %
-
 
 \paragraph{addListener('enter-html-full-screen', ...)}
 
@@ -530,7 +505,6 @@ Use \code{removeListener(listenerFunc)} instead.
 \textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
 
 % -------------------- %
-
 
 \paragraph{addListener('will-navigate', ...)}
 
@@ -584,7 +558,6 @@ Use \code{removeListener(listenerFunc)} instead.
 
 % -------------------- %
 
-
 \paragraph{addListener('did-finish-load', ...)}
 
 \begin{minted}{typescript}
@@ -615,7 +588,8 @@ Use \code{removeListener(listenerFunc)} instead.
   ) => Promise<PluginListenerHandle> & PluginListenerHandle
 \end{minted}
 
-Calls \code{listenerFunc(data)} when the page failed to load. These errors usually indicate inability to connect to the server.
+Calls \code{listenerFunc(data)} when the page failed to load.
+These errors usually indicate inability to connect to the server.
 
 On Android at \ac{api} level 23 or higher, this event is fired for any resource (iframe, image, etc.), not just for the main page.~\cite{android:api}
 
@@ -625,7 +599,6 @@ Use \code{removeListener(listenerFunc)} instead.
 \textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
 
 % -------------------- %
-
 
 \paragraph{addListener('dom-ready', ...)}
 
@@ -638,8 +611,8 @@ Use \code{removeListener(listenerFunc)} instead.
 
 Calls \code{listenerFunc()} when the document in the top-level frame is loaded.
 
-This callback is called when the body of the \ac{http} response has started loading, is reflected in the \ac{dom},
-and will be visible in subsequent draws. This callback occurs early in the document loading process,
+This callback is called when the body of the \ac{http} response has started loading, is reflected in the \ac{dom}, and will be visible in subsequent draws.
+This callback occurs early in the document loading process,
 and as such it should be expected that linked resources (for example, \ac{css} and images) may not be available.
 
 \textbf{Note:} On Android this event requires \ac{api} level 23 or higher to be fired.~\cite{android:api}
@@ -676,7 +649,6 @@ Use \code{removeListener(listenerFunc)} instead.
 
 % -------------------- %
 
-
 \paragraph{addListener('render-process-gone', ...)}
 
 \begin{minted}{typescript}
@@ -711,6 +683,7 @@ Use \code{removeListener(listenerFunc)} instead.
 
 % -------------------- %
 
+\newpage
 
 \paragraph{addListener('unresponsive', ...)}
 
@@ -735,7 +708,6 @@ Use \code{removeListener(listenerFunc)} instead.
 \textbf{Returns:} \code[typescript]{Promise<PluginListenerHandle> & PluginListenerHandle}
 
 % -------------------- %
-
 
 \paragraph{addListener('responsive', ...)}
 
@@ -779,7 +751,6 @@ Use \code{removeListener(listenerFunc)} instead.
 
 % -------------------- %
 
-
 \paragraph{removeListener(...)}
 
 \begin{minted}{typescript}
@@ -791,7 +762,6 @@ Use \code{removeListener(listenerFunc)} instead.
 Removes the specified \code{listenerHandle} from the listener array for the event it refers to.
 
 % -------------------- %
-
 
 \paragraph{removeAllListeners(...)}
 
@@ -809,6 +779,7 @@ Removes all listeners, or those of the specified \code{eventName}, of the Browse
 
 \paragraph{Interfaces}
 
+% -------------------- %
 
 \subparagraph{CreateOptions}
 
@@ -826,11 +797,15 @@ They override the global plugin configurations for this specific BrowserView.
   \code{backgroundColor}      & \code[typescript]{Color}    & Default background color. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \subparagraph{BoundsPayloadData}
 
 \begin{interface}{Capacitor-BrowserView / BoundsPayloadData}
   \code{bounds} & \code[typescript]{Rectangle} \\ \hline
 \end{interface}
+
+% -------------------- %
 
 \newpage
 
@@ -848,11 +823,15 @@ These fields can be accessed directly.
   \code{height} & \code[typescript]{number} & The height of the rectangle \textit{(must be an integer)}. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \subparagraph{ColorPayloadData}
 
 \begin{interface}{Capacitor-BrowserView / ColorPayloadData}
   \code{color} & \code[typescript]{Color} \\ \hline
 \end{interface}
+
+% -------------------- %
 
 \subparagraph{UrlPayloadData}
 
@@ -860,11 +839,16 @@ These fields can be accessed directly.
   \code{url} & \code[typescript]{string} & The \ac{url} of a web page. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \subparagraph{TitlePayloadData}
 
 \begin{interfacedesc}{Capacitor-BrowserView / TitlePayloadData}
   \code{title} & \code[typescript]{string} & The title of a web page. \\ \hline
+
 \end{interfacedesc}
+
+% -------------------- %
 
 \subparagraph{CanGoBackPayloadData}
 
@@ -872,11 +856,17 @@ These fields can be accessed directly.
   \code{canGoBack} & \code[typescript]{boolean} & Whether the browser can go back to previous web page. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
+\newpage
+
 \subparagraph{CanGoForwardPayloadData}
 
 \begin{interfacedesc}{Capacitor-BrowserView / CanGoForwardPayloadData}
   \code{canGoForward} & \code[typescript]{boolean} & Whether the browser can go forward to next web page. \\ \hline
 \end{interfacedesc}
+
+% -------------------- %
 
 \subparagraph{UserAgentPayloadData}
 
@@ -884,11 +874,15 @@ These fields can be accessed directly.
   \code{userAgent} & \code[typescript]{string} & The BrowserView's user-agent string. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \subparagraph{CodeExecuteResultData}
 
 \begin{interfacedesc}{Capacitor-BrowserView / CodeExecuteResultData}
   \code{result} & \code[typescript]{any} & The result of the execution (if any). \\ \hline
 \end{interfacedesc}
+
+% -------------------- %
 
 \subparagraph{CodeExecutePayloadData}
 
@@ -896,11 +890,15 @@ These fields can be accessed directly.
   \code{code} & \code[typescript]{string} & The JavaScript to execute. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \subparagraph{AllowMultipleWindowsPayloadData}
 
 \begin{interfacedesc}{Capacitor-BrowserView / AllowMultipleWindowsPayloadData}
   \code{allowMultipleWindows} & \code[typescript]{boolean} & Whether the BrowserView supports multiple windows. If set to \code[typescript]{true}, links that request a new tab or window \textit{e.g.\ by \code[javascript]{window.open()}, a link with \code[javascript]{target="_blank"}, shift+clicking on a link, or submitting a form with \code[html]{<form target="_blank">}.} open in the external browser instead of the BrowserView. \\ \hline
 \end{interfacedesc}
+
+% -------------------- %
 
 \newpage
 
@@ -910,21 +908,19 @@ These fields can be accessed directly.
   \code{allowedNavigation} & \code[typescript]{string[]} & The list of regular expressions that the BrowserView can additional navigate to. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \subparagraph{MessageChannelPayloadData}
 
-The payload data to send a message to the web page via \code{eventName},
-along with arguments. Arguments will be serialized with \ac{json}.
+The payload data to send a message to the web page via \code{eventName}, along with arguments.
+Arguments will be serialized with \ac{json}.
 
 \begin{interfacedesc}{Capacitor-BrowserView / MessageChannelPayloadData}
   \code{eventName} & \code[typescript]{string} & The name of the event being send to. \\ \hline
   \code{args}      & \code[typescript]{any[]}  & The array of arguments to send. \\ \hline
 \end{interfacedesc}
 
-\subparagraph{PluginListenerHandle}
-
-\begin{interface}{Capacitor-BrowserView / PluginListenerHandle}
-  \code{remove} & \code[typescript]{() => Promise<void>} \\ \hline
-\end{interface}
+% -------------------- %
 
 \subparagraph{NavigationPayloadData}
 
@@ -933,10 +929,13 @@ along with arguments. Arguments will be serialized with \ac{json}.
   \code{isExternal} & \code[typescript]{boolean} & Whether the \ac{url} is opened in the external browser or in the BrowserView. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \subparagraph{EmptyPayloadData}
 
 An empty interface that represents no data.
 
+% -------------------- %
 
 \subparagraph{IconPayloadData}
 
@@ -944,11 +943,17 @@ An empty interface that represents no data.
   \code{icon} & \code[typescript]{string} & The favicon of a web page as base64 encoded string. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
+\newpage
+
 \subparagraph{ErrorPayloadData}
 
 \begin{interfacedesc}{Capacitor-BrowserView / ErrorPayloadData}
   \code{error} & \code[typescript]{WebResourceError} & Information about the error occurred. \\ \hline
 \end{interfacedesc}
+
+% -------------------- %
 
 \subparagraph{WebResourceError}
 
@@ -960,12 +965,16 @@ An interface that encapsulates information about the error that occurred during 
   \code{validatedURL}     & \code[typescript]{string} & The \ac{url} that failed to load. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \subparagraph{ResponsePayloadData}
 
 \begin{interfacedesc}{Capacitor-BrowserView / ResponsePayloadData}
   \code{url}           & \code[typescript]{string}              & The \ac{url} that failed to load. \\ \hline
   \code{errorResponse} & \code[typescript]{WebResourceResponse} & Information about the error occurred. \\ \hline
 \end{interfacedesc}
+
+% -------------------- %
 
 \subparagraph{WebResourceResponse}
 
@@ -976,6 +985,8 @@ An interface that encapsulates a resource response about the error that occurred
   \code{httpStatusText}   & \code[typescript]{string} & The description of the status code of the error response. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \newpage
 
 \subparagraph{RenderProcessGonePayloadData}
@@ -983,6 +994,8 @@ An interface that encapsulates a resource response about the error that occurred
 \begin{interfacedesc}{Capacitor-BrowserView / RenderProcessGonePayloadData}
   \code{details} & \code[typescript]{RenderProcessGoneDetail} & The reason why the renderer process exited. \\ \hline
 \end{interfacedesc}
+
+% -------------------- %
 
 \subparagraph{RenderProcessGoneDetail}
 
@@ -993,6 +1006,8 @@ The application may use this to decide how to handle the situation.
   \code{crashed} & \code[typescript]{boolean} & Indicates whether the render process was observed to crash, or whether it was killed by the system. If the render process was killed, this is most likely caused by the system being low on memory. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \subparagraph{MessageChannelCallbackData}
 
 The callback data object when a message from the web page arrives.
@@ -1001,17 +1016,20 @@ The callback data object when a message from the web page arrives.
   \code{args} & \code[typescript]{any[]} & The received array of arguments. \\ \hline
 \end{interfacedesc}
 
+% -------------------- %
+
 \newpage
 
 \paragraph{Type Aliases}
 
+% -------------------- %
 
 \subparagraph{Color}
 
 A string that represents a color.
 
-Supported formats are \code*{\#RRGGBB} and \code*{\#AARRGGBB}. The following names are also accepted: \code{red}, \code{blue}, \code{green}, \code{black}, \code{white}, \code{gray},
-\code{cyan}, \code{magenta}, \code{yellow}, \code{darkgray}, \code{lightgrey}, \code{aqua}, \code{fuchsia}, \code{lime}, \code{maroon}, \code{navy}, \code{olive}, \code{purple}, \code{silver}, and \code{teal}.
+Supported formats are \code*{\#RRGGBB} and \code*{\#AARRGGBB}.
+The following names are also accepted: \code{red}, \code{blue}, \code{green}, \code{black}, \code{white}, \code{gray}, \code{cyan}, \code{magenta}, \code{yellow}, \code{darkgray}, \code{lightgrey}, \code{aqua}, \code{fuchsia}, \code{lime}, \code{maroon}, \code{navy}, \code{olive}, \code{purple}, \code{silver}, and \code{teal}.
 
 \begin{minted}{typescript}
   `#${string}`
@@ -1036,6 +1054,8 @@ Supported formats are \code*{\#RRGGBB} and \code*{\#AARRGGBB}. The following nam
   | 'silver'
   | 'teal'
 \end{minted}
+
+% -------------------- %
 
 \subparagraph{BrowserViewListenerCallback}
 
