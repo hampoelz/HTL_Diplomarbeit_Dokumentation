@@ -1,5 +1,88 @@
 \unnumberedSection{Arbeitsaufwand}
 
+\newcounter{efforts}
+
+% usage:
+%   \begin{HistoryTable}
+%     \effort{<date>}{<hours>}{<project>}{<message>}
+%   \end{HistoryTable}
+%
+\newcommand{\effort}[4]{%
+  \addtocounter{efforts}{#2}%
+  \HistoryTabEntry{#1}{#2~\ifnum#2=1 hour\else hours\fi}{\author\hfill\code{#3}}{\textit{#4}}%
+}
+
+\setcounter{efforts}{0}
+\def\author{Rene Hampölz}
 \begin{HistoryTable}[]
-    \HistoryTabEntry{0000-00-00}{TITLE}{AUTHOR}{TODO}
+  \effort{2023-08-28}{1}{Capacitor-BrowserView}{chore: Release v1.0.0-beta.3}
+  \effort{2023-08-28}{1}{Capacitor-BrowserView}{fix(android): Statusbar overlapping}
+  \effort{2023-08-28}{1}{Capacitor-BrowserView}{feat: Add isExternal to navigation callback}
+  \effort{2023-08-25}{1}{Capacitor-NodeJS}{chore: Release v1.0.0-beta.4}
+  \effort{2023-08-25}{1}{Capacitor-BrowserView}{chore: Release v1.0.0-beta.2}
+  \effort{2023-08-25}{1}{Capacitor-NodeJS}{style: Cleanup code}
+  \effort{2023-08-25}{2}{Capacitor-NodeJS}{perf(android): Improve startup of Node.js runtime}
+  \effort{2023-08-25}{6}{Capacitor-NodeJS}{feat: Allow manual startup of the Node.js runtime}
+  \effort{2023-08-25}{1}{Capacitor-NodeJS}{feat: Add persistent data storage}
+  \effort{2023-08-25}{1}{Capacitor-BrowserView}{style: Cleanup code}
+  \effort{2023-08-25}{1}{Capacitor-BrowserView}{fix(bridge): Data serialization issues}
+  \effort{2023-08-22}{6}{Capacitor-NodeJS}{refactor(bridge): Rewrite in TypeScript}
+  \effort{2023-08-22}{3}{Capacitor-NodeJS}{feat: Auto load bridge module}
+  \effort{2023-08-21}{2}{Capacitor-NodeJS}{feat(android): Pass env vars to Node.js runtime}
+  \effort{2023-08-21}{10}{Capacitor-NodeJS}{refactor(android): Rewrite implementation}
+  \effort{2023-08-20}{8}{Capacitor-NodeJS}{refactor(electron): Rewrite implementation}
+  \effort{2023-08-19}{1}{Capacitor-BrowserView}{chore: Release v1.0.0-beta.1}
+  \effort{2023-08-19}{1}{Capacitor-NodeJS}{chore: Release v1.0.0-beta.3}
+  \effort{2023-08-19}{1}{Capacitor-NodeJS}{build: Update to Capacitor v5}
+  \effort{2023-08-19}{6}{Capacitor-NodeJS}{refactor: Rework plugin API}
+  \effort{2023-08-17}{1}{Capacitor-BrowserView}{build: Update to Capacitor v5}
+  \effort{2023-08-15}{2}{Capacitor-BrowserView}{fix: Implement WebView inequalities properly}
+  \effort{2023-08-04}{25}{Capacitor-BrowserView}{feat: Add Electron support}
+  \effort{2023-08-04}{1}{Capacitor-BrowserView}{refactor: Separate bridge module into files}
+  \effort{2023-07-31}{1}{Capacitor-BrowserView}{chore: Improve bridge module}
+  \effort{2023-07-29}{1}{Capacitor-BrowserView}{chore(android): Improve implementation}
+  \effort{2023-07-29}{19}{Capacitor-BrowserView}{refactor: Rework plugin API}
+  \effort{2023-07-17}{2}{Capacitor-BrowserView}{feat: Add navigation handling}
+  \effort{2023-07-17}{1}{Capacitor-BrowserView}{feat: Add bridge module}
+  \effort{2023-03-10}{1}{Capacitor-BrowserView}{chore: Improve error messages}
+  \effort{2023-03-10}{1}{Capacitor-BrowserView}{refactor: Refactor plugin methods}
+  \effort{2023-03-05}{16}{Capacitor-BrowserView}{feat: Add Android support}
+  \effort{2023-03-04}{14}{Capacitor-BrowserView}{chore: Add basic Android structure}
+  \effort{2023-02-25}{1}{Capacitor-BrowserView}{build: Add support for Capacitor v4}
+  \effort{2023-01-30}{1}{Capacitor-NodeJS}{chore: Release v1.0.0-beta.2}
+  \effort{2023-01-29}{1}{Capacitor-NodeJS}{build: Bump nodejs-mobile runtime to v16.17.0}
+  \effort{2023-01-29}{1}{Capacitor-NodeJS}{chore: Release v1.0.0-beta.1}
+  \effort{2022-12-22}{1}{Capacitor-NodeJS}{build: Add support for Capacitor v4}
+  \effort{2022-07-19}{34}{Capacitor-BrowserView}{chore: Add basic API structure}
+  \effort{2022-04-29}{23}{Capacitor-NodeJS}{feat: Add Electron support}
+  \effort{2021-08-27}{4}{Capacitor-BrowserView}{chore: Setup dev environment}
+  \effort{2021-06-29}{1}{Capacitor-NodeJS}{build: Update to Capacitor v3 stable}
+  \effort{2021-05-14}{46}{Capacitor-NodeJS}{feat: Add Android support}
+  \effort{2021-05-14}{2}{Capacitor-NodeJS}{chore: Add basic API structure}
+  \effort{2021-04-26}{6}{Capacitor-NodeJS}{chore: Setup dev environment}
+  \midrule
+  \textbf{SUM} & \textbf{\arabic{efforts}~hours} by \author \\
+\end{HistoryTable}
+
+\clearpage
+
+\setcounter{efforts}{0}
+\def\author{Noah Quinz}
+\begin{HistoryTable}[]
+  \effort{2023-08-28}{3}{WebApp-Wrapper}{style: Cleanup code}
+  \effort{2023-08-28}{6}{WebApp-Wrapper}{feat: Add APIs}
+  \effort{2023-08-27}{4}{WebApp-Wrapper}{feat: Add menubar}
+  \effort{2023-08-26}{26}{WebApp-Wrapper}{chore: Rewrite using Capacitor}
+  \effort{2023-07-25}{15}{WebApp-Wrapper}{refactor: Rewrite implementation}
+  \effort{2023-07-25}{4}{WebApp-Wrapper}{feat: Add message screen}
+  \effort{2023-06-24}{8}{WebApp-Wrapper}{chore: Redesign with PicoCSS}
+  \effort{2023-06-26}{3}{WebApp-Wrapper}{refactor: Remove unused code}
+  \effort{2023-06-24}{6}{WebApp-Wrapper}{fix: Navigation issues}
+  \effort{2023-06-24}{8}{WebApp-Wrapper}{chore: Improve implementation}
+  \effort{2022-08-08}{36}{WebApp-Wrapper}{chore: Add basic implementation}
+  \effort{2022-08-26}{4}{WebApp-Wrapper}{chore: Setup dev environment}
+  \effort{2022-07-15}{25}{-}{Getting started with Capacitor}
+  \effort{2022-06-29}{34}{-}{Getting started with Electron}
+  \midrule
+  \textbf{SUM} & \textbf{\arabic{efforts}~hours} by \author \\
 \end{HistoryTable}
