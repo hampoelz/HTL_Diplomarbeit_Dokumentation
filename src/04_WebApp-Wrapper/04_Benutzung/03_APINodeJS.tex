@@ -140,7 +140,7 @@ Entfernt ein Menüelement mit der eindeutigen ID \code{itemId} aus der Menüleis
 \end{minted}
 
 Öffnet oder aktualisiert das Meldungsfenster.
-Es kann mit \ac{html} angepasst werden und wird automatisch mit Stilen des PicoCSS Frameworks versehen.
+Es kann mit \ac{html} angepasst werden und wird automatisch mit Styles des PicoCSS Frameworks versehen.
 
 \begin{arguments}
   \item \code{html}: Der \ac{html}-Code für das Meldungsfenster.
@@ -268,7 +268,7 @@ Löscht die interne Liste der Rück- und Vorwärtsnavigation.
   ) => void
 \end{minted}
 
-Bringt den Browser dazu, eine Webseite zurückzugehen.
+Bringt den WebApp-Wrapper dazu, eine Webseite zurückzugehen.
 
 % -------------------- %
 
@@ -282,7 +282,7 @@ Bringt den Browser dazu, eine Webseite zurückzugehen.
   ) => void
 \end{minted}
 
-Bringt den Browser dazu, eine Webseite weiterzuleiten.
+Bringt den WebApp-Wrapper dazu, eine Webseite nach vorzugehen.
 
 % -------------------- %
 
@@ -324,7 +324,7 @@ Es wird auch nicht für seiteninterne Navigationen ausgelöst, wie das Anklicken
 
 \begin{arguments}
   \item \code{url}: Die \ac{url} einer Webseite.
-  \item \code{isExternal}: Ob die \ac{url} im externen Browser oder in der BrowserView geöffnet wird.
+  \item \code{isExternal}: Ob die \ac{url} im externen Browser oder im WebApp-Wrapper geöffnet wird.
 \end{arguments}
 
 % -------------------- %
@@ -397,7 +397,7 @@ Ruft \code{listenerFunc()} auf, wenn das Dokument im Frame der obersten Ebene ge
 
 \subparagraph{MenuItem}
 
-Ein Interface, das Informationen über einen Menüelement enthält.
+Ein Interface, das Informationen über ein Menüelement enthält.
 
 \begin{interfacedesc}{WebApp-Wrapper / MenuItem (Node.js Projekt API)}
   \code{id}   & \code[typescript]{string} & Eine eindeutige ID für das Menüelement. \\ \hline
@@ -414,7 +414,7 @@ Ein Interface, das Informationen über einen Menüelement enthält.
 Ein Interface, das Informationen über den Fehler enthält, der beim Laden von Webressourcen aufgetreten ist.
 
 \begin{interfacedesc}{WebApp-Wrapper / WebResourceError}
-  errorCode         & \code[typescript]{string} & Der Fehlercode des Fehlers. \\ \hline
-  errorDescription  & \code[typescript]{string} & Eine Zeichenfolge, die den Fehler beschreibt. Beschreibungen sind lokalisiert und können daher verwendet werden, um dem Benutzer das Problem mitzuteilen. \\ \hline
-  validatedURL      & \code[typescript]{string} & Die \ac{url}, die nicht geladen werden konnte. \\ \hline
+  \code{errorCode}         & \code[typescript]{string} & Der Fehlercode des Fehlers. \\ \hline
+  \code{errorDescription}  & \code[typescript]{string} & Eine Zeichenfolge, die den Fehler beschreibt. Beschreibungen sind lokalisiert und können daher verwendet werden, um dem Benutzer das Problem mitzuteilen. \\ \hline
+  \code{validatedURL}      & \code[typescript]{string} & Die \ac{url}, die nicht geladen werden konnte. \\ \hline
 \end{interfacedesc}
