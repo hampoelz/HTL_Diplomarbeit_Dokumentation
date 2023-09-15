@@ -83,10 +83,10 @@ Aktiviert oder deaktiviert die Menüleiste.
   ) => void
 \end{minted}
 
-Fügt ein Menüelement zur Menüleiste hinzu.
+Fügt ein \code*{MenuItem} zur Menüleiste hinzu.
 
 \begin{arguments}
-  \item \code{item}: Das Menüelement \code*{MenuItem}, das hinzugefügt werden soll.
+  \item \code{item}: Das Menüelement, das hinzugefügt werden soll.
 \end{arguments}
 
 % -------------------- %
@@ -144,7 +144,7 @@ Schließt das Meldungsfenster.
 
 \begin{minted}{typescript}
   send: (
-    eventName: 'wrapper:updateColor',
+    eventName: 'wrapper:sendMessage',
     ...args: any[]
   ) => void
 \end{minted}

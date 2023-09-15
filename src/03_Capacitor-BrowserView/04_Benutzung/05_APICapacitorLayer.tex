@@ -787,7 +787,7 @@ An interface containing the options used when creating a BrowserView.
 They override the global plugin configurations for this specific BrowserView.
 
 \begin{interfacedesc}{Capacitor-BrowserView / CreateOptions}
-  \code{url}                  & \code[typescript]{string}   & Initial \ac{url} that is loaded immediately after the BrowserView has been created. \\ \hline
+  \code{url}                  & \code[typescript]{string}   & Initial \ac{url} of the website that is loaded immediately after the BrowserView has been created. \\ \hline
   \code{allowMultipleWindows} & \code[typescript]{boolean}  & Open links that request a new tab or window \textit{e.g.\ by \code[javascript]{window.open()}, a link with \code[javascript]{target="_blank"}, shift+clicking on a link, or submitting a form with \code[html]{<form target="_blank">}.} in the external browser instead of the BrowserViews. \\
                               &                             & Defaults to \code[typescript]{true} \\ \hline
   \code{enableBridge}         & \code[typescript]{boolean}  & Enable a bridge between the Capacitor layer and the loaded web page. \\
