@@ -2,9 +2,7 @@
 %      Add custom packages and styles     
 % ========================================
 
-\usepackage{fontawesome}
 \usepackage{titlesec}
-\usepackage{caption}
 
 \setlength\itemsep{-0.5em}
 
@@ -65,7 +63,7 @@
 % --------------- footnotes --------------
 \newcommand{\urlfn}[2]{\href{#2}{#1}\footnote{\url{#2}}}
 
-% --------- alert and quote boxes --------
+% ------------ blockquote box ------------
 \newenvironment{baseAlertBox}[1]{
   \begin{tcolorbox}[%
     enhanced,%
@@ -82,44 +80,6 @@
     \color{muted}
 }{
   \end{baseAlertBox}
-}
-
-\newenvironment{titleAlertBox}[2]{
-  \begin{baseAlertBox}{#1}
-    {\large\color{#1}#2}
-    \\[0.5em]
-}{
-  \end{baseAlertBox}
-}
-
-\newenvironment{iconAlertbox}[3]{
-  \begin{titleAlertBox}{#1}{#2\hspace{1ex}\textbf{#3}}
-}{
-  \end{titleAlertBox}
-}
-
-\newenvironment{alertbox}[2]{
-  \begin{titleAlertBox}{#1}{\textbf{#2}}
-}{
-  \end{titleAlertBox}
-}
-
-\newenvironment{note}[1][Anmerkung]{
-  \begin{iconAlertbox}{note}{\faInfoCircle}{#1}
-}{
-  \end{iconAlertbox}
-}
-
-\newenvironment{important}[1][Wichtig]{
-  \begin{iconAlertbox}{important}{\faExclamation}{#1}
-}{
-  \end{iconAlertbox}
-}
-
-\newenvironment{warning}[1][Warnung]{
-  \begin{iconAlertbox}{warning}{\faExclamationTriangle}{#1}
-}{
-  \end{iconAlertbox}
 }
 
 % ---- style paragraphs like sections ----
@@ -176,3 +136,5 @@
 }{
   \end{itemize}
 }
+
+% ----------------------------------------
